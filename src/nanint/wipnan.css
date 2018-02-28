@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18.10.2017, 16:10:43
+    Author     : Andreas Grdan
+*/
+
+.default-color0.chart-bar { -fx-background-color: #6b88ff; }
+.default-color1.chart-bar { -fx-background-color: #00fff2; }
+.default-color2.chart-bar { -fx-background-color: #f2ff00; }
+.default-color3.chart-bar { -fx-background-color: #ff8800; }
+.default-color4.chart-bar { -fx-background-color: #ff0000; }
+.default-color5.chart-bar { -fx-background-color: #ee00ff; }
+.default-color6.chart-bar { -fx-background-color: #f8a0ff; }
+.default-color7.chart-bar { -fx-background-color: #777777; }
+.default-color8.chart-bar { -fx-background-color: #c9c9c9; }
+.default-color9.chart-bar { -fx-background-color: #02fc06; }
+.default-color10.chart-bar { -fx-background-color: #82ff84; }
+
+.chart .label{
+    -fx-text-fill: black;
+    -fx-font-size: 8pt;
+    -fx-font-family: "Verdana";
+}

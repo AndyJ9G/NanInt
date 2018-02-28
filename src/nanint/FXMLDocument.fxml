@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane  id="BorderPane" prefWidth="1600.0" prefHeight="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="nanint.NanFXML">
+    <top>
+        <StackPane>
+            <children>
+                <MenuBar id="MenuBar" fx:id="MenuBar">
+                    <menus>
+                        <Menu text="Data">
+                            <items>
+                                <MenuItem onAction="#menuImportData" text="Import New Data" />
+                            </items>
+                        </Menu>
+                        <Menu text="Database">
+                            <items>
+                                <MenuItem onAction="#menuClearDatabase" text="Delete all data from Database" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Label id="ProgrammVersionLabel" fx:id="ProgrammVersionLabel" StackPane.alignment="CENTER_RIGHT">
+                    <StackPane.margin>
+                        <Insets right="10.0" />
+                    </StackPane.margin>
+                </Label>
+            </children>
+        </StackPane>
+    </top>
+    <center>
+        <TabPane id="tabPane" fx:id="tabPane">
+            <tabs>
+                <Tab id="lotDataTab" fx:id="lotDataTab" text="Lot Data" closable="false">
+                    <BorderPane id="BorderPaneLotData" fx:id="BorderPaneLotData">
+                        <top>
+                            <HBox id="lotHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxValueLotData" fx:id="ComboBoxValueLotData"/>
+                                    <TextField id="TextFieldValueLotData" fx:id="TextFieldValueLotData" layoutX="115.0" />
+                                    <ComboBox id="ComboBox2ValueLotData" fx:id="ComboBox2ValueLotData"/>
+                                    <TextField id="TextField2ValueLotData" fx:id="TextField2ValueLotData" layoutX="115.0" />
+                                    <ComboBox id="ComboBox3ValueLotData" fx:id="ComboBox3ValueLotData"/>
+                                    <TextField id="TextField3ValueLotData" fx:id="TextField3ValueLotData" layoutX="115.0" />
+                                    <Button id="FilterButtonLotData" fx:id="FilterButtonLotData" onAction="#filterButtonLotData" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="LotDataExcelExportButton" fx:id="LotDataExcelExportButton" onAction="#LotDataExcelExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="lotDataTable" fx:id="lotDataTable">
+                                <columns>
+                                    <TableColumn id="LotColLotData" fx:id="LotColLotData" text="Lot"></TableColumn>
+                                    <TableColumn id="ProductColLotData" fx:id="ProductColLotData" text="Product"></TableColumn>
+                                    <TableColumn id="BasicTypeColLotData" fx:id="BasicTypeColLotData" text="BasicType"></TableColumn>
+                                    <TableColumn id="CreationDateColLotData" fx:id="CreationDateColLotData" text="Created"></TableColumn>
+                                    <TableColumn id="FirstStepDateColLotData" fx:id="FirstStepDateColLotData" text="Last DieBank"></TableColumn>
+                                    <TableColumn id="LastStepDateColLotData" fx:id="LastStepDateColLotData" text="Shipping"></TableColumn>
+                                    <TableColumn id="LastDateColLotData" fx:id="LastDateColLotData" text="Last"></TableColumn>
+                                </columns>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="wipNanTab" fx:id="wipNanTab" text="Wip Nan Lots" closable="false">
+                    <BorderPane id="BorderPaneWipNan" fx:id="BorderPaneWipNan">
+                        <top>
+                            <HBox id="wipHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxValue" fx:id="ComboBoxValue"/>
+                                    <TextField id="TextFieldValue" fx:id="TextFieldValue" layoutX="115.0" />
+                                    <ComboBox id="ComboBox2Value" fx:id="ComboBox2Value"/>
+                                    <TextField id="TextField2Value" fx:id="TextField2Value" layoutX="115.0" />
+                                    <ComboBox id="ComboBox3Value" fx:id="ComboBox3Value"/>
+                                    <TextField id="TextField3Value" fx:id="TextField3Value" layoutX="115.0" />
+                                    <CheckBox id="CheckBoxNotProd" fx:id="CheckBoxNotProd" text="not PROD" />
+                                    <Button id="FilterButton" fx:id="FilterButton" onAction="#filterButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="ExcelExportButton" fx:id="ExcelExportButton" onAction="#xlsExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="wipNanTable" fx:id="wipNanTable">
+                                <columns>
+                                    <TableColumn id="ReportDateCol" fx:id="ReportDateCol" text="ReportDate"></TableColumn>
+                                    <TableColumn id="LotCol" fx:id="LotCol" text="Lot"></TableColumn>
+                                    <TableColumn id="OwnerCol" fx:id="OwnerCol" text="Owner"></TableColumn>
+                                    <TableColumn id="ProductCol" fx:id="ProductCol" text="Product"></TableColumn>
+                                    <TableColumn id="HoldFlagCol" fx:id="HoldFlagCol" text="HoldFlag"></TableColumn>
+                                    <TableColumn id="WIP1Col" fx:id="WIP1Col" text="WIP1"></TableColumn>
+                                    <TableColumn id="WIP2Col" fx:id="WIP2Col" text="WIP2"></TableColumn>
+                                    <TableColumn id="ShrinkCol" fx:id="ShrinkCol" text="Shrink"></TableColumn>
+                                    <TableColumn id="FE_SITECol" fx:id="FE_SITECol" text="FE_SITE"></TableColumn>
+                                    <TableColumn id="BasicTypeCol" fx:id="BasicTypeCol" text="BasicType"></TableColumn>
+                                    <TableColumn id="PackageCol" fx:id="PackageCol" text="Package"></TableColumn>
+                                    <TableColumn id="StepCol" fx:id="StepCol" text="Step"></TableColumn>
+                                    <TableColumn id="WorkCenterCol" fx:id="WorkCenterCol" text="WorkCenter"></TableColumn>
+                                    <TableColumn id="SEQCol" fx:id="SEQCol" text="SEQ"></TableColumn>
+                                    <TableColumn id="PercentageCol" fx:id="PercentageCol" text="Percentage"></TableColumn>
+                                    <TableColumn id="ReportFileNameCol" fx:id="ReportFileNameCol" text="ReportFileName"></TableColumn>
+                                </columns>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="GFtoNanTab" fx:id="GFtoNanTab" text="Shipments from GF to Nan" closable="false">
+                    <BorderPane id="BorderPaneGFtoNan" fx:id="BorderPaneGFtoNan">
+                        <top>
+                            <HBox id="GFtoNanHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxGFtoNanValue" fx:id="ComboBoxGFtoNanValue"/>
+                                    <TextField id="TextFieldGFtoNanValue" fx:id="TextFieldGFtoNanValue" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxGFtoNan2Value" fx:id="ComboBoxGFtoNan2Value"/>
+                                    <TextField id="TextFieldGFtoNan2Value" fx:id="TextFieldGFtoNan2Value" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxGFtoNan3Value" fx:id="ComboBoxGFtoNan3Value"/>
+                                    <TextField id="TextFieldGFtoNan3Value" fx:id="TextFieldGFtoNan3Value" layoutX="115.0" />
+                                    <CheckBox id="CheckBoxGFtoNanOpenShipment" fx:id="CheckBoxGFtoNanOpenShipment" text="only open Shipments" />
+                                    <Button id="FilterGFtoNanButton" fx:id="FilterGFtoNanButton" onAction="#filterGFtoNanButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="GFtoNanExcelExportButton" fx:id="GFtoNanExcelExportButton" onAction="#GFtoNanxlsExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="GFtoNanTable" fx:id="GFtoNanTable">
+                                <columns>
+                                    <TableColumn id="GFReportDateCol" fx:id="GFReportDateCol" text="ReportDate"></TableColumn>
+                                    <TableColumn id="GFCustomerNameCol" fx:id="GFCustomerNameCol" text="CustomerName"></TableColumn> 
+                                    <TableColumn id="GFShipDateCol" fx:id="GFShipDateCol" text="ShipDate"></TableColumn> 
+                                    <TableColumn id="GFInvoiceNoCol" fx:id="GFInvoiceNoCol" text="InvoiceNo"></TableColumn> 
+                                    <TableColumn id="GFInvoiceDateCol" fx:id="GFInvoiceDateCol" text="InvoiceDate"></TableColumn> 
+                                    <TableColumn id="GFPOCol" fx:id="GFPOCol" text="PO"></TableColumn> 
+                                    <TableColumn id="GFSOCol" fx:id="GFSOCol" text="SO"></TableColumn> 
+                                    <TableColumn id="GFOrderDateCol" fx:id="GFOrderDateCol" text="OrderDate"></TableColumn> 
+                                    <TableColumn id="GFProcessNameCol" fx:id="GFProcessNameCol" text="ProcessName"></TableColumn> 
+                                    <TableColumn id="GFCustomerPartnameCol" fx:id="GFCustomerPartnameCol" text="CustomerPartname"></TableColumn> 
+                                    <TableColumn id="GFInternalPartNameCol" fx:id="GFInternalPartNameCol" text="InternalPartName"></TableColumn> 
+                                    <TableColumn id="GFLotIdCol" fx:id="GFLotIdCol" text="LotId"></TableColumn> 
+                                    <TableColumn id="GFCustomerLotIdCol" fx:id="GFCustomerLotIdCol" text="CustomerLotId"></TableColumn> 
+                                    <TableColumn id="GFLotTypeCol" fx:id="GFLotTypeCol" text="LotType"></TableColumn> 
+                                    <TableColumn id="GFLotPriorityCol" fx:id="GFLotPriorityCol" text="LotPriority"></TableColumn> 
+                                    <TableColumn id="GFAgreedGDPWCol" fx:id="GFAgreedGDPWCol" text="AgreedGDPW"></TableColumn> 
+                                    <TableColumn id="GFCalculatedGDPLCol" fx:id="GFCalculatedGDPLCol" text="CalculatedGDPL"></TableColumn> 
+                                    <TableColumn id="GFCycleTimeCol" fx:id="GFCycleTimeCol" text="CycleTime"></TableColumn> 
+                                    <TableColumn id="GFBillQtyWfrCol" fx:id="GFBillQtyWfrCol" text="BillQtyWfr"></TableColumn> 
+                                    <TableColumn id="GFWfrIdsCol" fx:id="GFWfrIdsCol" text="WfrIds"></TableColumn> 
+                                    <TableColumn id="GFvBillDieCol" fx:id="GFvBillDieCol" text="vBillDie"></TableColumn> 
+                                    <TableColumn id="GFShipToLocationCol" fx:id="GFShipToLocationCol" text="ShipToLocation"></TableColumn> 
+                                    <TableColumn id="GFBillToLocationCol" fx:id="GFBillToLocationCol" text="BillToLocation"></TableColumn> 
+                                    <TableColumn id="GFETACol" fx:id="GFETACol" text="ETA"></TableColumn> 
+                                    <TableColumn id="GFETDCol" fx:id="GFETDCol" text="ETD"></TableColumn> 
+                                    <TableColumn id="GFForwarderCol" fx:id="GFForwarderCol" text="Forwarder"></TableColumn> 
+                                    <TableColumn id="GFHAWBCol" fx:id="GFHAWBCol" text="HAWB"></TableColumn> 
+                                    <TableColumn id="GFMAWBCol" fx:id="GFMAWBCol" text="MAWB"></TableColumn> 
+                                    <TableColumn id="GFFlightNoCol" fx:id="GFFlightNoCol" text="FlightNo"></TableColumn> 
+                                    <TableColumn id="GFConnectingFlightNoCol" fx:id="GFConnectingFlightNoCol" text="ConnectingFlightNo"></TableColumn> 
+                                    <TableColumn id="GFReportFileNameCol" fx:id="GFReportFileNameCol" text="ReportFileName"></TableColumn> 
+                                </columns>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="TSMCtoNanTab" fx:id="TSMCtoNanTab" text="Shipments from TSMC to Nan" closable="false">
+                    <BorderPane id="BorderPaneTSMCtoNan" fx:id="BorderPaneTSMCtoNan">
+                        <top>
+                            <HBox id="TSMCtoNanHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxTSMCtoNanValue" fx:id="ComboBoxTSMCtoNanValue"/>
+                                    <TextField id="TextFieldTSMCtoNanValue" fx:id="TextFieldTSMCtoNanValue" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxTSMCtoNan2Value" fx:id="ComboBoxTSMCtoNan2Value"/>
+                                    <TextField id="TextFieldTSMCtoNan2Value" fx:id="TextFieldTSMCtoNan2Value" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxTSMCtoNan3Value" fx:id="ComboBoxTSMCtoNan3Value"/>
+                                    <TextField id="TextFieldTSMCtoNan3Value" fx:id="TextFieldTSMCtoNan3Value" layoutX="115.0" />
+                                    <CheckBox id="CheckBoxTSMCtoNanOpenShipment" fx:id="CheckBoxTSMCtoNanOpenShipment" text="only open Shipments" />
+                                    <Button id="FilterTSMCtoNanButton" fx:id="FilterTSMCtoNanButton" onAction="#filterTSMCtoNanButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="TSMCtoNanExcelExportButton" fx:id="TSMCtoNanExcelExportButton" onAction="#TSMCtoNanxlsExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="TSMCtoNanTable" fx:id="TSMCtoNanTable">
+                                <columns>
+                                    <TableColumn id="TSMCLotCol" fx:id="TSMCLotCol" text="Lot"></TableColumn>
+                                    <TableColumn id="TSMCWaferPcsCol" fx:id="TSMCWaferPcsCol" text="WaferPcs"></TableColumn>
+                                    <TableColumn id="TSMCInvoiceNoCol" fx:id="TSMCInvoiceNoCol" text="InvoiceNo"></TableColumn>
+                                    <TableColumn id="TSMCInvoiceDateCol" fx:id="TSMCInvoiceDateCol" text="InvoiceDate"></TableColumn>
+                                    <TableColumn id="TSMCForwarderCol" fx:id="TSMCForwarderCol" text="Forwarder"></TableColumn>
+                                    <TableColumn id="TSMCMAWBCol" fx:id="TSMCMAWBCol" text="MAWB"></TableColumn>
+                                    <TableColumn id="TSMCHAWBCol" fx:id="TSMCHAWBCol" text="HAWB"></TableColumn>
+                                    <TableColumn id="TSMCReportFileNameCol" fx:id="TSMCReportFileNameCol" text="ReportFileName"></TableColumn>
+                                </columns>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="UMCItoNanTab" fx:id="UMCItoNanTab" text="Shipments from UMCI to Nan" closable="false">
+                    <BorderPane id="BorderPaneUMCItoNan" fx:id="BorderPaneUMCItoNan">
+                        <top>
+                            <HBox id="UMCItoNanHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxUMCItoNanValue" fx:id="ComboBoxUMCItoNanValue"/>
+                                    <TextField id="TextFieldUMCItoNanValue" fx:id="TextFieldUMCItoNanValue" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxUMCItoNan2Value" fx:id="ComboBoxUMCItoNan2Value"/>
+                                    <TextField id="TextFieldUMCItoNan2Value" fx:id="TextFieldUMCItoNan2Value" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxUMCItoNan3Value" fx:id="ComboBoxUMCItoNan3Value"/>
+                                    <TextField id="TextFieldUMCItoNan3Value" fx:id="TextFieldUMCItoNan3Value" layoutX="115.0" />
+                                    <CheckBox id="CheckBoxUMCItoNanOpenShipment" fx:id="CheckBoxUMCItoNanOpenShipment" text="only open Shipments" />
+                                    <Button id="FilterUMCItoNanButton" fx:id="FilterUMCItoNanButton" onAction="#filterUMCItoNanButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="UMCItoNanExcelExportButton" fx:id="UMCItoNanExcelExportButton" onAction="#UMCItoNanxlsExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="UMCItoNanTable" fx:id="UMCItoNanTable">
+                                <columns>
+                                    <TableColumn id="UMCIPART_DIVCol" fx:id="UMCIPART_DIVCol" text="PART_DIV"></TableColumn> 
+                                    <TableColumn id="UMCIINV_NOCol" fx:id="UMCIINV_NOCol" text="INV_NO"></TableColumn>
+                                    <TableColumn id="UMCISHPTO_IDCol" fx:id="UMCISHPTO_IDCol" text="SHPTO_ID"></TableColumn>
+                                    <TableColumn id="UMCIINV_DATECol" fx:id="UMCIINV_DATECol" text="INV_DATE"></TableColumn>
+                                    <TableColumn id="UMCIMAWB_NOCol" fx:id="UMCIMAWB_NOCol" text="MAWB_NO"></TableColumn>
+                                    <TableColumn id="UMCIHAWB_NOCol" fx:id="UMCIHAWB_NOCol" text="HAWB_NO"></TableColumn>
+                                    <TableColumn id="UMCIFLT_NOCol" fx:id="UMCIFLT_NOCol" text="FLT_NO"></TableColumn>
+                                    <TableColumn id="UMCIFLT_DATECol" fx:id="UMCIFLT_DATECol" text="FLT_DATE"></TableColumn>
+                                    <TableColumn id="UMCIFLT_DESTCol" fx:id="UMCIFLT_DESTCol" text="FLT_DEST"></TableColumn>
+                                    <TableColumn id="UMCICARTON_NOCol" fx:id="UMCICARTON_NOCol" text="CARTON_NO"></TableColumn>
+                                    <TableColumn id="UMCIPO_NOCol" fx:id="UMCIPO_NOCol" text="PO_NO"></TableColumn> 
+                                    <TableColumn id="UMCIPRD_NOCol" fx:id="UMCIPRD_NOCol" text="PRD_NO"></TableColumn>
+                                    <TableColumn id="UMCILOT_TYPECol" fx:id="UMCILOT_TYPECol" text="LOT_TYPE"></TableColumn>
+                                    <TableColumn id="UMCILOT_NOCol" fx:id="UMCILOT_NOCol" text="LOT_NO"></TableColumn>
+                                    <TableColumn id="UMCISHIP_W_QTYCol" fx:id="UMCISHIP_W_QTYCol" text="SHIP_W_QTY"></TableColumn>
+                                    <TableColumn id="UMCISHIP_D_QTYCol" fx:id="UMCISHIP_D_QTYCol" text="SHIP_D_QTY"></TableColumn>
+                                    <TableColumn id="UMCISHP_PRD_NOCol" fx:id="UMCISHP_PRD_NOCol" text="SHP_PRD_NO"></TableColumn>
+                                    <TableColumn id="UMCICTM_DEVICECol" fx:id="UMCICTM_DEVICECol" text="CTM_DEVICE"></TableColumn>
+                                    <TableColumn id="UMCICUSTOMER_LOTCol" fx:id="UMCICUSTOMER_LOTCol" text="CUSTOMER_LOT"></TableColumn>
+                                    <TableColumn id="UMCIUMC_INV_NOCol" fx:id="UMCIUMC_INV_NOCol" text="UMC_INV_NO"></TableColumn>
+                                    <TableColumn id="UMCIREMARKCol" fx:id="UMCIREMARKCol" text="REMARK"></TableColumn> 
+                                    <TableColumn id="UMCIWAFER_NOCol" fx:id="UMCIWAFER_NOCol" text="WAFER_NO"></TableColumn>
+                                    <TableColumn id="UMCIReportFileNameCol" fx:id="UMCIReportFileNameCol" text="ReportFileName"></TableColumn> 
+                                </columns>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="wipChart" fx:id="wipChart" text="Single Lot Processing Chart" closable="false">
+                    <BorderPane id="BorderPanewipLineChart" fx:id="BorderPanewipLineChart">
+                        <top>
+                            <HBox id="wipLineChartHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <Label id="LabelTextFieldwipLineChart" fx:id="LabelTextFieldwipLineChart" text="Lot:" />
+                                    <TextField id="TextFieldwipLineChartValue" fx:id="TextFieldwipLineChartValue" layoutX="115.0" />
+                                    <Button id="FilterwipLineChartButton" fx:id="FilterwipLineChartButton" onAction="#filterwipLineChartButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="wipLineChartSaveAsPngButton" fx:id="wipLineChartSaveAsPngButton" onAction="#wipLineChartSaveAsPngButton" text="Save as PNG"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <StackedBarChart id="lineChartWipNan" fx:id="lineChartWipNan" title="Single Lot processing days" titleSide="TOP" categoryGap="0">
+                                <xAxis>
+                                    <CategoryAxis label="Days of processing" id="lineChartWipNanXAxis" fx:id="lineChartWipNanXAxis" side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Operation (SEQ)" id="lineChartWipNanYAxis" fx:id="lineChartWipNanYAxis" side="LEFT" />
+                                </yAxis>
+                            </StackedBarChart>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="wipBarChart" fx:id="wipBarChart" text="WIP Nan Bar Chart" closable="false">
+                    <BorderPane id="BorderPanewipBarChart" fx:id="BorderPanewipBarChart">
+                        <top>
+                            <HBox id="wipBarChartHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxwipBarChartValue" fx:id="ComboBoxwipBarChartValue"/>
+                                    <TextField id="TextFieldwipBarChartValue" fx:id="TextFieldwipBarChartValue" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxwipBarChart2Value" fx:id="ComboBoxwipBarChart2Value"/>
+                                    <TextField id="TextFieldwipBarChart2Value" fx:id="TextFieldwipBarChart2Value" layoutX="115.0" />
+                                    <CheckBox id="CheckBoxwipBarChartWIP2" fx:id="CheckBoxwipBarChartWIP2" text="show WIP in PCS." />
+                                    <CheckBox id="CheckBoxwipBarChartWIPvalue" fx:id="CheckBoxwipBarChartWIPvalue" text="show values" />
+                                    <CheckBox id="CheckBoxwipBarChartNotDieBank" fx:id="CheckBoxwipBarChartNotDieBank" text="remove DieBank" />
+                                    <Button id="FilterwipBarChartButton" fx:id="FilterwipBarChartButton" onAction="#filterwipBarChartButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="wipBarChartSaveAsPngButton" fx:id="wipBarChartSaveAsPngButton" onAction="#wipBarChartSaveAsPngButton" text="Save as PNG"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <StackedBarChart id="barChartWipNan" fx:id="barChartWipNan" title="WIP overview" titleSide="TOP">
+                                <xAxis>
+                                    <CategoryAxis label="Operation (SEQ)" id="barChartWipNanXAxis" fx:id="barChartWipNanXAxis" side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="WIP amount" id="barChartWipNanYAxis" fx:id="barChartWipNanYAxis" side="LEFT" />
+                                </yAxis>
+                            </StackedBarChart>
+                        </center>
+                    </BorderPane>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
