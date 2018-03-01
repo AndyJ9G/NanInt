@@ -92,7 +92,7 @@ public class NanFXML extends Application implements Initializable {
     private void menuClearDatabase(ActionEvent event) {
         System.out.println("Menu Button for database clean data pressed -----------------------------");
         // show alert dialog
-        Alert alert = new Alert(AlertType.CONFIRMATION, "DO you want to delete all data from Database?", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to delete all data from Database?", ButtonType.YES, ButtonType.NO);
         alert.setHeaderText(null);
         alert.showAndWait();
         
@@ -114,6 +114,29 @@ public class NanFXML extends Application implements Initializable {
             buildTableWipNan(sqlLotSelect);
             buildTableGFtoNan(sqlShipmentSelectGF);
             buildTableTSMCtoNan(sqlShipmentSelectTSMC);
+        }
+    }
+    @FXML
+    private void menuCheckDatabase(ActionEvent event) {
+        System.out.println("Menu Button for database structure check pressed -----------------------------");
+        // show alert dialog
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to check and update the structure of the Database? No Data will be deleted.", ButtonType.YES, ButtonType.NO);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+        
+        // we check the result of the alert dialog
+        if (alert.getResult() == ButtonType.YES) {
+            // create instance of database
+            DataBaseSQLite db = new DataBaseSQLite();
+            // run the database check
+            // here we check the tables from the database and add columns if new needed
+            // no data are deleted, only the table strucutre is checked
+            db.runCheckDatabaseTables();
+            
+            // show confirmation dialog
+            Alert alert2 = new Alert(AlertType.INFORMATION, "Database checked and updated!", ButtonType.OK);
+            alert2.setHeaderText(null);
+            alert2.showAndWait();
         }
     }
     

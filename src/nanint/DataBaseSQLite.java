@@ -22,6 +22,26 @@ import java.util.Arrays;
  * @author Grdan Andreas
  */
 public class DataBaseSQLite {
+    // table structure
+    // wip_nan
+    private List<String> listTableWipNan = Arrays.asList("ReportDate", "Lot", "Owner", "Product", "HoldFlag", "WIP1", "WIP2", "Shrink", "FE_SITE", "BasicType",
+            "Package", "Step", "WorkCenter", "SEQ", "Percentage", "ReportFileName");
+    // tsmc_to_nan
+    private List<String> listTableTSMC = Arrays.asList("Lot", "WaferPcs", "InvoiceNo", "InvoiceDate", "Forwarder", "MAWB", "HAWB", "ReportFileName");
+    // gf_to_nan
+    private List<String> listTableGF = Arrays.asList("ReportDate", "CustomerName", "ShipDate", "InvoiceNo", "InvoiceDate", "PO", "SO", "OrderDate",
+            "ProcessName", "CustomerPartname", "InternalPartName", "LotId", "CustomerLotId", "LotType", "LotPriority", "AgreedGDPW", "CalculatedGDPL",
+            "CycleTime", "BillQtyWfr", "WfrIds", "vBillDie", "ShipToLocation", "BillToLocation", "ETA", "ETD", "Forwarder", "HAWB", "MAWB", "FlightNo",
+            "ConnectingFlightNo", "ReportFileName");
+    // umci_to_nan
+    private List<String> listTableUMCI = Arrays.asList("PART_DIV", "INV_NO", "SHPTO_ID", "INV_DATE", "MAWB_NO", "HAWB_NO", "FLT_NO", "FLT_DATE", "FLT_DEST",
+            "CARTON_NO", "PO_NO", "PRD_NO", "LOT_TYPE", "LOT_NO", "SHIP_W_QTY", "SHIP_D_QTY", "SHP_PRD_NO", "CTM_DEVICE", "CUSTOMER_LOT", "UMC_INV_NO",
+            "REMARK", "WAFER_NO", "ReportFileName");
+    // file_list
+    private List<String> listTableFileList = Arrays.asList("FILENAME");
+    // lot_data
+    private List<String> listTableLotData = Arrays.asList("Lot", "Product", "BasicType", "CreationDate", "FirstStepDate", "LastStepDate", "LastDate");
+
     // sql query statements      
     // sql for tsmc_to_nan
     private String sqlDropWIPnan = "DROP TABLE IF EXISTS wip_nan;";
@@ -43,7 +63,7 @@ public class DataBaseSQLite {
     private String sqlDropFileList = "DROP TABLE IF EXISTS file_list;";
     private String sqlCreateFileList = "CREATE TABLE file_list (FILENAME);";
     
-    // sql for lot data
+    // sql for lot_data
     private String sqlDropLotData = "DROP TABLE IF EXISTS lot_data;";
     private String sqlCreateLotData = "CREATE TABLE lot_data (Lot, Product, BasicType, CreationDate, FirstStepDate, LastStepDate, LastDate);";
     
@@ -110,6 +130,74 @@ public class DataBaseSQLite {
         System.out.println("Database table lot data deleted");
         db.updateTable(sqlCreateLotData, "create lot_data");
         System.out.println("Database table lot data created");
+    }
+    
+    /**
+     * Check table existence and table columns structure
+     */
+    public void runCheckDatabaseTables() {
+        // create instance of database
+        DataBaseSQLite db = new DataBaseSQLite();
+        
+        // check wip_nan table structure
+        db.checkAddDatabaseTables("lot_data", listTableLotData);
+    }
+    
+    /**
+     * Check table existence and table columns structure
+     * Add table columns if missing
+     */
+    public void checkAddDatabaseTables(String tableName, List<String> tableStructure) {
+        // create instance of database
+        DataBaseSQLite db = new DataBaseSQLite();
+
+        // call pragma to get the column names
+        ArrayList<String> pragmaTable = db.pragmaDatabaseTables(tableName);
+        
+        // loop through the ArrayList of Table Structure
+        // Check if the names are in the ArrayList from PRAGMA table call
+        for(String colName : tableStructure){
+            // check if this name is inside of the Pragma-ArrayList
+            if (pragmaTable.contains(colName)){
+                // column name is existing, nothing to be done
+            }else{
+                // column not existing, needs to be added
+                System.out.println("Table-Column: " + colName + " not existing in table: " + tableName + ". Need to be added.");
+                // sql query preparation
+                String sqlAddColumn = "ALTER TABLE " + tableName + " ADD COLUMN '" + colName + "';";
+                // calling database update to add the column
+                db.updateTable(sqlAddColumn, "Add column");
+            }
+        }
+    }
+    
+    /**
+     * Get table columns with PRAGMA sql query
+     * @param tableName
+     * @return ArrayList of Strings
+     */
+    public ArrayList<String> pragmaDatabaseTables(String tableName) {
+        // create instance of database
+        DataBaseSQLite db = new DataBaseSQLite();
+        
+        // check table structure with PRAGMA
+        String sqlPragma = "PRAGMA table_info('" + tableName + "');";
+        ArrayList<String> pragmaTable = new ArrayList<String>();
+        
+        // call the sql command and get the return set
+        ResultSet rs = db.selectTableResultSet(sqlPragma);
+        
+        // loop through the result set and put name in the ArryList
+        try {
+            // loop 
+            while (rs.next()) {
+                pragmaTable.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Database PRAGMA table info from table: " + tableName + " executed");
+        return pragmaTable;
     }
     
     /**

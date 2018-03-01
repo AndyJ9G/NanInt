@@ -373,9 +373,13 @@ public class ReportImport {
                     // trim the pcs
                     String getPCSTrim = getPCSValue.trim();
                     // get the second part after PCS
-                    String getLotNumber = line.split("PCS")[1];
-                    // trim the lot number
-                    String getLotTrim = getLotNumber.trim();
+                    String getTechnology = line.split("PCS")[1];
+                    // trim the technology
+                    String getTechnologyTrim = getTechnology.trim();
+                    // get the technology as first part
+                    String getTechnologyValue = getTechnologyTrim.split(" ")[0];
+                    // trim the final technology
+                    String getTechnologyTrimmed = getTechnologyValue.trim();
                     // get the first part after "*" wildcard
                     String getTSMCLotNumber = line.split("\\*")[0];
                     // trim the tsmc lot number string
@@ -411,6 +415,17 @@ public class ReportImport {
                     String hawb = line.split("HAWB NO. :")[1];
                     // trim the hawb
                     hawbTrim = hawb.trim();
+                }
+                // process the line, get the ETA
+                if (line.contains("ETA      :")) {                   
+                    // cut away the first part
+                    String cutAwayFirstETA = line.split("ETA      :")[1];
+                    // trim the first part
+                    String ETAtrim = cutAwayFirstETA.trim();
+                    // get the ETA
+                    String getETA = ETAtrim.split(" ")[0];
+                    // trim the final ETA
+                    String ETA = getETA.trim();
                 }
                 // process the line, get the line number where the customer lots start
                 if (line.contains("CUST LOT NO")) {

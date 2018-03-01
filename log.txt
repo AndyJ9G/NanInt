@@ -191,3 +191,66 @@
 2018-02-27 18:03:08,785 INFO - Table build done for lot data.
 2018-02-27 18:03:12,020 INFO - Build filtered sql query for lot data.
 2018-02-27 18:03:12,023 INFO - Table build done for lot data.
+2018-03-01 10:52:18,886 INFO - Initialize!
+2018-03-01 10:52:19,532 INFO - Got latest date from wip nan.
+2018-03-01 10:52:19,618 INFO - Table build done for lot data.
+2018-03-01 10:52:21,607 INFO - Table build done for wip nan.
+2018-03-01 10:52:21,610 INFO - Table build done for gf to nan.
+2018-03-01 10:52:21,648 INFO - Data build for line chart done for wip nan.
+2018-03-01 10:52:21,666 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:03:24,692 INFO - Initialize!
+2018-03-01 11:03:25,431 INFO - Got latest date from wip nan.
+2018-03-01 11:03:25,536 INFO - Table build done for lot data.
+2018-03-01 11:03:27,401 INFO - Table build done for wip nan.
+2018-03-01 11:03:27,403 INFO - Table build done for gf to nan.
+2018-03-01 11:03:27,434 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:03:27,458 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:21:19,364 INFO - Initialize!
+2018-03-01 11:21:19,943 INFO - Got latest date from wip nan.
+2018-03-01 11:21:20,034 INFO - Table build done for lot data.
+2018-03-01 11:21:21,940 INFO - Table build done for wip nan.
+2018-03-01 11:21:21,945 INFO - Table build done for gf to nan.
+2018-03-01 11:21:21,974 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:21:21,998 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:23:01,586 INFO - Initialize!
+2018-03-01 11:23:02,050 INFO - Got latest date from wip nan.
+2018-03-01 11:23:02,152 INFO - Table build done for lot data.
+2018-03-01 11:23:04,387 INFO - Table build done for wip nan.
+2018-03-01 11:23:04,391 INFO - Table build done for gf to nan.
+2018-03-01 11:23:04,420 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:23:04,447 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:23:37,829 INFO - Initialize!
+2018-03-01 11:23:38,269 INFO - Got latest date from wip nan.
+2018-03-01 11:23:38,361 INFO - Table build done for lot data.
+2018-03-01 11:23:40,244 INFO - Table build done for wip nan.
+2018-03-01 11:23:40,246 INFO - Table build done for gf to nan.
+2018-03-01 11:23:40,274 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:23:40,301 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:35:43,895 INFO - Initialize!
+2018-03-01 11:35:44,347 INFO - Got latest date from wip nan.
+2018-03-01 11:35:44,427 INFO - Table build done for lot data.
+2018-03-01 11:35:46,597 INFO - Table build done for wip nan.
+2018-03-01 11:35:46,600 INFO - Table build done for gf to nan.
+2018-03-01 11:35:46,626 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:35:46,653 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:36:17,881 INFO - Initialize!
+2018-03-01 11:36:18,325 INFO - Got latest date from wip nan.
+2018-03-01 11:36:18,405 INFO - Table build done for lot data.
+2018-03-01 11:36:20,201 INFO - Table build done for wip nan.
+2018-03-01 11:36:20,204 INFO - Table build done for gf to nan.
+2018-03-01 11:36:20,232 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:36:20,250 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:41:08,507 INFO - Initialize!
+2018-03-01 11:41:08,893 INFO - Got latest date from wip nan.
+2018-03-01 11:41:08,970 INFO - Table build done for lot data.
+2018-03-01 11:41:11,225 INFO - Table build done for wip nan.
+2018-03-01 11:41:11,228 INFO - Table build done for gf to nan.
+2018-03-01 11:41:11,247 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:41:11,264 INFO - Data build for bar chart done for wip nan.
+2018-03-01 11:48:04,634 INFO - Initialize!
+2018-03-01 11:48:05,067 INFO - Got latest date from wip nan.
+2018-03-01 11:48:05,132 INFO - Table build done for lot data.
+2018-03-01 11:48:06,683 INFO - Table build done for wip nan.
+2018-03-01 11:48:06,685 INFO - Table build done for gf to nan.
+2018-03-01 11:48:06,722 INFO - Data build for line chart done for wip nan.
+2018-03-01 11:48:06,756 INFO - Data build for bar chart done for wip nan.

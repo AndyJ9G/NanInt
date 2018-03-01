@@ -38,6 +38,9 @@
                             <items>
                                 <MenuItem onAction="#menuClearDatabase" text="Delete all data from Database" />
                             </items>
+                            <items>
+                                <MenuItem onAction="#menuCheckDatabase" text="Check and update Database structure" />
+                            </items>
                         </Menu>
                     </menus>
                 </MenuBar>
