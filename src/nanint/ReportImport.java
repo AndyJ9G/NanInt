@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.sql.ResultSet;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
@@ -33,8 +34,8 @@ public class ReportImport {
 
     // sql for tsmc_to_nan
     private String sqlDropTSMC = "DROP TABLE IF EXISTS tsmc_to_nan;";
-    private String sqlCreateTSMC = "CREATE TABLE tsmc_to_nan (Lot, WaferPcs, InvoiceNo, InvoiceDate, Forwarder, MAWB, HAWB, ReportFileName);";
-    private String sqlInsertTSMC= "INSERT INTO tsmc_to_nan VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    private String sqlCreateTSMC = "CREATE TABLE tsmc_to_nan (Lot, WaferPcs, InvoiceNo, InvoiceDate, Forwarder, MAWB, HAWB, ReportFileName, Technology, Product, Product2000, ETA);";
+    private String sqlInsertTSMC= "INSERT INTO tsmc_to_nan VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     // sql for gf_to_nan
     private String sqlDropGF = "DROP TABLE IF EXISTS gf_to_nan;";
@@ -108,7 +109,7 @@ public class ReportImport {
         // get the size of the ArrayList with data and add to the report
         repfeed.add("Number of data points from tsmc to nan extracted and inserted into database: " + shipAlertAllLine.size());
         // insert ArrayList of ArrayList of Strings into tsmc-to-nan with sql batch
-        db.insertBatchIntoTable(shipAlertAllLine, sqlInsertTSMC, "tsmc-to-nan");
+        db.insertTSMCtoNanBatchIntoTable(shipAlertAllLine, sqlInsertTSMC, "tsmc-to-nan");
         
         // get the CSV data from WIP as an ArrayLists of ArrayLists of Strings
         // define the directory and the Regex for filename
@@ -335,16 +336,52 @@ public class ReportImport {
         String forwarderTrim = "";
         String mawbTrim = "";
         String hawbTrim = "";
+        String productNumber = "";
+        String product2000Number = "";
+        String ETA = "";
         // line number
         int lineNumber = 0;
         int custLotNumberStartLine = 0;
         int custLotNumberEndLine = 0;
+        int productNumberLine = 0;
+        int product2000NumberLine = 0;
         // read buffered txt file
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             // loop through file line by line
             for(String line; (line = br.readLine()) != null; ) {
                 // count the line number
                 lineNumber = lineNumber + 1;
+                // process the line, get product number
+                if (line.contains("12\" WAFER")) {
+                    // one line after this we have the product number line
+                    productNumberLine = lineNumber + 1;
+                    // one line after we have the 2000 product number line
+                    product2000NumberLine = lineNumber + 2;
+                }
+                // process the line, get the product number
+                if (productNumberLine == lineNumber) {
+                    // we have the right line for the product number
+                    Scanner scan = new Scanner(line);
+                    ArrayList<String> stringList = new ArrayList<String>();
+                    // split
+                    while(scan.hasNext()){
+                        stringList.add(scan.next());
+                    }
+                    // get the second part as product number
+                    productNumber = stringList.get(1);
+                }
+                // process the line, get the product 2000 number
+                if (product2000NumberLine == lineNumber) {
+                    // we have the right line for the product 2000 number
+                    Scanner scan = new Scanner(line);
+                    ArrayList<String> stringList = new ArrayList<String>();
+                    // split
+                    while(scan.hasNext()){
+                        stringList.add(scan.next());
+                    }
+                    // get the first part as product 2000 number
+                    product2000Number = stringList.get(0);
+                }
                 // process the line, get invoice data
                 if (line.contains("INVOICE NO.:")) {
                     // cut away the first part
@@ -375,12 +412,8 @@ public class ReportImport {
                     // get the second part after PCS
                     String getTechnology = line.split("PCS")[1];
                     // trim the technology
-                    String getTechnologyTrim = getTechnology.trim();
-                    // get the technology as first part
-                    String getTechnologyValue = getTechnologyTrim.split(" ")[0];
-                    // trim the final technology
-                    String getTechnologyTrimmed = getTechnologyValue.trim();
-                    // get the first part after "*" wildcard
+                    String getTechnologyTrimmed = getTechnology.trim();
+                    // get the first part before "*" wildcard
                     String getTSMCLotNumber = line.split("\\*")[0];
                     // trim the tsmc lot number string
                     String getTSMCLotTrim = getTSMCLotNumber.trim();
@@ -392,6 +425,7 @@ public class ReportImport {
                     //lotData.add(getLotTrim);
                     lotData.add(getTSMCLotTrimmed);
                     lotData.add(getPCSTrim);
+                    lotData.add(getTechnologyTrimmed);
                     // add the lot data ArrayList to the full ArrayList
                     lotDataAll.add(lotData);
                 }
@@ -425,7 +459,7 @@ public class ReportImport {
                     // get the ETA
                     String getETA = ETAtrim.split(" ")[0];
                     // trim the final ETA
-                    String ETA = getETA.trim();
+                    ETA = getETA.trim();
                 }
                 // process the line, get the line number where the customer lots start
                 if (line.contains("CUST LOT NO")) {
@@ -491,6 +525,9 @@ public class ReportImport {
             lotArray.add(mawbTrim);
             lotArray.add(hawbTrim);
             lotArray.add(fileName);
+            lotArray.add(productNumber);
+            lotArray.add(product2000Number);
+            lotArray.add(ETA);
             // add the data to the full ArrayList of ArrayList of Strings
             shipDataAll.add(lotArray);
         }
@@ -507,6 +544,81 @@ public class ReportImport {
         fileDel.deleteSpecifiedFile(filePath);
         // return the file data
         return shipDataAll;
+    }
+    
+    /**
+     * Get data from TSMC TXT file of ShipALert
+     * Parse all needed data
+     * @param filePath
+     * @return ArrayList of an ArrayList of Strings
+     */
+    public void readLineShipAlertTXT(String filePath) {
+        // create new instance
+        ReportImport repimp = new ReportImport();
+        // get the filename from file path
+        String fileName = repimp.getFileNameFromPath(filePath);
+        // create the ArrayList of Strings to store the Shipment Data
+        ArrayList<String> shipData = new ArrayList<String>();
+        // create the variable for storing the number of lots
+        int lotNumber = 0;
+        int lotTSMCNumber = 0;
+        // create the ArrayList of ArrayList of Strings to store the full Lot Data
+        ArrayList<ArrayList<String>> lotDataAll = new ArrayList<ArrayList<String>>();
+        // create the ArrayList of ArrayList of Strings to store the TSMC to Customer Lot Data
+        ArrayList<ArrayList<String>> lotTSMCDataAll = new ArrayList<ArrayList<String>>();
+        // create the ArrayList of ArrayList of Strings to store the full Shipment Lot Data
+        ArrayList<ArrayList<String>> shipDataAll = new ArrayList<ArrayList<String>>();
+        // create all variables needed
+        String invoiceNo = "";
+        String invoiceDate = "";
+        String forwarderTrim = "";
+        String mawbTrim = "";
+        String hawbTrim = "";
+        // line number
+        int lineNumber = 0;
+        int custLotNumberStartLine = 0;
+        int custLotNumberEndLine = 0;
+        
+        // create the ArrayList of ArrayList of Strings for the text file data
+        //ArrayList<ArrayList<String>> txtFileAll = new ArrayList<ArrayList<String>>();
+        ArrayList<String> txtFileAll = new ArrayList<String>();
+
+        // read buffered txt file
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            
+            // loop through file line by line
+            for(String line; (line = br.readLine()) != null; ) {
+                
+                // count the line number
+                lineNumber = lineNumber + 1;
+                
+                // create the ArrayList of Strings for the text file Line data
+                ArrayList<String> txtFileLine = new ArrayList<String>();
+                
+                // add line number at the beginning of ArrayList
+                txtFileLine.add(Integer.toString(lineNumber));
+
+                // use Scanner to scan the line
+                Scanner scanner = new Scanner(line);
+                
+                // loop through line and separate by whitespace
+                while (scanner.hasNext()){
+                    // add scanner input to ArrayList
+                    txtFileLine.add(scanner.next());
+                }
+                // add the ArrayList to the full TextArray
+                //txtFileAll.add(txtFileLine);
+                txtFileAll.add(line);
+            }
+            for(String txtFileLine : txtFileAll){
+                if(txtFileLine.contains("INVOICE NO.:")){
+                    System.out.println("Invoice:Line:" + txtFileLine);
+                }
+            }
+        // line is not visible here.
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

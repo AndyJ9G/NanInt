@@ -227,6 +227,10 @@
                                     <TableColumn id="TSMCMAWBCol" fx:id="TSMCMAWBCol" text="MAWB"></TableColumn>
                                     <TableColumn id="TSMCHAWBCol" fx:id="TSMCHAWBCol" text="HAWB"></TableColumn>
                                     <TableColumn id="TSMCReportFileNameCol" fx:id="TSMCReportFileNameCol" text="ReportFileName"></TableColumn>
+                                    <TableColumn id="TSMCTechnologyCol" fx:id="TSMCTechnologyCol" text="Technology"></TableColumn>
+                                    <TableColumn id="TSMCProductCol" fx:id="TSMCProductCol" text="Product"></TableColumn>
+                                    <TableColumn id="TSMCProduct2000Col" fx:id="TSMCProduct2000Col" text="Product2000"></TableColumn>
+                                    <TableColumn id="TSMCETACol" fx:id="TSMCETACol" text="ETA"></TableColumn>
                                 </columns>
                             </TableView>
                         </center>

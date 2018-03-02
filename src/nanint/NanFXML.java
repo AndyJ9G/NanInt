@@ -442,6 +442,14 @@ public class NanFXML extends Application implements Initializable {
     private TableColumn<TSMCtoNan, String> TSMCHAWBCol;
     @FXML
     private TableColumn<TSMCtoNan, String> TSMCReportFileNameCol;
+    @FXML
+    private TableColumn<TSMCtoNan, String> TSMCTechnologyCol;
+    @FXML
+    private TableColumn<TSMCtoNan, String> TSMCProductCol;
+    @FXML
+    private TableColumn<TSMCtoNan, String> TSMCProduct2000Col;
+    @FXML
+    private TableColumn<TSMCtoNan, String> TSMCETACol;
     
     // UMCI to Nan Filter Area
     @FXML
@@ -704,7 +712,8 @@ public class NanFXML extends Application implements Initializable {
         CheckBoxGFtoNanOpenShipment.setSelected(true);
         
         // define the combo box values for tsmc to nan
-        ComboBoxTSMCtoNanList.addAll("Lot","WaferPcs","InvoiceNo","InvoiceDate","Forwarder","MAWB","HAWB","ReportFileName");
+        ComboBoxTSMCtoNanList.addAll("Lot","WaferPcs","InvoiceNo","InvoiceDate","Forwarder","MAWB","HAWB","ReportFileName","Technology",
+                "Product","Product2000","ETA");
         // put the values in the 3 combo boxes for tsmc to nan
         ComboBoxTSMCtoNanValue.setItems(ComboBoxTSMCtoNanList);
         ComboBoxTSMCtoNan2Value.setItems(ComboBoxTSMCtoNanList);
@@ -826,6 +835,10 @@ public class NanFXML extends Application implements Initializable {
         TSMCMAWBCol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("MAWB"));
         TSMCHAWBCol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("HAWB"));
         TSMCReportFileNameCol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("ReportFileName"));
+        TSMCTechnologyCol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("Technology"));
+        TSMCProductCol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("Product"));
+        TSMCProduct2000Col.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("Product2000"));
+        TSMCETACol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("ETA"));
         // set the items to the table
         TSMCtoNanTable.setItems(TSMCtoNanData);
         
@@ -1547,6 +1560,10 @@ public class NanFXML extends Application implements Initializable {
                 TSMCtoNanItem.setMAWB(rs.getString("MAWB"));
                 TSMCtoNanItem.setHAWB(rs.getString("HAWB"));
                 TSMCtoNanItem.setReportFileName(rs.getString("ReportFileName"));
+                TSMCtoNanItem.setTechnology(rs.getString("Technology"));
+                TSMCtoNanItem.setProduct(rs.getString("Product"));
+                TSMCtoNanItem.setProduct2000(rs.getString("Product2000"));
+                TSMCtoNanItem.setETA(rs.getString("ETA"));
                 TSMCtoNanData.add(TSMCtoNanItem);
             }
             System.out.println("Table build done for tsmc to nan"); 

@@ -22,12 +22,16 @@ public class TSMCtoNan {
     private final StringProperty MAWB;
     private final StringProperty HAWB;
     private final StringProperty ReportFileName;
+    private final StringProperty Technology;
+    private final StringProperty Product;
+    private final StringProperty Product2000;
+    private final StringProperty ETA;
     
     /**
      * Default constructor
      */
     public TSMCtoNan() {
-        this(null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null, null, null);
     }
     
     /**
@@ -39,9 +43,14 @@ public class TSMCtoNan {
      * @param Forwarder
      * @param MAWB
      * @param HAWB
-     * @param ReportFileName 
+     * @param ReportFileName
+     * @param Technology
+     * @param Product
+     * @param Product2000
+     * @param ETA
      */
-    public TSMCtoNan(String Lot, String WaferPcs, String InvoiceNo, String InvoiceDate, String Forwarder, String MAWB, String HAWB, String ReportFileName) {
+    public TSMCtoNan(String Lot, String WaferPcs, String InvoiceNo, String InvoiceDate, String Forwarder, String MAWB, String HAWB,
+            String ReportFileName, String Technology, String Product, String Product2000, String ETA) {
         this.Lot = new SimpleStringProperty(Lot); 
         this.WaferPcs = new SimpleStringProperty(WaferPcs);
         this.InvoiceNo = new SimpleStringProperty(InvoiceNo);
@@ -50,6 +59,10 @@ public class TSMCtoNan {
         this.MAWB = new SimpleStringProperty(MAWB);
         this.HAWB = new SimpleStringProperty(HAWB);
         this.ReportFileName = new SimpleStringProperty(ReportFileName);
+        this.Technology = new SimpleStringProperty(Technology);
+        this.Product = new SimpleStringProperty(Product);
+        this.Product2000 = new SimpleStringProperty(Product2000);
+        this.ETA = new SimpleStringProperty(ETA);
     }
     
     /**
@@ -133,5 +146,45 @@ public class TSMCtoNan {
     }
     public StringProperty ReportFileNameProperty() {
         return ReportFileName;
-    }    
+    }
+    
+    public String getTechnology() {
+        return Technology.get();
+    }
+    public void setTechnology(String Technology) {
+        this.Technology.set(Technology);
+    }
+    public StringProperty TechnologyProperty() {
+        return Technology;
+    }
+    
+    public String getProduct() {
+        return Product.get();
+    }
+    public void setProduct(String Product) {
+        this.Product.set(Product);
+    }
+    public StringProperty ProductProperty() {
+        return Product;
+    }
+    
+    public String getProduct2000() {
+        return Product2000.get();
+    }
+    public void setProduct2000(String Product2000) {
+        this.Product2000.set(Product2000);
+    }
+    public StringProperty Product2000Property() {
+        return Product2000;
+    }
+    
+    public String getETA() {
+        return ETA.get();
+    }
+    public void setETA(String ETA) {
+        this.ETA.set(ETA);
+    }
+    public StringProperty ETAProperty() {
+        return ETA;
+    }
 }

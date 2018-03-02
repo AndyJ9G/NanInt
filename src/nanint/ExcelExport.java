@@ -320,6 +320,10 @@ public class ExcelExport {
             rowhead.createCell((short) 5).setCellValue("MAWB");//Row Name1 
             rowhead.createCell((short) 6).setCellValue("HAWB");//Row Name1 
             rowhead.createCell((short) 7).setCellValue("ReportFileName");//Row Name1
+            rowhead.createCell((short) 8).setCellValue("Technology");//Row Name1
+            rowhead.createCell((short) 9).setCellValue("Product");//Row Name1
+            rowhead.createCell((short) 10).setCellValue("Product2000");//Row Name1
+            rowhead.createCell((short) 11).setCellValue("ETA");//Row Name1
             // loop through the observable list
             for(TSMCtoNan wn : TSMCtoNanData){
                 //Insertion in corresponding row  
@@ -332,6 +336,10 @@ public class ExcelExport {
                 row.createCell((short) 5).setCellValue(wn.getMAWB());
                 row.createCell((short) 6).setCellValue(wn.getHAWB());
                 row.createCell((short) 7).setCellValue(wn.getReportFileName());
+                row.createCell((short) 8).setCellValue(wn.getTechnology());
+                row.createCell((short) 9).setCellValue(wn.getProduct());
+                row.createCell((short) 10).setCellValue(wn.getProduct2000());
+                row.createCell((short) 11).setCellValue(wn.getETA());
                 // increase the counter
                 counter ++;
             }

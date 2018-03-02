@@ -27,7 +27,8 @@ public class DataBaseSQLite {
     private List<String> listTableWipNan = Arrays.asList("ReportDate", "Lot", "Owner", "Product", "HoldFlag", "WIP1", "WIP2", "Shrink", "FE_SITE", "BasicType",
             "Package", "Step", "WorkCenter", "SEQ", "Percentage", "ReportFileName");
     // tsmc_to_nan
-    private List<String> listTableTSMC = Arrays.asList("Lot", "WaferPcs", "InvoiceNo", "InvoiceDate", "Forwarder", "MAWB", "HAWB", "ReportFileName");
+    private List<String> listTableTSMC = Arrays.asList("Lot", "WaferPcs", "InvoiceNo", "InvoiceDate", "Forwarder", "MAWB", "HAWB", "ReportFileName", "Technology",
+            "Product", "Product2000", "ETA");
     // gf_to_nan
     private List<String> listTableGF = Arrays.asList("ReportDate", "CustomerName", "ShipDate", "InvoiceNo", "InvoiceDate", "PO", "SO", "OrderDate",
             "ProcessName", "CustomerPartname", "InternalPartName", "LotId", "CustomerLotId", "LotType", "LotPriority", "AgreedGDPW", "CalculatedGDPL",
@@ -45,19 +46,24 @@ public class DataBaseSQLite {
     // sql query statements      
     // sql for tsmc_to_nan
     private String sqlDropWIPnan = "DROP TABLE IF EXISTS wip_nan;";
-    private String sqlCreateWIPnan = "CREATE TABLE wip_nan (ReportDate, Lot, Owner, Product, HoldFlag, WIP1, WIP2, Shrink, FE_SITE, BasicType, Package, Step, WorkCenter, SEQ, Percentage, ReportFileName);";
+    private String sqlCreateWIPnan = "CREATE TABLE wip_nan (ReportDate, Lot, Owner, Product, HoldFlag, WIP1, WIP2, Shrink, FE_SITE, BasicType, Package, Step,"
+            + "WorkCenter, SEQ, Percentage, ReportFileName);";
 
     // sql for tsmc_to_nan
     private String sqlDropTSMC = "DROP TABLE IF EXISTS tsmc_to_nan;";
-    private String sqlCreateTSMC = "CREATE TABLE tsmc_to_nan (Lot, WaferPcs, InvoiceNo, InvoiceDate, Forwarder, MAWB, HAWB, ReportFileName);";
+    private String sqlCreateTSMC = "CREATE TABLE tsmc_to_nan (Lot, WaferPcs, InvoiceNo, InvoiceDate, Forwarder, MAWB, HAWB, ReportFileName, Technology, "
+            + "Product, Product2000, ETA);";
 
     // sql for gf_to_nan
     private String sqlDropGF = "DROP TABLE IF EXISTS gf_to_nan;";
-    private String sqlCreateGF = "CREATE TABLE gf_to_nan (ReportDate, CustomerName, ShipDate, InvoiceNo, InvoiceDate, PO, SO, OrderDate, ProcessName, CustomerPartname, InternalPartName, LotId, CustomerLotId, LotType, LotPriority, AgreedGDPW, CalculatedGDPL, CycleTime, BillQtyWfr, WfrIds, vBillDie, ShipToLocation, BillToLocation, ETA, ETD, Forwarder, HAWB, MAWB, FlightNo, ConnectingFlightNo, ReportFileName);";
+    private String sqlCreateGF = "CREATE TABLE gf_to_nan (ReportDate, CustomerName, ShipDate, InvoiceNo, InvoiceDate, PO, SO, OrderDate, ProcessName,"
+            + "CustomerPartname, InternalPartName, LotId, CustomerLotId, LotType, LotPriority, AgreedGDPW, CalculatedGDPL, CycleTime, BillQtyWfr, WfrIds,"
+            + "vBillDie, ShipToLocation, BillToLocation, ETA, ETD, Forwarder, HAWB, MAWB, FlightNo, ConnectingFlightNo, ReportFileName);";
 
     // sql for umci_to_nan
     private String sqlDropUMCI = "DROP TABLE IF EXISTS umci_to_nan;";
-    private String sqlCreateUMCI = "CREATE TABLE umci_to_nan (PART_DIV, INV_NO, SHPTO_ID, INV_DATE, MAWB_NO, HAWB_NO, FLT_NO, FLT_DATE, FLT_DEST, CARTON_NO, PO_NO, PRD_NO, LOT_TYPE, LOT_NO, SHIP_W_QTY, SHIP_D_QTY, SHP_PRD_NO, CTM_DEVICE, CUSTOMER_LOT, UMC_INV_NO, REMARK, WAFER_NO, ReportFileName);";
+    private String sqlCreateUMCI = "CREATE TABLE umci_to_nan (PART_DIV, INV_NO, SHPTO_ID, INV_DATE, MAWB_NO, HAWB_NO, FLT_NO, FLT_DATE, FLT_DEST, CARTON_NO,"
+            + "PO_NO, PRD_NO, LOT_TYPE, LOT_NO, SHIP_W_QTY, SHIP_D_QTY, SHP_PRD_NO, CTM_DEVICE, CUSTOMER_LOT, UMC_INV_NO, REMARK, WAFER_NO, ReportFileName);";
 
     // sql for file_list
     private String sqlDropFileList = "DROP TABLE IF EXISTS file_list;";
@@ -96,9 +102,9 @@ public class DataBaseSQLite {
         
         // create new database tables
         // create WIP tables
-        db.updateTable(sqlDropWIPnan, "drop wip-nan");
+        db.updateTable(sqlDropWIPnan, "drop wip_nan");
         System.out.println("Database table wip nan deleted");
-        db.updateTable(sqlCreateWIPnan, "create wip-nan");
+        db.updateTable(sqlCreateWIPnan, "create wip_nan");
         System.out.println("Database table wip nan created");
         
         // create TSMC Ship tables
@@ -139,6 +145,14 @@ public class DataBaseSQLite {
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
         
+        // check wip_nan table structure
+        db.checkAddDatabaseTables("wip_nan", listTableWipNan);
+        // check wip_nan table structure
+        db.checkAddDatabaseTables("tsmc_to_nan", listTableTSMC);
+        // check wip_nan table structure
+        db.checkAddDatabaseTables("gf_to_nan", listTableGF);
+        // check wip_nan table structure
+        db.checkAddDatabaseTables("umci_to_nan", listTableUMCI);
         // check wip_nan table structure
         db.checkAddDatabaseTables("lot_data", listTableLotData);
     }
@@ -352,6 +366,55 @@ public class DataBaseSQLite {
                     pstmt.setString(16,dataListRow.get(13)); //ReportFileName
                     System.out.println("Wip nan old CSV file with missing SEQ and Percentage");
                 }
+                // add the prepared statement to a batch
+                pstmt.addBatch();
+            }
+            // execute the full batch
+            int[] inserted = pstmt.executeBatch();
+            // closing the autocommit with commit
+            conn.commit();
+            System.out.println("Insert data into database, table: " + table + ", rows: " + inserted.length);
+            // close the prepared statement
+            pstmt.close();
+            // close database connection
+            conn.close();
+            System.out.println("Database connection closed.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /**
+     * Database Insert Multiple Data Rows from ArrayList for the TSMC to Nan Table
+     * call the full insertion without autocommit for database speed
+     * @param dataList
+     * @param query
+     * @param table 
+     */
+    public void insertTSMCtoNanBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        try {
+            // connect to the database and prepare query
+            Connection conn = this.connect();
+            // speeding up the database by setting autocommit to false
+            conn.setAutoCommit(false);
+            // insert the query into prepared statement
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            // loop through ArrayLists of ArrayLists of Strings
+            for (ArrayList<String> dataListRow : dataList) {
+                // update the query string parts with the data
+                //Lot, WaferPcs, Technology, InvoiceNo, InvoiceDate, Forwarder, MAWB, HAWB, ReportFileName, Product, Product2000, ETA
+                pstmt.setString(1,dataListRow.get(0)); //Lot
+                pstmt.setString(2,dataListRow.get(1)); //WaferPcs
+                pstmt.setString(3,dataListRow.get(3)); //InvoiceNo
+                pstmt.setString(4,dataListRow.get(4)); //InvoiceDate
+                pstmt.setString(5,dataListRow.get(5)); //Forwarder
+                pstmt.setString(6,dataListRow.get(6)); //MAWB
+                pstmt.setString(7,dataListRow.get(7)); //HAWB
+                pstmt.setString(8,dataListRow.get(8)); //ReportFileName
+                pstmt.setString(9,dataListRow.get(2)); //Technology
+                pstmt.setString(10,dataListRow.get(9)); //Product
+                pstmt.setString(11,dataListRow.get(10)); //Product2000
+                pstmt.setString(12,dataListRow.get(11)); //ETA
                 // add the prepared statement to a batch
                 pstmt.addBatch();
             }
