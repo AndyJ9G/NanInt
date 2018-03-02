@@ -94,6 +94,24 @@ public class DataBaseSQLite {
     }
     
     /**
+     * Check if table exists
+     * @param tableName
+     * @return boolean 
+     */
+    public boolean tableExists(String tableName){
+        // connect to the database and run query
+        try (Connection conn = this.connect();) {
+            DatabaseMetaData md = conn.getMetaData();
+            ResultSet rs = md.getTables(null, null, tableName, null);
+            rs.last();
+            return rs.getRow() > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+    
+    /**
      * Create a new clean set of tables
      */
     public void runCreateNewDatabase() {
@@ -145,16 +163,71 @@ public class DataBaseSQLite {
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
         
-        // check wip_nan table structure
-        db.checkAddDatabaseTables("wip_nan", listTableWipNan);
-        // check wip_nan table structure
-        db.checkAddDatabaseTables("tsmc_to_nan", listTableTSMC);
-        // check wip_nan table structure
-        db.checkAddDatabaseTables("gf_to_nan", listTableGF);
-        // check wip_nan table structure
-        db.checkAddDatabaseTables("umci_to_nan", listTableUMCI);
-        // check wip_nan table structure
-        db.checkAddDatabaseTables("lot_data", listTableLotData);
+        // check if exists wip_nan
+        if(db.tableExists("wip_nan")){
+            // Table Exists
+            // check wip_nan table structure
+            db.checkAddDatabaseTables("wip_nan", listTableWipNan);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateWIPnan, "create wip_nan");
+        }
+
+        // check if exists tsmc_to_nan
+        if(db.tableExists("tsmc_to_nan")){
+            // Table Exists
+            // check tsmc_to_nan table structure
+            db.checkAddDatabaseTables("tsmc_to_nan", listTableTSMC);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateTSMC, "create tsmc_to_nan");
+        }
+        
+        // check if exists gf_to_nan
+        if(db.tableExists("gf_to_nan")){
+            // Table Exists
+            // check gf_to_nan table structure
+            db.checkAddDatabaseTables("gf_to_nan", listTableGF);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateGF, "create gf_to_nan");
+        }
+        
+        // check if exists umci_to_nan
+        if(db.tableExists("umci_to_nan")){
+            // Table Exists
+            // check umci_to_nan table structure
+            db.checkAddDatabaseTables("umci_to_nan", listTableUMCI);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateUMCI, "create umci_to_nan");
+        }
+        
+        // check if exists lot_data
+        if(db.tableExists("lot_data")){
+            // Table Exists
+            // check lot_data table structure
+            db.checkAddDatabaseTables("lot_data", listTableLotData);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateLotData, "create lot_data");
+        }
+        
+        // check if exists file_list
+        if(db.tableExists("file_list")){
+            // Table Exists
+            // check file_list table structure
+            db.checkAddDatabaseTables("file_list", listTableFileList);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateFileList, "create file_list");
+        }
     }
     
     /**
