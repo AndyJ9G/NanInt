@@ -59,7 +59,7 @@ public class NanFXML extends Application implements Initializable {
     private static Logger logger = LogManager.getLogger(NanFXML.class.getName());
     
     // Version Number
-    String ProgrammVersion = "Version 1.14 with Logging and GIT";
+    String ProgrammVersion = "Version 1.14 with Logging and GIT Repo";
     
     // SQL select query's
     String sqlShipmentSelectTSMC = "SELECT tsmc_to_nan.* FROM tsmc_to_nan LEFT JOIN wip_nan ON tsmc_to_nan.Lot = wip_nan.Lot WHERE wip_nan.Lot ISNULL;";
