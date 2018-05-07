@@ -55,41 +55,6 @@
     <center>
         <TabPane id="tabPane" fx:id="tabPane">
             <tabs>
-                <Tab id="lotDataTab" fx:id="lotDataTab" text="Lot Data" closable="false">
-                    <BorderPane id="BorderPaneLotData" fx:id="BorderPaneLotData">
-                        <top>
-                            <HBox id="lotHBox" spacing="10.0">
-                                <padding>
-                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
-                                </padding>
-                                <children>
-                                    <ComboBox id="ComboBoxValueLotData" fx:id="ComboBoxValueLotData"/>
-                                    <TextField id="TextFieldValueLotData" fx:id="TextFieldValueLotData" layoutX="115.0" />
-                                    <ComboBox id="ComboBox2ValueLotData" fx:id="ComboBox2ValueLotData"/>
-                                    <TextField id="TextField2ValueLotData" fx:id="TextField2ValueLotData" layoutX="115.0" />
-                                    <ComboBox id="ComboBox3ValueLotData" fx:id="ComboBox3ValueLotData"/>
-                                    <TextField id="TextField3ValueLotData" fx:id="TextField3ValueLotData" layoutX="115.0" />
-                                    <Button id="FilterButtonLotData" fx:id="FilterButtonLotData" onAction="#filterButtonLotData" text="Filter Data"></Button>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Button id="LotDataExcelExportButton" fx:id="LotDataExcelExportButton" onAction="#LotDataExcelExportButton" text="Excel export"></Button>
-                                </children>
-                            </HBox>
-                        </top>
-                        <center>
-                            <TableView id="lotDataTable" fx:id="lotDataTable">
-                                <columns>
-                                    <TableColumn id="LotColLotData" fx:id="LotColLotData" text="Lot"></TableColumn>
-                                    <TableColumn id="ProductColLotData" fx:id="ProductColLotData" text="Product"></TableColumn>
-                                    <TableColumn id="BasicTypeColLotData" fx:id="BasicTypeColLotData" text="BasicType"></TableColumn>
-                                    <TableColumn id="CreationDateColLotData" fx:id="CreationDateColLotData" text="Created"></TableColumn>
-                                    <TableColumn id="FirstStepDateColLotData" fx:id="FirstStepDateColLotData" text="Last DieBank"></TableColumn>
-                                    <TableColumn id="LastStepDateColLotData" fx:id="LastStepDateColLotData" text="Shipping"></TableColumn>
-                                    <TableColumn id="LastDateColLotData" fx:id="LastDateColLotData" text="Last"></TableColumn>
-                                </columns>
-                            </TableView>
-                        </center>
-                    </BorderPane>
-                </Tab>
                 <Tab id="wipNanTab" fx:id="wipNanTab" text="Wip Nan Lots" closable="false">
                     <BorderPane id="BorderPaneWipNan" fx:id="BorderPaneWipNan">
                         <top>
@@ -288,6 +253,58 @@
                         </center>
                     </BorderPane>
                 </Tab>
+                
+                <Tab id="AMKORtoASETab" fx:id="AMKORtoASETab" text="Shipments from AMKOR" closable="false">
+                    <BorderPane id="BorderPaneAMKORtoASE" fx:id="BorderPaneAMKORtoASE">
+                        <top>
+                            <HBox id="AMKORtoASEHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxAMKORtoASEValue" fx:id="ComboBoxAMKORtoASEValue"/>
+                                    <TextField id="TextFieldAMKORtoASEValue" fx:id="TextFieldAMKORtoASEValue" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxAMKORtoASE2Value" fx:id="ComboBoxAMKORtoASE2Value"/>
+                                    <TextField id="TextFieldAMKORtoASE2Value" fx:id="TextFieldAMKORtoASE2Value" layoutX="115.0" />
+                                    <ComboBox id="ComboBoxAMKORtoASE3Value" fx:id="ComboBoxAMKORtoASE3Value"/>
+                                    <TextField id="TextFieldAMKORtoASE3Value" fx:id="TextFieldAMKORtoASE3Value" layoutX="115.0" />
+                                    <Button id="FilterAMKORtoASEButton" fx:id="FilterAMKORtoASEButton" onAction="#filterAMKORtoASEButton" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="AMKORtoASEExcelExportButton" fx:id="AMKORtoASEExcelExportButton" onAction="#AMKORtoASEExcelExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="AMKORtoASETable" fx:id="AMKORtoASETable">
+                                <columns> 
+                                    <TableColumn id="AMKORShippingDateCol" fx:id="AMKORShippingDateCol" text="ShippingDate"></TableColumn> 
+                                    <TableColumn id="AMKORPackingNoCol" fx:id="AMKORPackingNoCol" text="PackingNo"></TableColumn> 
+                                    <TableColumn id="AMKORInvoiceNoCol" fx:id="AMKORInvoiceNoCol" text="InvoiceNo"></TableColumn> 
+                                    <TableColumn id="AMKORShipToCol" fx:id="AMKORShipToCol" text="ShipTo"></TableColumn> 
+                                    <TableColumn id="AMKORMAWBCol" fx:id="AMKORMAWBCol" text="MAWB"></TableColumn> 
+                                    <TableColumn id="AMKORCustomerPOCol" fx:id="AMKORCustomerPOCol" text="CustomerPO"></TableColumn> 
+                                    <TableColumn id="AMKORDescriptionOfGoodsCol" fx:id="AMKORDescriptionOfGoodsCol" text="DescriptionOfGoods"></TableColumn> 
+                                    <TableColumn id="AMKORPdfFileNameCol" fx:id="AMKORPdfFileNameCol" text="PdfFileName"></TableColumn> 
+                                    <TableColumn id="AMKORDeliveryCol" fx:id="AMKORDeliveryCol" text="Delivery"></TableColumn> 
+                                    <TableColumn id="AMKORBoxCol" fx:id="AMKORBoxCol" text="Box"></TableColumn> 
+                                    <TableColumn id="AMKORMaterialCol" fx:id="AMKORMaterialCol" text="Material"></TableColumn> 
+                                    <TableColumn id="AMKORDeviceNameCol" fx:id="AMKORDeviceNameCol" text="DeviceName"></TableColumn> 
+                                    <TableColumn id="AMKORPONoCol" fx:id="AMKORPONoCol" text="PONo"></TableColumn> 
+                                    <TableColumn id="AMKORDateCodeCol" fx:id="AMKORDateCodeCol" text="DateCode"></TableColumn> 
+                                    <TableColumn id="AMKORFABnoCol" fx:id="AMKORFABnoCol" text="FABno"></TableColumn> 
+                                    <TableColumn id="AMKORControlCodeCol" fx:id="AMKORControlCodeCol" text="ControlCode"></TableColumn> 
+                                    <TableColumn id="AMKORATPOnoCol" fx:id="AMKORATPOnoCol" text="ATPOno"></TableColumn> 
+                                    <TableColumn id="AMKORFPOCol" fx:id="AMKORFPOCol" text="FPO"></TableColumn> 
+                                    <TableColumn id="AMKORMCitemCol" fx:id="AMKORMCitemCol" text="MCitem"></TableColumn> 
+                                    <TableColumn id="AMKORQuantityCol" fx:id="AMKORQuantityCol" text="Quantity"></TableColumn> 
+                                    <TableColumn id="AMKORReportFileNameCol" fx:id="AMKORReportFileNameCol" text="ReportFileName"></TableColumn> 
+                                </columns>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                
+                
                 <Tab id="wipChart" fx:id="wipChart" text="Single Lot Processing Chart" closable="false">
                     <BorderPane id="BorderPanewipLineChart" fx:id="BorderPanewipLineChart">
                         <top>
@@ -346,6 +363,41 @@
                                     <NumberAxis label="WIP amount" id="barChartWipNanYAxis" fx:id="barChartWipNanYAxis" side="LEFT" />
                                 </yAxis>
                             </StackedBarChart>
+                        </center>
+                    </BorderPane>
+                </Tab>
+                <Tab id="lotDataTab" fx:id="lotDataTab" text="Lot Data" closable="false">
+                    <BorderPane id="BorderPaneLotData" fx:id="BorderPaneLotData">
+                        <top>
+                            <HBox id="lotHBox" spacing="10.0">
+                                <padding>
+                                    <Insets top="10.0" bottom="10.0" left="10.0" right="10.0"/>
+                                </padding>
+                                <children>
+                                    <ComboBox id="ComboBoxValueLotData" fx:id="ComboBoxValueLotData"/>
+                                    <TextField id="TextFieldValueLotData" fx:id="TextFieldValueLotData" layoutX="115.0" />
+                                    <ComboBox id="ComboBox2ValueLotData" fx:id="ComboBox2ValueLotData"/>
+                                    <TextField id="TextField2ValueLotData" fx:id="TextField2ValueLotData" layoutX="115.0" />
+                                    <ComboBox id="ComboBox3ValueLotData" fx:id="ComboBox3ValueLotData"/>
+                                    <TextField id="TextField3ValueLotData" fx:id="TextField3ValueLotData" layoutX="115.0" />
+                                    <Button id="FilterButtonLotData" fx:id="FilterButtonLotData" onAction="#filterButtonLotData" text="Filter Data"></Button>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Button id="LotDataExcelExportButton" fx:id="LotDataExcelExportButton" onAction="#LotDataExcelExportButton" text="Excel export"></Button>
+                                </children>
+                            </HBox>
+                        </top>
+                        <center>
+                            <TableView id="lotDataTable" fx:id="lotDataTable">
+                                <columns>
+                                    <TableColumn id="LotColLotData" fx:id="LotColLotData" text="Lot"></TableColumn>
+                                    <TableColumn id="ProductColLotData" fx:id="ProductColLotData" text="Product"></TableColumn>
+                                    <TableColumn id="BasicTypeColLotData" fx:id="BasicTypeColLotData" text="BasicType"></TableColumn>
+                                    <TableColumn id="CreationDateColLotData" fx:id="CreationDateColLotData" text="Created"></TableColumn>
+                                    <TableColumn id="FirstStepDateColLotData" fx:id="FirstStepDateColLotData" text="Last DieBank"></TableColumn>
+                                    <TableColumn id="LastStepDateColLotData" fx:id="LastStepDateColLotData" text="Shipping"></TableColumn>
+                                    <TableColumn id="LastDateColLotData" fx:id="LastDateColLotData" text="Last"></TableColumn>
+                                </columns>
+                            </TableView>
                         </center>
                     </BorderPane>
                 </Tab>

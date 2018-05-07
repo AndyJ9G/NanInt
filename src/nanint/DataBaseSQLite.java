@@ -16,12 +16,19 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This is the method for all database connections
  * @author Grdan Andreas
  */
 public class DataBaseSQLite {
+    
+    //private static final Logger logger = ApplicationLogger.getInstance();
+    private static Logger logger = LogManager.getLogger(DataBaseSQLite.class.getName());
+    
     // table structure
     // wip_nan
     private List<String> listTableWipNan = Arrays.asList("ReportDate", "Lot", "Owner", "Product", "HoldFlag", "WIP1", "WIP2", "Shrink", "FE_SITE", "BasicType",
@@ -38,6 +45,9 @@ public class DataBaseSQLite {
     private List<String> listTableUMCI = Arrays.asList("PART_DIV", "INV_NO", "SHPTO_ID", "INV_DATE", "MAWB_NO", "HAWB_NO", "FLT_NO", "FLT_DATE", "FLT_DEST",
             "CARTON_NO", "PO_NO", "PRD_NO", "LOT_TYPE", "LOT_NO", "SHIP_W_QTY", "SHIP_D_QTY", "SHP_PRD_NO", "CTM_DEVICE", "CUSTOMER_LOT", "UMC_INV_NO",
             "REMARK", "WAFER_NO", "ReportFileName");
+    // amkto_to_ase
+    private List<String> listTableAMKOR = Arrays.asList("ShippingDate","PackingNo","InvoiceNo","ShipTo","MAWB","CustomerPO","DescriptionOfGoods","PdfFileName",
+            "Delivery","Box","Material","DeviceName","PONo","DateCode","FABno","ControlCode","ATPOno","FPO","MCitem","Quantity","ReportFileName");
     // file_list
     private List<String> listTableFileList = Arrays.asList("FILENAME");
     // lot_data
@@ -65,6 +75,11 @@ public class DataBaseSQLite {
     private String sqlCreateUMCI = "CREATE TABLE umci_to_nan (PART_DIV, INV_NO, SHPTO_ID, INV_DATE, MAWB_NO, HAWB_NO, FLT_NO, FLT_DATE, FLT_DEST, CARTON_NO,"
             + "PO_NO, PRD_NO, LOT_TYPE, LOT_NO, SHIP_W_QTY, SHIP_D_QTY, SHP_PRD_NO, CTM_DEVICE, CUSTOMER_LOT, UMC_INV_NO, REMARK, WAFER_NO, ReportFileName);";
 
+    // sql for amkor_to_ase
+    private String sqlDropAMKOR = "DROP TABLE IF EXISTS amkor_to_ase;";
+    private String sqlCreateAMKOR = "CREATE TABLE amkor_to_ase (ShippingDate, PackingNo, InvoiceNo, ShipTo, MAWB, CustomerPO, DescriptionOfGoods, PdfFileName,"
+            + "Delivery, Box, Material, DeviceName, PONo, DateCode, FABno, ControlCode, ATPOno, FPO, MCitem, Quantity, ReportFileName);";
+
     // sql for file_list
     private String sqlDropFileList = "DROP TABLE IF EXISTS file_list;";
     private String sqlCreateFileList = "CREATE TABLE file_list (FILENAME);";
@@ -77,7 +92,10 @@ public class DataBaseSQLite {
      * Connect to database
      * @return connection 
      */
-    private Connection connect() {    
+    private Connection connect() {  
+        
+        logger.info("Connect to database");
+        
         // Database parameter
         String DB_PATH = "nanint.db";
         String DB_DRIVER = "jdbc:sqlite:";
@@ -87,8 +105,10 @@ public class DataBaseSQLite {
             // create a connection to the database
             connection = DriverManager.getConnection(DB_DRIVER + DB_PATH);
             System.out.println("Connection to database, dp path: " + DB_PATH + ", db driver: " + DB_DRIVER);
+            logger.info("Connection to database, dp path: " + DB_PATH + ", db driver: " + DB_DRIVER);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return connection;
     }
@@ -99,6 +119,7 @@ public class DataBaseSQLite {
      * @return boolean 
      */
     public boolean tableExists(String tableName){
+        logger.info("Check if table exists: " + tableName);
         // connect to the database and run query
         try (Connection conn = this.connect();) {
             DatabaseMetaData md = conn.getMetaData();
@@ -115,6 +136,8 @@ public class DataBaseSQLite {
      * Create a new clean set of tables
      */
     public void runCreateNewDatabase() {
+        logger.info("Create a new clean set of tables");
+        
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
         
@@ -143,6 +166,12 @@ public class DataBaseSQLite {
         db.updateTable(sqlCreateUMCI, "create umci_to_nan");
         System.out.println("Database table umci_to_nan created");
         
+        // create AMKOR Ship tables
+        db.updateTable(sqlDropAMKOR, "drop amkor_to_ase");
+        System.out.println("Database table amkor_to_ase deleted");
+        db.updateTable(sqlCreateAMKOR, "create amkor_to_ase");
+        System.out.println("Database table amkor_to_ase created");
+        
         // create FileList tables
         db.updateTable(sqlDropFileList, "drop file_list");
         System.out.println("Database table file list deleted");
@@ -160,6 +189,7 @@ public class DataBaseSQLite {
      * Check table existence and table columns structure
      */
     public void runCheckDatabaseTables() {
+        logger.info("Check table existence and table columns structure");
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
         
@@ -207,6 +237,17 @@ public class DataBaseSQLite {
             db.updateTable(sqlCreateUMCI, "create umci_to_nan");
         }
         
+        // check if exists amkor_to_ase
+        if(db.tableExists("amkor_to_ase")){
+            // Table Exists
+            // check amkor_to_ase table structure
+            db.checkAddDatabaseTables("amkor_to_ase", listTableAMKOR);
+        }else{
+            // Table doesn't exist.
+            // create table
+            db.updateTable(sqlCreateAMKOR, "create amkor_to_ase");
+        }
+        
         // check if exists lot_data
         if(db.tableExists("lot_data")){
             // Table Exists
@@ -235,6 +276,7 @@ public class DataBaseSQLite {
      * Add table columns if missing
      */
     public void checkAddDatabaseTables(String tableName, List<String> tableStructure) {
+        logger.info("Check table existence and table columns structure, add table columns if missing");
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
 
@@ -264,6 +306,7 @@ public class DataBaseSQLite {
      * @return ArrayList of Strings
      */
     public ArrayList<String> pragmaDatabaseTables(String tableName) {
+        logger.info("Get table columns with PRAGMA sql query");
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
         
@@ -293,6 +336,7 @@ public class DataBaseSQLite {
      * @param action 
      */
     public void updateTable(String sqlQuery, String action) {
+        logger.info("Call database update with the given sql query :" + sqlQuery);
         // connect to the database and run query
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sqlQuery);) {
@@ -301,6 +345,7 @@ public class DataBaseSQLite {
             System.out.println("Database update with query: " + sqlQuery + ", action: " + action);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -311,6 +356,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertIntoTable(String dataValue, String query, String table) {
+        logger.info("Database Insert simple Data into table :" + table);
         // connect to the database and prepare query
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -321,6 +367,7 @@ public class DataBaseSQLite {
             System.out.println("Insert data into database, table: " + table + ", query: " + query);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -332,6 +379,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertArrayIntoTable(ArrayList<String> dataList, String query, String table) {
+        logger.info("Database Insert Array Data");
         // connect to the database and prepare query
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -349,6 +397,7 @@ public class DataBaseSQLite {
             System.out.println("Insert data into database, table: " + table + ", query: " + query);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     } 
 
@@ -360,6 +409,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ArrayListto Table :" + table);
         try {
             // connect to the database and prepare query
             Connection conn = this.connect();
@@ -389,6 +439,7 @@ public class DataBaseSQLite {
             System.out.println("Database connection closed.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -400,6 +451,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertWipNanBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ArrayList for the Wip Nan Table");
         try {
             // connect to the database and prepare query
             Connection conn = this.connect();
@@ -454,6 +506,7 @@ public class DataBaseSQLite {
             System.out.println("Database connection closed.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
     
@@ -465,6 +518,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertTSMCtoNanBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ArrayList for the TSMC to Nan Table");
         try {
             // connect to the database and prepare query
             Connection conn = this.connect();
@@ -503,6 +557,7 @@ public class DataBaseSQLite {
             System.out.println("Database connection closed.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
     
@@ -514,6 +569,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertGFtoNanBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ArrayList for the GF to Nan Table");
         try {
             // connect to the database and prepare query
             Connection conn = this.connect();
@@ -570,6 +626,7 @@ public class DataBaseSQLite {
             System.out.println("Database connection closed.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     } 
 
@@ -581,6 +638,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertUMCItoNanBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ArrayList for the UMCI to Nan Table");
         try {
             // connect to the database and prepare query
             Connection conn = this.connect();
@@ -629,6 +687,7 @@ public class DataBaseSQLite {
             System.out.println("Database connection closed.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
     
@@ -640,6 +699,7 @@ public class DataBaseSQLite {
      * @param table 
      */
     public void insertLotDataBatchIntoTable(ArrayList<ArrayList<String>> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ArrayList for the lot_data Table");
         try {
             // connect to the database and prepare query
             Connection conn = this.connect();
@@ -672,6 +732,66 @@ public class DataBaseSQLite {
             System.out.println("Database connection closed.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
+        }
+    }
+    
+    /**
+     * Database Insert Multiple Data Rows from ObservableList for the amkor-to-ase Table
+     * call the full insertion without autocommit for database speed
+     * @param dataList
+     * @param query
+     * @param table 
+     */
+    public void insertAMKORtoASEBatchIntoTable(ObservableList<AMKORtoASE> dataList, String query, String table) {
+        logger.info("Database Insert Multiple Data Rows from ObservableList for the amkor-to-ase");
+        try {
+            // connect to the database and prepare query
+            Connection conn = this.connect();
+            // speeding up the database by setting autocommit to false
+            conn.setAutoCommit(false);
+            // insert the query into prepared statement
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            // loop through ArrayLists of ArrayLists of Strings
+            for (AMKORtoASE dataListRow : dataList) {
+                // update the query string parts with the data                
+                pstmt.setString(1,dataListRow.getShippingDate()); 
+                pstmt.setString(2,dataListRow.getPackingNo()); 
+                pstmt.setString(3,dataListRow.getInvoiceNo());
+                pstmt.setString(4,dataListRow.getShipTo());
+                pstmt.setString(5,dataListRow.getMAWB());
+                pstmt.setString(6,dataListRow.getCustomerPO());
+                pstmt.setString(7,dataListRow.getDescriptionOfGoods());
+                pstmt.setString(8,dataListRow.getPdfFileName());
+                pstmt.setString(9,dataListRow.getDelivery());
+                pstmt.setString(10,dataListRow.getBox());
+                pstmt.setString(11,dataListRow.getMaterial());
+                pstmt.setString(12,dataListRow.getDeviceName());
+                pstmt.setString(13,dataListRow.getPONo());
+                pstmt.setString(14,dataListRow.getDateCode());
+                pstmt.setString(15,dataListRow.getFABno());
+                pstmt.setString(16,dataListRow.getControlCode());
+                pstmt.setString(17,dataListRow.getATPOno());
+                pstmt.setString(18,dataListRow.getFPO());
+                pstmt.setString(19,dataListRow.getMCitem());
+                pstmt.setString(20,dataListRow.getQuantity());
+                pstmt.setString(21,dataListRow.getReportFileName());
+                // add the prepared statement to a batch
+                pstmt.addBatch();
+            }
+            // execute the full batch
+            int[] inserted = pstmt.executeBatch();
+            // closing the autocommit with commit
+            conn.commit();
+            System.out.println("Insert data into database, table: " + table + ", rows: " + inserted.length);
+            // close the prepared statement
+            pstmt.close();
+            // close database connection
+            conn.close();
+            System.out.println("Database connection closed.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -680,6 +800,7 @@ public class DataBaseSQLite {
      * @return ArrayList of Strings of file names
      */
     public ArrayList<String> checkFileNameExisting() {
+        logger.info("Database query to get all file names from file table");
         String sqlCheckFileName = "SELECT * FROM file_list;";
         ArrayList<String> fileName = new ArrayList<String>();
         try (Connection conn = this.connect();
@@ -693,6 +814,7 @@ public class DataBaseSQLite {
             return fileName;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
     } 
@@ -703,6 +825,7 @@ public class DataBaseSQLite {
      * @return ArrayList of ArrayList of Strings
      */
     public ArrayList<ArrayList<String>> selectTable(String sqlSelect) {
+        logger.info("Database query returning ArrayList of Strings :" + sqlSelect);
         try (Connection conn = this.connect();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sqlSelect)) {
@@ -741,6 +864,7 @@ public class DataBaseSQLite {
             return databaseResult;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
     } 
@@ -751,6 +875,7 @@ public class DataBaseSQLite {
      * @return result set
      */
     public ResultSet selectTableResultSet(String sqlSelect) {
+        logger.info("Database query :" + sqlSelect);
         try {
             Connection conn = this.connect();
             Statement stmt = conn.createStatement();
@@ -759,6 +884,7 @@ public class DataBaseSQLite {
             return rs;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
     } 
@@ -768,6 +894,7 @@ public class DataBaseSQLite {
      * @return ArrayList of Strings of lot names
      */
     public ArrayList<String> getLotNamesWipNan() {
+        logger.info("Database query to get all lot names from wip_nan table");
         String sqlGetLotNamesWipNan = "SELECT DISTINCT Lot FROM wip_nan;";
         ArrayList<String> lotNamesWipNan = new ArrayList<String>();
         try (Connection conn = this.connect();
@@ -781,6 +908,7 @@ public class DataBaseSQLite {
             return lotNamesWipNan;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
     }

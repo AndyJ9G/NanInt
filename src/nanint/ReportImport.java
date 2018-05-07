@@ -16,16 +16,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  * This is the method for importing all data to database from imported files
  * @author Grdan Andreas
  */
-public class ReportImport {      
+public class ReportImport {
+    //private static final Logger logger = ApplicationLogger.getInstance();
+    private static Logger logger = LogManager.getLogger(ReportImport.class.getName());
+    
     // sql query statements      
     // sql for tsmc_to_nan
     private String sqlDropWIPnan = "DROP TABLE IF EXISTS wip_nan;";
@@ -47,6 +63,12 @@ public class ReportImport {
     private String sqlCreateUMCI = "CREATE TABLE umci_to_nan (PART_DIV, INV_NO, SHPTO_ID, INV_DATE, MAWB_NO, HAWB_NO, FLT_NO, FLT_DATE, FLT_DEST, CARTON_NO, PO_NO, PRD_NO, LOT_TYPE, LOT_NO, SHIP_W_QTY, SHIP_D_QTY, SHP_PRD_NO, CTM_DEVICE, CUSTOMER_LOT, UMC_INV_NO, REMARK, WAFER_NO, ReportFileName);";
     private String sqlInsertUMCI= "INSERT INTO umci_to_nan VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
+    // sql for amkor_to_ase
+    private String sqlDropAMKOR = "DROP TABLE IF EXISTS amkor_to_ase;";
+    private String sqlCreateAMKOR = "CREATE TABLE amkor_to_ase (ShippingDate, PackingNo, InvoiceNo, ShipTo, MAWB, CustomerPO, DescriptionOfGoods, PdfFileName,"
+            + "Delivery, Box, Material, DeviceName, PONo, DateCode, FABno, ControlCode, ATPOno, FPO, MCitem, Quantity, ReportFileName);";
+    private String sqlInsertAMKOR = "INSERT INTO amkor_to_ase VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    
     // sql for file_list
     private String sqlDropFileList = "DROP TABLE IF EXISTS file_list;";
     private String sqlCreateFileList = "CREATE TABLE file_list (FILENAME);";
@@ -54,6 +76,17 @@ public class ReportImport {
     
     // create new ArrayList of Strings for method return
     ArrayList<String> repfeed = new ArrayList<String>();
+    
+    // The data as an observable list of AMKOR to ASE 
+    ObservableList<AMKORtoASE> AMKORtoASElist  = FXCollections.observableArrayList();
+    ObservableList<AMKORtoASE> AMKORtoASEfullList  = FXCollections.observableArrayList();
+    
+    // The data as an observable list of AMKOR pdf import 
+    ObservableList<AMKORpdf> AMKORpdfList  = FXCollections.observableArrayList();
+    ObservableList<AMKORpdf> AMKORpdfFullList  = FXCollections.observableArrayList();
+    
+    // The final data as an observable list of AMKOR to ASE
+    ObservableList<AMKORtoASE> AMKORfinalList  = FXCollections.observableArrayList();
 
     /**
      * Run the full report import
@@ -62,6 +95,8 @@ public class ReportImport {
      * Delete the files and save the filename in the database
      */
     public void runReportImport() {
+        
+        logger.info("Run Report Import Class");
        
         // create instance of database
         DataBaseSQLite db = new DataBaseSQLite();
@@ -76,71 +111,302 @@ public class ReportImport {
         ArrayList<ArrayList<String>> csvLineRowsUMCI = new ArrayList<ArrayList<String>>();
         ArrayList<ArrayList<String>> csvAllLineRowsUMCI = new ArrayList<ArrayList<String>>();
         
-        // read all data from CSV files in directory
         // create the instances
         ReportImport repimp = new ReportImport();
         MsgMail msgmail = new MsgMail();
         
         // extract the attachments from Outlook msg into the folder
         // create ArrayList for number of files and attachments
+        logger.info("Extract the attachments from Outlook msg into the folder");
         ArrayList<Integer> msgatt = new ArrayList<Integer>();
         // loop folder and get attachments extracted
         msgatt = msgmail.loopMsgAttFiles("wip-nan", "");
+        logger.info("Loop folder and get attachments extracted for wip nan");
         // add the file number and attachment number to string and add to report array list
         repfeed.add("From folder wip-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
+        logger.info("From folder wip-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1)); 
         // loop folder and get attachments extracted
         msgatt = msgmail.loopMsgAttFiles("tsmc-to-nan", "");
+        logger.info("Loop folder and get attachments extracted for tsmc-to-nan");
         // add the file number and attachment number to string and add to report array list
         repfeed.add("From folder tsmc-to-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
+        logger.info("From folder tsmc-to-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
         // loop folder and get attachments extracted
         msgatt = msgmail.loopMsgAttFiles("gf-to-nan", "");
+        logger.info("Loop folder and get attachments extracted for gf-to-nan");
         // add the file number and attachment number to string and add to report array list
         repfeed.add("From folder gf-to-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
+        logger.info("From folder gf-to-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
         // loop folder and get attachments extracted
         msgatt = msgmail.loopMsgAttFiles("umci-to-nan", "");
+        logger.info("Loop folder and get attachments extracted for umci-to-nan");
         // add the file number and attachment number to string and add to report array list
         repfeed.add("From folder umci-to-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
+        logger.info("From folder umci-to-nan, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
+        // loop folder and get attachments extracted
+        msgatt = msgmail.loopMsgAttFiles("amkor-to-ase", "");
+        logger.info("Loop folder and get attachments extracted for amkor-to-ase");
+        // add the file number and attachment number to string and add to report array list
+        repfeed.add("From folder amkor-to-ase, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
+        logger.info("From folder amkor-to-ase, found number of msg. files: " + msgatt.get(0) + ", extracted number of attachments: " + msgatt.get(1));
         
         // get the TXT data as an ArrayLists of ArrayLists of Strings
         // define the directory and the Regex for filename
         shipAlertLine = repimp.loopLineTXTFiles("tsmc-to-nan", "");
+        logger.info("Get the TXT data as an ArrayLists of ArrayLists of Strings tsmc-to-nan");
         // add to ArrayLists of ArrayLists of Strings
         shipAlertAllLine.addAll(shipAlertLine);
         // get the size of the ArrayList with data and add to the report
         repfeed.add("Number of data points from tsmc to nan extracted and inserted into database: " + shipAlertAllLine.size());
+        logger.info("Number of data points from tsmc to nan extracted and inserted into database: " + shipAlertAllLine.size());
         // insert ArrayList of ArrayList of Strings into tsmc-to-nan with sql batch
         db.insertTSMCtoNanBatchIntoTable(shipAlertAllLine, sqlInsertTSMC, "tsmc-to-nan");
         
         // get the CSV data from WIP as an ArrayLists of ArrayLists of Strings
         // define the directory and the Regex for filename
         csvLineRowsWIP = repimp.loopLineCSVFiles("wip-nan", "");
+        logger.info("Get the CSV data from WIP as an ArrayLists of ArrayLists of Strings for wip-nan");
         // add to ArrayLists of ArrayLists of Strings
         csvAllLineRowsWIP.addAll(csvLineRowsWIP);
         // get the size of the ArrayList with data and add to the report
         repfeed.add("Number of data points from wip nan extracted and inserted into database: " + csvAllLineRowsWIP.size());
+        logger.info("Number of data points from wip nan extracted and inserted into database: " + csvAllLineRowsWIP.size());
         // insert ArrayList of ArrayList of Strings into wip-nan with sql batch
         db.insertWipNanBatchIntoTable(csvAllLineRowsWIP, sqlInsertWIPnan, "wip-nan");
         
         // get the CSV data from GF as an ArrayLists of ArrayLists of Strings
         // define the directory and the Regex for filename
         csvLineRowsGF = repimp.loopLineCSVFiles("gf-to-nan", "");
+        logger.info("Get the CSV data from WIP as an ArrayLists of ArrayLists of Strings for gf-to-nan");
         // add to ArrayLists of ArrayLists of Strings
         csvAllLineRowsGF.addAll(csvLineRowsGF);
         // get the size of the ArrayList with data and add to the report
         repfeed.add("Number of data points from gf to nan extracted and inserted into database: " + csvAllLineRowsGF.size());
+        logger.info("Number of data points from gf to nan extracted and inserted into database: " + csvAllLineRowsGF.size());
         // insert ArrayList of ArrayList of Strings into gf-to-nan with sql batch
         db.insertBatchIntoTable(csvAllLineRowsGF, sqlInsertGF, "gf-to-nan");
         
         // get the CSV data from UMCI as an ArrayLists of ArrayLists of Strings
         // define the directory and the Regex for filename
         csvLineRowsUMCI = repimp.loopLineCSVFiles("umci-to-nan", "");
+        logger.info("Get the CSV data from WIP as an ArrayLists of ArrayLists of Strings for umci-to-nan");
         // add to ArrayLists of ArrayLists of Strings
         csvAllLineRowsUMCI.addAll(csvLineRowsUMCI);
         // get the size of the ArrayList with data and add to the report
         repfeed.add("Number of data points from umci to nan extracted and inserted into database: " + csvAllLineRowsUMCI.size());
+        logger.info("Number of data points from umci to nan extracted and inserted into database: " + csvAllLineRowsUMCI.size());
         // insert ArrayList of ArrayList of Strings into umci-to-nan with sql batch
         db.insertUMCItoNanBatchIntoTable(csvAllLineRowsUMCI, sqlInsertUMCI, "umci-to-nan");
         
+        // get the Excel data from AMKOR as an Observable List
+        // loop through XLS files
+        // define the directory and the Regex for filename
+        AMKORtoASElist.clear();
+        AMKORtoASElist = repimp.loopAmkorXLSFiles("amkor-to-ase", ".xls", "");
+        logger.info("Get the Excel data from AMKOR as an Observable List");
+        // add to Observable List
+        AMKORtoASEfullList.addAll(AMKORtoASElist);
+        // get the size of the Observable List with data and add to the report
+        repfeed.add("Number of data points from AMKOR to ASE extracted and inserted into database: " + AMKORtoASEfullList.size());
+        logger.info("Number of data points from AMKOR to ASE extracted and inserted into database: " + AMKORtoASEfullList.size());
+        
+        // get the PDF data from AMKOR pdf import as an Observable List
+        // loop through pdf files
+        // define the directory and the Regex for filename
+        AMKORpdfList.clear();
+        AMKORpdfList = repimp.loopAmkorPDFfiles("amkor-to-ase", ".pdf", "PL ");
+        logger.info("Get the PDF data from AMKOR pdf import as an Observable List");
+        // add to Observable List
+        AMKORpdfFullList.addAll(AMKORpdfList);
+        // get the size of the Observable List with data and add to the report
+        repfeed.add("Number of data points from AMKOR pdf extracted and inserted into database: " + AMKORpdfFullList.size());
+        logger.info("Number of data points from AMKOR pdf extracted and inserted into database: " + AMKORpdfFullList.size());
+
+        // combine AMKOR to ASE data with AMKOR pdf data
+        AMKORfinalList = repimp.combineAMKORlists(AMKORpdfFullList, AMKORtoASEfullList);
+        // insert Observable List into amkor-to-ase with sql batch
+        db.insertAMKORtoASEBatchIntoTable(AMKORfinalList, sqlInsertAMKOR, "amkor-to-ase");
+    }
+    
+    /**
+     * Combine List of AMKOR shipment with List of AMKOR PDF shipment details
+     * @param ObservableList<AMKORpdf>
+     * @param ObservableList<AMKORtoASE>
+     * @return ObservableList<AMKORtoASE>
+     */
+    public ObservableList<AMKORtoASE> combineAMKORlists(ObservableList<AMKORpdf> amPDF, ObservableList<AMKORtoASE> amASE){
+        logger.info("Combine List of AMKOR shipment with List of AMKOR PDF shipment details");
+        // The data as an observable list of AMKOR to ASE 
+        ObservableList<AMKORtoASE> AMKORfinalASEList  = FXCollections.observableArrayList();
+
+        // loop through AMKOR pdf List
+        logger.info("loop through AMKOR pdf List");
+        for(AMKORpdf a : amPDF){
+            // get the matching list of AMKOR shipments
+            List<AMKORtoASE> am = amASE.stream()
+                    .filter(p -> p.getDelivery().equals(a.getPackingNo())).collect(Collectors.toList());
+            
+            // loop through matching list
+            logger.info("loop through matching list");
+            for(AMKORtoASE ams : am){
+                // add value to AMKOR ASE list
+                ams.setShippingDate(a.getShippingDate());
+
+                ams.setShippingDate(a.getShippingDate());
+                ams.setPackingNo(a.getPackingNo());
+                ams.setInvoiceNo(a.getInvoiceNo());
+                ams.setShipTo(a.getShipTo());
+                ams.setMAWB(a.getMAWB());
+                ams.setCustomerPO(a.getCustomerPO());
+                ams.setDescriptionOfGoods(a.getDescriptionOfGoods());
+                ams.setPdfFileName(a.getPdfFileName());
+                AMKORfinalASEList.add(ams);
+                logger.debug(ams.toString());
+            }
+        }
+        return AMKORfinalASEList;
+    }
+    
+    /**
+     * Loop through PDF files of specified directory
+     * Find the files with corresponding ending
+     * @param directory
+     * @param Regex
+     * @return Array List of an Array List of Strings
+     */
+    public ObservableList<AMKORpdf> loopAmkorPDFfiles(String directory, String fileExtension, String Regex){
+        logger.info("Loop through PDF files of specified directory");
+        // create new object
+        ReportImport repimp = new ReportImport();
+        // The data as an observable list of AMKOR pdf 
+        ObservableList<AMKORpdf> AMKORpdfList  = FXCollections.observableArrayList();
+        
+        LoopDirectory lopdir = new LoopDirectory();
+        // loop directory with all pdf files
+        File[] fileLocations = lopdir.loopDirectorySpecific(directory, fileExtension, Regex);
+        // check if file already processed, in file_name table of database
+        // connect to database
+        DataBaseSQLite db = new DataBaseSQLite();
+        // check if file in file_name
+        ArrayList<String> fileArray = new ArrayList<String>();
+        fileArray = db.checkFileNameExisting();
+        // loop through files
+        for (File file : fileLocations) {
+            // check if file already processed, compare file name with file list
+            // get filename from path
+            String fileName = getFileNameFromPath(file.toString());
+            // check if file is already in list
+            if(fileArray.contains(fileName)) {
+                System.out.println("File already imported, no need for skipping, PDF file only appending data: " + file.toString());
+                logger.info("File already imported, no need for skipping, PDF file only appending data: " + file.toString());
+            }
+            // read the file
+            try{
+                // read the pdf file
+                logger.info("Read PDF file :" + file);
+                // create instance of excel import
+                AMKORpdfBox pdfimp = new AMKORpdfBox();
+
+                // The data as an observable list of AMKOR pdf
+                AMKORpdf AMKORpdfFileList  = new AMKORpdf();
+
+                // open pdf from input file
+                System.out.println("Open pdf File.");
+                // import lines to observable list
+                //pdfimp.pdfImportAMKOR(file);
+                AMKORpdfFileList = pdfimp.pdfImportAMKOR(file);
+                // insert file into table file_list and delete the file
+                repimp.insertAndDeleteFileNameIntoTracking(file.toString());
+                // add objects to observable list
+                AMKORpdfList.addAll(AMKORpdfFileList);
+
+            }catch(FileNotFoundException e){
+                System.out.println("FileNotFoundException:" + e);
+                logger.error("FileNotFoundException:" + e);
+            }catch(IOException e){
+                System.out.println("IOException:" + e);
+                logger.error("IOException:" + e);
+            }
+        }
+        // return the observable list
+        return AMKORpdfList;
+    }
+    
+    /**
+     * Loop through XLS files of specified directory
+     * Find the files with corresponding ending
+     * @param directory
+     * @param Regex
+     * @return Array List of an Array List of Strings
+     */
+    public ObservableList<AMKORtoASE> loopAmkorXLSFiles(String directory, String fileExtension, String Regex){
+        logger.info("Loop through XLS files of specified directory");
+        // create new object
+        ReportImport repimp = new ReportImport();
+        
+        // The data as an observable list of AMKOR to ASE 
+        ObservableList<AMKORtoASE> AMKORtoASEList  = FXCollections.observableArrayList();
+        
+        LoopDirectory lopdir = new LoopDirectory();
+        // loop directory with all xls files
+        File[] fileLocations = lopdir.loopDirectorySpecific(directory, fileExtension, Regex);
+        // check if file already processed, in file_name table of database
+        // connect to database
+        DataBaseSQLite db = new DataBaseSQLite();
+        // check if file in file_name
+        ArrayList<String> fileArray = new ArrayList<String>();
+        fileArray = db.checkFileNameExisting();
+        // loop through files
+        for (File file : fileLocations) {
+            // check if file already processed, compare file name with file list
+            // get filename from path
+            String fileName = getFileNameFromPath(file.toString());
+            // check if file is already in list
+            if(fileArray.contains(fileName)) {
+                System.out.println("File already imported, skipping: " + file.toString());
+                logger.info("File already imported, skipping: " + file.toString());
+                // call delete file mathod
+                DeleteFile fileDel = new DeleteFile();
+                fileDel.deleteSpecifiedFile(file.toString());
+            } else {
+                // read the file
+                try{
+                    // read the xls file
+                    logger.info("Read XLS File :" + file);
+                    // create instance of excel import
+                    AmkorExcelImport eximp = new AmkorExcelImport();
+
+                    // The data as an observable list of AMKOR to ASE 
+                    ObservableList<AMKORtoASE> AMKORtoASEfileList  = FXCollections.observableArrayList();
+                    
+                    // create input stream from file
+                    FileInputStream inputStream = new FileInputStream(file);
+                    System.out.println("Open input stream from XLS file.");
+
+                    // open workbook from input stream file
+                    Workbook workbook = new HSSFWorkbook(inputStream);
+                    System.out.println("Open Workbook.");
+                    // import lines to observable list
+                    AMKORtoASEfileList = eximp.excelImportAMKORtoASE(workbook, file);
+                    // insert file into table file_list and delete the file
+                    repimp.insertAndDeleteFileNameIntoTracking(file.toString());
+                    // add objects to observable list
+                    AMKORtoASEList.addAll(AMKORtoASEfileList);
+
+                    // close input stream
+                    inputStream.close();
+                    System.out.println("InputStream closed");
+                }catch(FileNotFoundException e){
+                    System.out.println("FileNotFoundException:" + e);
+                    logger.error("FileNotFoundException:" + e);
+                }catch(IOException e){
+                    System.out.println("IOException:" + e);
+                    logger.error("IOException:" + e);
+                }
+            }
+        }
+        // return the observable list
+        return AMKORtoASEList;
     }
     
     /**
@@ -151,6 +417,7 @@ public class ReportImport {
      * @return Array List of an Array List of Strings
      */
     public ArrayList<ArrayList<String>> loopLineCSVFiles(String directory, String Regex) {
+        logger.info("Loop through CSV files of specified directory");
         ArrayList<ArrayList<String>> allFileRows = new ArrayList<ArrayList<String>>();
         // create new object
         ReportImport repimp = new ReportImport();
@@ -171,13 +438,17 @@ public class ReportImport {
             // check if file is already in list
             if(fileArray.contains(fileName)) {
                 System.out.println("File already imported, skipping: " + file.toString());
+                logger.info("File already imported, skipping: " + file.toString());
                 // call delete file mathod
                 DeleteFile fileDel = new DeleteFile();
                 fileDel.deleteSpecifiedFile(file.toString());
             } else {
                 // read all csv files
+                logger.info("Read CSV File :" + file);
                 // get the data as ArrayList of ArrayList of Strings
                 ArrayList<ArrayList<String>> allRows = repimp.readLineCSV(file.toString());
+                // insert file into table file_list and delete the file
+                repimp.insertAndDeleteFileNameIntoTracking(file.toString());
                 // add the data to the StringArray list
                 allFileRows.addAll(allRows);
             }
@@ -194,6 +465,7 @@ public class ReportImport {
      * @return Array List of an Array List of Strings
      */
     public ArrayList<ArrayList<String>> loopLineTXTFiles(String directory, String Regex) {
+        logger.info("Loop through TXT files of specified directory");
         ArrayList<ArrayList<String>> shipAlert = new ArrayList<ArrayList<String>>();
         // create new object
         ReportImport repimp = new ReportImport();
@@ -219,14 +491,18 @@ public class ReportImport {
                 // count the old txt files
                 oldtxt = oldtxt + 1;
                 System.out.println("File already imported, skipping: " + file.toString());
+                logger.info("File already imported, skipping: " + file.toString());
                 // call delete file mathod
                 DeleteFile fileDel = new DeleteFile();
                 fileDel.deleteSpecifiedFile(file.toString());
             } else {
+                logger.info("Read file :" + file);
                 // count the new txt files
                 newtxt = newtxt + 1;
-                // read all txt files
+                // read the txt file
                 ArrayList<ArrayList<String>> shipAlertRows = repimp.readShipAlertTXT(file.toString());
+                // insert file into table file_list and delete the file
+                repimp.insertAndDeleteFileNameIntoTracking(file.toString());
                 // add the data to the StringArray list
                 shipAlert.addAll(shipAlertRows);                
             }
@@ -246,14 +522,16 @@ public class ReportImport {
      * @return ArrayList of an ArrayList of Strings
      */
     public ArrayList<ArrayList<String>> readLineCSV(String fileLocation) {
+        logger.info("Read Line CSV");
+        // create ReportImport instance
+        ReportImport repimp = new ReportImport();
         // create List of List of Strings
         ArrayList<ArrayList<String>> fullList = new ArrayList<ArrayList<String>>();
         // read CSV but exclude first line (header)
         try (CSVReader reader = new CSVReader(new FileReader(fileLocation), CSVParser.DEFAULT_SEPARATOR, CSVParser.DEFAULT_QUOTE_CHARACTER, 1)) {
+            logger.info("Read CSV File with CSV Reader :" + fileLocation);
             // read all lines and store in list of string arrays
             String[] nextLine;
-            // create ReportImport instance
-            ReportImport repimp = new ReportImport();
             // get the filename from file path
             String fileName = repimp.getFileNameFromPath(fileLocation);
             // loop through the lines
@@ -276,21 +554,11 @@ public class ReportImport {
                 fullList.add(fullLine);
             }
             System.out.println("Read data from file: " + fileLocation);
-            // insert file into table file_list
-            // connect to database
-            DataBaseSQLite db = new DataBaseSQLite();
-            // sql query for file_name
-            String sqlInsertFileList = "INSERT INTO file_list VALUES (?);";
-            // insert String into file_name
-            db.insertIntoTable(fileName, sqlInsertFileList, "file_list");
             return fullList;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             return null;
-        } finally {
-            // call delete file mathod
-            DeleteFile fileDel = new DeleteFile();
-            fileDel.deleteSpecifiedFile(fileLocation);
         }
     }
 
@@ -300,6 +568,7 @@ public class ReportImport {
      * @return date string
      */
     public String readDatefromCSVFileName(String filePath) {
+        logger.info("Read date from file name");
         // get the date out of the filename by splitting using '_' delimiter
         // the last part is the date
         String fileName = filePath.substring(filePath.lastIndexOf("_") + 1);
@@ -315,6 +584,7 @@ public class ReportImport {
      * @return ArrayList of an ArrayList of Strings
      */
     public ArrayList<ArrayList<String>> readShipAlertTXT(String filePath) {
+        logger.info("Get data from TXT file of ShipALert");
         // create new instance
         ReportImport repimp = new ReportImport();
         // get the filename from file path
@@ -346,8 +616,10 @@ public class ReportImport {
         int productNumberLine = 0;
         int product2000NumberLine = 0;
         // read buffered txt file
+        logger.info("Read buffered TXT file :" + filePath);
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             // loop through file line by line
+            logger.info("Loop through file line by line");
             for(String line; (line = br.readLine()) != null; ) {
                 // count the line number
                 lineNumber = lineNumber + 1;
@@ -499,11 +771,13 @@ public class ReportImport {
                         lotTSMCData.add(getCustomerLotTrimmed);
                         // add the lot data ArrayList to the full ArrayList
                         lotTSMCDataAll.add(lotTSMCData);
+                        logger.debug(lotTSMCData.toString());
                 }
             }
         // line is not visible here.
         }catch (Exception e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         // loop through the TSMC lot array list
         for(ArrayList lotTSMCArray : lotTSMCDataAll) {
@@ -532,16 +806,6 @@ public class ReportImport {
             shipDataAll.add(lotArray);
         }
         System.out.println("Read data from file: " + filePath);
-        // insert file into table file_list
-        // connect to database
-        DataBaseSQLite db = new DataBaseSQLite();
-        // sql query for file_name
-        String sqlInsertFileList = "INSERT INTO file_list VALUES (?);";
-        // insert String into file_name
-        db.insertIntoTable(fileName, sqlInsertFileList, "file_list");
-        // call delete file mathod
-        DeleteFile fileDel = new DeleteFile();
-        fileDel.deleteSpecifiedFile(filePath);
         // return the file data
         return shipDataAll;
     }
@@ -550,9 +814,9 @@ public class ReportImport {
      * Get data from TSMC TXT file of ShipALert
      * Parse all needed data
      * @param filePath
-     * @return ArrayList of an ArrayList of Strings
      */
     public void readLineShipAlertTXT(String filePath) {
+        logger.info("Get data from TSMC TXT file of ShipALert");
         // create new instance
         ReportImport repimp = new ReportImport();
         // get the filename from file path
@@ -584,6 +848,7 @@ public class ReportImport {
         ArrayList<String> txtFileAll = new ArrayList<String>();
 
         // read buffered txt file
+        logger.info("Read buffered txt file :" + filePath);
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             
             // loop through file line by line
@@ -609,6 +874,7 @@ public class ReportImport {
                 // add the ArrayList to the full TextArray
                 //txtFileAll.add(txtFileLine);
                 txtFileAll.add(line);
+                logger.debug(line.toString());
             }
             for(String txtFileLine : txtFileAll){
                 if(txtFileLine.contains("INVOICE NO.:")){
@@ -618,6 +884,7 @@ public class ReportImport {
         // line is not visible here.
         }catch (Exception e) {
             System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
@@ -633,6 +900,33 @@ public class ReportImport {
         String fileName = filePath.split(splitRegex)[1];
         // return the file name
         System.out.println("Get file name from file path: " + filePath + ", file name: " + fileName);
+        logger.info("Get file name from file path: " + filePath + ", file name: " + fileName);
         return fileName;
+    }
+    
+    /**
+     * Insert specific file into table file_list
+     * Inserting the filename means that the file was already processed
+     * This makes sure that the file will not be processed a second time
+     * @param filePath
+     * @return file name as string
+     */
+    public void insertAndDeleteFileNameIntoTracking(String filePath) {
+        logger.info("Insert specific file into table file_list");
+        // create new instance
+        ReportImport repimp = new ReportImport();
+        // get the filename from file path
+        String fileName = repimp.getFileNameFromPath(filePath);
+
+        // insert file into table file_list
+        // connect to database
+        DataBaseSQLite db = new DataBaseSQLite();
+        // sql query for file_name
+        String sqlInsertFileList = "INSERT INTO file_list VALUES (?);";
+        // insert String into file_name
+        db.insertIntoTable(fileName, sqlInsertFileList, "file_list");
+        // call delete file mathod
+        DeleteFile fileDel = new DeleteFile();
+        fileDel.deleteSpecifiedFile(filePath);
     }
 }

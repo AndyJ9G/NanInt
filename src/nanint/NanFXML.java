@@ -47,7 +47,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * This is the method for the whole GUI creation
@@ -55,10 +55,11 @@ import org.apache.log4j.Logger;
  */
 public class NanFXML extends Application implements Initializable {
     
-    private static final Logger logger = ApplicationLogger.getInstance();
+    //private static final Logger logger = ApplicationLogger.getInstance();
+    private static Logger logger = LogManager.getLogger(NanFXML.class.getName());
     
     // Version Number
-    String ProgrammVersion = "Version 1.10 with Lot Data";
+    String ProgrammVersion = "Version 1.13 with Logging";
     
     // SQL select query's
     String sqlShipmentSelectTSMC = "SELECT tsmc_to_nan.* FROM tsmc_to_nan LEFT JOIN wip_nan ON tsmc_to_nan.Lot = wip_nan.Lot WHERE wip_nan.Lot ISNULL;";
@@ -72,6 +73,7 @@ public class NanFXML extends Application implements Initializable {
     String sqlWIPChartActual = "SELECT * FROM wip_nan WHERE ReportDate LIKE '" + dateToString(0) + "';";
     String sqlWIPLineChartActual = "SELECT * FROM wip_nan WHERE Lot LIKE '';";
     String sqlNewestDateWipNanSelect = "SELECT MAX(ReportDate) AS ReportDate FROM wip_nan;";
+    String sqlAMKORtoASEselect = "SELECT * FROM amkor_to_ase;";
     
     /**
      * Define all FXML GUI items
@@ -84,6 +86,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     private void menuImportData(ActionEvent event) {
         System.out.println("Menu Button for data import pressed -----------------------------");
+        logger.info("Menu Button for data import pressed");
         // we call the update or import method
         // we run it in the background
         backroundUpdateTask();
@@ -91,6 +94,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     private void menuClearDatabase(ActionEvent event) {
         System.out.println("Menu Button for database clean data pressed -----------------------------");
+        logger.info("Menu Button for database clean data pressed");
         // show alert dialog
         Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to delete all data from Database?", ButtonType.YES, ButtonType.NO);
         alert.setHeaderText(null);
@@ -119,6 +123,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     private void menuCheckDatabase(ActionEvent event) {
         System.out.println("Menu Button for database structure check pressed -----------------------------");
+        logger.info("Menu Button for database structure check pressed");
         // show alert dialog
         Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to check and update the structure of the Database? No Data will be deleted.", ButtonType.YES, ButtonType.NO);
         alert.setHeaderText(null);
@@ -158,6 +163,7 @@ public class NanFXML extends Application implements Initializable {
     protected void filterButtonLotData() {
         // define the sylQuery based on the selected values
         System.out.println("Filter Button for data filter LOT DATA pressed -----------------------------");
+        logger.info("Filter Button for data filter LOT DATA pressed");
         // get the sql query from the combo boxes etc
         String sqlQuery = getLotDatafilterButtonQuery();
         // call the filter method
@@ -166,6 +172,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void LotDataExcelExportButton() {
         System.out.println("Excel Export Button for LOT DATA pressed -----------------------------");
+        logger.info("Excel Export Button for LOT DATA pressed");
         // file chooser dialog
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
@@ -197,6 +204,93 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     private TableColumn<LotData, String> LastDateColLotData;
     
+    // AMKOR to ASE tab with table view
+    // Filter Area
+    @FXML
+    private ComboBox<String> ComboBoxAMKORtoASEValue;  
+    @FXML
+    private TextField TextFieldAMKORtoASEValue;
+    @FXML
+    private ComboBox<String> ComboBoxAMKORtoASE2Value;  
+    @FXML
+    private TextField TextFieldAMKORtoASE2Value;
+    @FXML
+    private ComboBox<String> ComboBoxAMKORtoASE3Value;  
+    @FXML
+    private TextField TextFieldAMKORtoASE3Value;
+    @FXML
+    protected void filterAMKORtoASEButton() {
+        // define the sylQuery based on the selected values
+        System.out.println("Filter Button for data filter AMKOR to ASE pressed -----------------------------");
+        logger.info("Filter Button for data filter AMKOR to ASE pressed");
+        // get the sql query from the combo boxes etc
+        String sqlQuery = getAMKORtoASEfilterButtonQuery();
+        // call the filter method
+        filterAMKORtoASE(sqlQuery);
+    }
+    @FXML
+    protected void AMKORtoASEExcelExportButton() {
+        System.out.println("Excel Export Button for AMKOR to ASE pressed -----------------------------");
+        logger.info("Excel Export Button for AMKOR to ASE pressed");
+        // file chooser dialog
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setTitle("Save Excel File");
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null) {
+            ExcelExport xlsExport = new ExcelExport();
+            // export the observalbe list to excel
+            xlsExport.reportAMKORtoASEExcelExport(AMKORtoASEData, file);
+        }
+    }
+    // Lot Data Table
+    @FXML
+    private TableView<AMKORtoASE> AMKORtoASETable;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORShippingDateCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORPackingNoCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORInvoiceNoCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORShipToCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORMAWBCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORCustomerPOCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORDescriptionOfGoodsCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORPdfFileNameCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORDeliveryCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORBoxCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORMaterialCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORDeviceNameCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORPONoCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORDateCodeCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORFABnoCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORControlCodeCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORATPOnoCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORFPOCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORMCitemCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORQuantityCol;
+    @FXML
+    private TableColumn<AMKORtoASE, String> AMKORReportFileNameCol;
+    
     // Wip Nan tab with table view
     // Filter Area
     @FXML
@@ -215,6 +309,7 @@ public class NanFXML extends Application implements Initializable {
     protected void filterButton() {
         // define the sylQuery based on the selected values
         System.out.println("Filter Button for data filter WIP NAN pressed -----------------------------");
+        logger.info("Filter Button for data filter WIP NAN pressed");
         // get the sql query from the combo boxes etc
         String sqlQuery = getWipNanfilterButtonQuery();
         // call the filter method
@@ -225,6 +320,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void xlsExportButton() {
         System.out.println("Excel Export Button for WIP NAN pressed -----------------------------");
+        logger.info("Excel Export Button for WIP NAN pressed");
         // file chooser dialog
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
@@ -293,7 +389,8 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void filterGFtoNanButton() {
         // define the sylQuery based on the selected values
-        System.out.println("Filter Button for data filter GF to NAN pressed -----------------------------"); 
+        System.out.println("Filter Button for data filter GF to NAN pressed -----------------------------");
+        logger.info("Filter Button for data filter GF to NAN pressed");
         // get the sql query from the combo boxes etc
         String sqlQuery = getGFtoNanfilterButtonQuery();
         // call the filter method
@@ -302,6 +399,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void GFtoNanxlsExportButton() {
         System.out.println("Excel Export Button for GF to NAN pressed -----------------------------");
+        logger.info("Excel Export Button for GF to NAN pressed");
         // file chooser dialog
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
@@ -400,7 +498,8 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void filterTSMCtoNanButton() {
         // define the sylQuery based on the selected values
-        System.out.println("Filter Button for data filter TSMC to NAN pressed -----------------------------"); 
+        System.out.println("Filter Button for data filter TSMC to NAN pressed -----------------------------");
+        logger.info("Filter Button for data filter TSMC to NAN pressed");
         // get the sql query from the combo boxes etc
         String sqlQuery = getTSMCtoNanfilterButtonQuery();
         // call the filter method
@@ -409,6 +508,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void TSMCtoNanxlsExportButton() {
         System.out.println("Excel Export Button for TSMC to NAN pressed -----------------------------");
+        logger.info("Excel Export Button for TSMC to NAN pressed");
         // file chooser dialog
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
@@ -469,7 +569,8 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void filterUMCItoNanButton() {
         // define the sylQuery based on the selected values
-        System.out.println("Filter Button for data filter UMCI to NAN pressed -----------------------------"); 
+        System.out.println("Filter Button for data filter UMCI to NAN pressed -----------------------------");
+        logger.info("Filter Button for data filter UMCI to NAN pressed");
         // get the sql query from the combo boxes etc
         String sqlQuery = getUMCItoNanfilterButtonQuery();
         // call the filter method
@@ -478,6 +579,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void UMCItoNanxlsExportButton() {
         System.out.println("Excel Export Button for UMCI to NAN pressed -----------------------------");
+        logger.info("Excel Export Button for UMCI to NAN pressed");
         // file chooser dialog
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
@@ -548,7 +650,8 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     protected void filterwipLineChartButton() {
         // define the sylQuery based on the selected values
-        System.out.println("Filter Button for wip line chart data filter pressed -----------------------------"); 
+        System.out.println("Filter Button for wip line chart data filter pressed -----------------------------");
+        logger.info("Filter Button for wip line chart data filter pressed");
         // get the sql query from the combo boxes etc
         String sqlQuery = getwipLineChartfilterButtonQuery();
         // call the filter method
@@ -561,6 +664,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     public void wipLineChartSaveAsPngButton() {
         System.out.println("PNG Button for wip line chart pressed -----------------------------");
+        logger.info("PNG Button for wip line chart pressed");
         WritableImage image = lineChartWipNan.snapshot(new SnapshotParameters(), null);
         
         // file chooser dialog
@@ -608,15 +712,18 @@ public class NanFXML extends Application implements Initializable {
     protected void filterwipBarChartButton() {
         // define the sylQuery based on the selected values
         System.out.println("Filter Button for wip bar chart data filter pressed -----------------------------");
+        logger.info("Filter Button for wip bar chart data filter pressed");
         // check if checkbox is selected
         boolean barChartWIPpcs = CheckBoxwipBarChartWIP2.isSelected();
         boolean barChartWIPvalue = CheckBoxwipBarChartWIPvalue.isSelected();
         if(barChartWIPpcs){
             // set title of bar chart
             barChartWipNan.setTitle("WIP overview in Pcs.");
+            logger.info("Set BarChart Title - WIP overview in Pcs.");
         }else{
             // set title of bar chart
             barChartWipNan.setTitle("WIP overview in Wafer Qty.");
+            logger.info("Set BarChart Title - WIP overview in Wafer Qty.");
         }
         // get the sql query from the combo boxes etc
         String sqlQuery = getwipBarChartfilterButtonQuery();
@@ -629,6 +736,7 @@ public class NanFXML extends Application implements Initializable {
     @FXML
     public void wipBarChartSaveAsPngButton() {
         System.out.println("PNG Button for wip bar chart pressed -----------------------------");
+        logger.info("PNG Button for wip bar chart pressed");
         WritableImage image = barChartWipNan.snapshot(new SnapshotParameters(), null);
         
         // file chooser dialog
@@ -668,6 +776,7 @@ public class NanFXML extends Application implements Initializable {
         
         // set the version number
         ProgrammVersionLabel.setText(ProgrammVersion);
+        logger.info("Set Programm Version Label to " + ProgrammVersion);
         
         // define the combo box values for lot data
         ComboBoxLotDataList.addAll("Lot","Product","BasicType","CreationDate","FirstStepDate","LastStepDate","LastDate");
@@ -679,6 +788,7 @@ public class NanFXML extends Application implements Initializable {
         ComboBoxValueLotData.getSelectionModel().select(0);
         ComboBox2ValueLotData.getSelectionModel().select(1);
         ComboBox3ValueLotData.getSelectionModel().select(2);
+        logger.info("Define ComboBox for LotData");
                 
         // define the combo box values for wip nan
         ComboBoxWipNanList.addAll("ReportDate","Lot","Owner","Product","HoldFlag","WIP1","WIP2","Shrink","FE_SITE",
@@ -691,9 +801,11 @@ public class NanFXML extends Application implements Initializable {
         ComboBoxValue.getSelectionModel().select(0);
         ComboBox2Value.getSelectionModel().select(7);
         ComboBox3Value.getSelectionModel().select(2);
+        logger.info("Define ComboBox for WipNan");
         // set the report date to newest day found in database
         String getLastDate = getLatestDateWipNan(sqlNewestDateWipNanSelect);
         TextFieldValue.setText(getLastDate);
+        logger.info("Set Report Date WipNan to newest found date");
         
         // define the combo box values for gf to nan
         ComboBoxGFtoNanList.addAll("ReportDate","CustomerName","ShipDate","InvoiceNo","InvoiceDate","PO","SO","OrderDate","ProcessName",
@@ -710,6 +822,7 @@ public class NanFXML extends Application implements Initializable {
         ComboBoxGFtoNan3Value.getSelectionModel().select(2);
         // select the shipment open checkbox
         CheckBoxGFtoNanOpenShipment.setSelected(true);
+        logger.info("Define ComboBox for GFtoNan");
         
         // define the combo box values for tsmc to nan
         ComboBoxTSMCtoNanList.addAll("Lot","WaferPcs","InvoiceNo","InvoiceDate","Forwarder","MAWB","HAWB","ReportFileName","Technology",
@@ -724,6 +837,7 @@ public class NanFXML extends Application implements Initializable {
         ComboBoxTSMCtoNan3Value.getSelectionModel().select(2);
         // select the shipment open checkbox
         CheckBoxTSMCtoNanOpenShipment.setSelected(true);
+        logger.info("Define ComboBox for TSMCtoNan");
         
         // define the combo box values for umci to nan
         ComboBoxUMCItoNanList.addAll("PART_DIV","INV_NO","SHPTO_ID","INV_DATE","MAWB_NO","HAWB_NO","FLT_NO","FLT_DATE","FLT_DEST",
@@ -739,18 +853,33 @@ public class NanFXML extends Application implements Initializable {
         ComboBoxUMCItoNan3Value.getSelectionModel().select(2);
         // select the shipment open checkbox
         CheckBoxUMCItoNanOpenShipment.setSelected(true);
+        logger.info("Define ComboBox for UMCItoNan");
         
-        // define the combo box values for bar chart wip nan
-        ComboBoxWipNanBarChartList.addAll("ReportDate","Lot","Owner","Product","HoldFlag","WIP1","WIP2","Shrink","FE_SITE",
-                "BasicType","Package","Step","WorkCenter","SEQ","Percentage","ReportFileName");
-        // put the values in the 3 combo boxes for tsmc to nan
-        ComboBoxwipBarChartValue.setItems(ComboBoxWipNanBarChartList);
-        ComboBoxwipBarChart2Value.setItems(ComboBoxWipNanBarChartList);
-        // select the first value in combo boxes for tsmc to nan
-        ComboBoxwipBarChartValue.getSelectionModel().select(0);
-        ComboBoxwipBarChart2Value.getSelectionModel().select(9);
-        // set the report date to today
-        TextFieldwipBarChartValue.setText(dateToString(-1));
+        // define the combo box values for lot data
+        ComboBoxLotDataList.addAll("Lot","Product","BasicType","CreationDate","FirstStepDate","LastStepDate","LastDate");
+        // put the values in the 3 combo boxes for lot data
+        ComboBoxValueLotData.setItems(ComboBoxLotDataList);
+        ComboBox2ValueLotData.setItems(ComboBoxLotDataList);
+        ComboBox3ValueLotData.setItems(ComboBoxLotDataList);
+        // select the first value in combo boxes for lot data
+        ComboBoxValueLotData.getSelectionModel().select(0);
+        ComboBox2ValueLotData.getSelectionModel().select(1);
+        ComboBox3ValueLotData.getSelectionModel().select(2);
+        logger.info("Define ComboBox for LotData");
+        
+        // define the combo box values for amkor to ase
+        ComboBoxAMKORtoASEList.addAll("ShippingDate", "PackingNo", "InvoiceNo", "ShipTo", "MAWB", "CustomerPO", "DescriptionOfGoods",
+                "PdfFileName", "Delivery", "Box", "Material", "DeviceName", "PONo", "DateCode", "FABno", "ControlCode", "ATPOno",
+                "String FPO", "MCitem", "Quantity", "ReportFileName");
+        // put the values in the 3 combo boxes for amkor to ase
+        ComboBoxAMKORtoASEValue.setItems(ComboBoxAMKORtoASEList);
+        ComboBoxAMKORtoASE2Value.setItems(ComboBoxAMKORtoASEList);
+        ComboBoxAMKORtoASE3Value.setItems(ComboBoxAMKORtoASEList);
+        // select the first value in combo boxes for amkor to ase
+        ComboBoxAMKORtoASEValue.getSelectionModel().select(0);
+        ComboBoxAMKORtoASE2Value.getSelectionModel().select(1);
+        ComboBoxAMKORtoASE3Value.getSelectionModel().select(2);
+        logger.info("Define ComboBox for AMKORtoASE");
         
         // build the lot data table data
         buildTableLotData(sqlLotDataSelect);
@@ -764,6 +893,7 @@ public class NanFXML extends Application implements Initializable {
         LastDateColLotData.setCellValueFactory(new PropertyValueFactory<LotData,String>("LastDate"));
         // set the items to the table
         lotDataTable.setItems(lotData);
+        logger.info("Setup the LotData table");
         
         // build the wip nan table data
         buildTableWipNan(sqlLotSelect);
@@ -786,6 +916,7 @@ public class NanFXML extends Application implements Initializable {
         ReportFileNameCol.setCellValueFactory(new PropertyValueFactory<WipNan,String>("ReportFileName"));
         // set the items to the table
         wipNanTable.setItems(wipNanData);
+        logger.info("Setup the WipNan table");
         
         // build the gf to nan table data
         buildTableGFtoNan(sqlShipmentSelectGF);
@@ -823,6 +954,7 @@ public class NanFXML extends Application implements Initializable {
         GFReportFileNameCol.setCellValueFactory(new PropertyValueFactory<GFtoNan,String>("ReportFileName"));
         // set the items to the table
         GFtoNanTable.setItems(GFtoNanData);
+        logger.info("Setup the GFtoNan table");
         
         // build the tsmc to nan table data
         buildTableTSMCtoNan(sqlShipmentSelectTSMC);
@@ -841,6 +973,7 @@ public class NanFXML extends Application implements Initializable {
         TSMCETACol.setCellValueFactory(new PropertyValueFactory<TSMCtoNan,String>("ETA"));
         // set the items to the table
         TSMCtoNanTable.setItems(TSMCtoNanData);
+        logger.info("Setup the TSMCtoNan table");
         
         // build the umci to nan table data
         buildTableUMCItoNan(sqlShipmentSelectUMCI);
@@ -870,6 +1003,35 @@ public class NanFXML extends Application implements Initializable {
         UMCIReportFileNameCol.setCellValueFactory(new PropertyValueFactory<UMCItoNan,String>("ReportFileName"));
         // set the items to the table
         UMCItoNanTable.setItems(UMCItoNanData);
+        logger.info("Setup the UMCItoNan table");
+        
+        // build the AMKOR to ASE table data
+        buildTableAMKORtoASE(sqlAMKORtoASEselect);
+        // Setup the umci to nan table data
+        AMKORShippingDateCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("ShippingDate"));
+        AMKORPackingNoCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("PackingNo"));
+        AMKORInvoiceNoCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("InvoiceNo"));
+        AMKORShipToCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("ShipTo"));
+        AMKORMAWBCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("MAWB"));
+        AMKORCustomerPOCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("CustomerPO"));
+        AMKORDescriptionOfGoodsCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("DescriptionOfGoods"));
+        AMKORPdfFileNameCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("PdfFileName"));
+        AMKORDeliveryCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("Delivery"));
+        AMKORBoxCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("Box"));
+        AMKORMaterialCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("Material"));
+        AMKORDeviceNameCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("DeviceName"));
+        AMKORPONoCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("PONo"));
+        AMKORDateCodeCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("DateCode"));
+        AMKORFABnoCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("FABno"));
+        AMKORControlCodeCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("ControlCode"));
+        AMKORATPOnoCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("ATPOno"));
+        AMKORFPOCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("FPO"));
+        AMKORMCitemCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("MCitem"));
+        AMKORQuantityCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("Quantity"));
+        AMKORReportFileNameCol.setCellValueFactory(new PropertyValueFactory<AMKORtoASE,String>("ReportFileName"));
+        // set the items to the table
+        AMKORtoASETable.setItems(AMKORtoASEData);
+        logger.info("Setup the AMKORtoASE table");
         
         // build the wip nan data for line chart
         buildDataForLineChartWipNan(sqlWIPLineChartActual);
@@ -886,6 +1048,7 @@ public class NanFXML extends Application implements Initializable {
         
         // create the bar chart data
         chartWipNanData.chartDataStackedBarChart(barChartWipNan, wipNanBarChartData,barChartWIPpcs,barChartWIPvalue);
+        logger.info("Create barChart data");
     }    
     
     // The data as an observable list of wip nan
@@ -898,6 +1061,8 @@ public class NanFXML extends Application implements Initializable {
     private ObservableList<TSMCtoNan> TSMCtoNanData  = FXCollections.observableArrayList();
     // The data as an observable list of umci to Nan 
     private ObservableList<UMCItoNan> UMCItoNanData  = FXCollections.observableArrayList();
+    // The data as an observable list of AMKOR to ASE 
+    private ObservableList<AMKORtoASE> AMKORtoASEData  = FXCollections.observableArrayList();
     // The data as an observable list of Strings for the combo box for lot data
     private ObservableList<String> ComboBoxLotDataList = FXCollections.observableArrayList();
     // The data as an observable list of Strings for the combo box for wip nan
@@ -908,6 +1073,8 @@ public class NanFXML extends Application implements Initializable {
     private ObservableList<String> ComboBoxTSMCtoNanList  = FXCollections.observableArrayList();
     // The data as an observable list of Strings for the combo box for umci to nan
     private ObservableList<String> ComboBoxUMCItoNanList  = FXCollections.observableArrayList();
+    // The data as an observable list of Strings for the combo box for amkor to ase
+    private ObservableList<String> ComboBoxAMKORtoASEList  = FXCollections.observableArrayList();
     // The data as an observable list of Strings for the combo box for bar chart wip nan
     private ObservableList<String> ComboBoxWipNanBarChartList  = FXCollections.observableArrayList();
     // The bar chart data as an observable list of wip nan
@@ -917,7 +1084,7 @@ public class NanFXML extends Application implements Initializable {
     
     /**
      * The start method for the UI
-     * @param primaryStage
+     * @param primaryStage The primary GUI stage
      * @throws Exception 
      */
     @Override
@@ -925,6 +1092,7 @@ public class NanFXML extends Application implements Initializable {
         
         // set the title
         primaryStage.setTitle("Wip Nan");
+        logger.info("Start Primary Stage");
         
         // load the FXML file
         Pane primaryPane = (Pane)FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -932,12 +1100,14 @@ public class NanFXML extends Application implements Initializable {
         primaryPane.getStylesheets().add(getClass().getResource("wipnan.css").toString());
         // create the scene
         Scene scene = new Scene(primaryPane);
+        logger.info("Set the scene");
         
         // set the scene to the stage
         primaryStage.setScene(scene);
 
         // show the stage
         primaryStage.show();
+        logger.info("Show the scene");
     }
     
     /**
@@ -981,6 +1151,52 @@ public class NanFXML extends Application implements Initializable {
                 + "AND " + ComboBox3StringLotData + " LIKE '" + TextField3StringLotData + "';");
         
         logger.info("Build filtered sql query for lot data.");
+        
+        // we return the sql query string
+        return filterLotDataDataQuery;
+    }
+    
+    /**
+     * Build filtered sql query for AMKOR to ASE
+     * we check the filters like comboboxes, text fields and checkboxes
+     * out of the data we create the sql query string
+     * @return sql query string
+     */
+    public String getAMKORtoASEfilterButtonQuery() {
+        // get the combo box value
+        String ComboBoxStringLotData = ComboBoxAMKORtoASEValue.getSelectionModel().getSelectedItem();
+        // get the text field value
+        String TextFieldStringLotData = TextFieldAMKORtoASEValue.getText();
+        // check if string value is empty
+        if (TextFieldStringLotData.isEmpty()){
+            // set the text field value to wildcard "&"
+            TextFieldStringLotData = "%";
+        }
+        
+        // get the combo box 2 value
+        String ComboBox2StringLotData = ComboBoxAMKORtoASE2Value.getSelectionModel().getSelectedItem();
+        // get the text field 2 value
+        String TextField2StringLotData = TextFieldAMKORtoASE2Value.getText();
+        // check if string value is empty
+        if (TextField2StringLotData.isEmpty()){
+            // set the text field value to wildcard "&"
+            TextField2StringLotData = "%";
+        }
+        // get the combo box 3 value
+        String ComboBox3StringLotData = ComboBoxAMKORtoASE3Value.getSelectionModel().getSelectedItem();
+        // get the text field 3 value
+        String TextField3StringLotData = TextFieldAMKORtoASE3Value.getText();
+        // check if string value is empty
+        if (TextField3StringLotData.isEmpty()){
+            // set the text field value to wildcard "&"
+            TextField3StringLotData = "%";
+        }
+        // create the combined SQL query with all 3 comboboxes and text field values
+        String filterLotDataDataQuery = ("SELECT * FROM amkor_to_ase WHERE " + ComboBoxStringLotData + " LIKE '" + TextFieldStringLotData + "' "
+                + "AND " + ComboBox2StringLotData + " LIKE '" + TextField2StringLotData + "' "
+                + "AND " + ComboBox3StringLotData + " LIKE '" + TextField3StringLotData + "';");
+        
+        logger.info("Build filtered sql query for amkor_to_ase.");
         
         // we return the sql query string
         return filterLotDataDataQuery;
@@ -1270,7 +1486,7 @@ public class NanFXML extends Application implements Initializable {
     /**
      * get newest date in table nan wip from sql query
      * we connect to the database, run the sql query and get the result set
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public String getLatestDateWipNan(String sqlQuery){
         String lastDateWipNan = "";
@@ -1297,7 +1513,7 @@ public class NanFXML extends Application implements Initializable {
      * Build table view data for lot data from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildTableLotData(String sqlQuery){
         try{
@@ -1338,7 +1554,7 @@ public class NanFXML extends Application implements Initializable {
      * Build table view data for nan wip from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildTableWipNan(String sqlQuery){
         try{
@@ -1387,7 +1603,7 @@ public class NanFXML extends Application implements Initializable {
      * Build data for bar chart for nan wip from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildDataForBarChartWipNan(String sqlQuery){
         try{
@@ -1431,7 +1647,7 @@ public class NanFXML extends Application implements Initializable {
      * Build data for line chart for nan wip from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildDataForLineChartWipNan(String sqlQuery){
         try{
@@ -1475,7 +1691,7 @@ public class NanFXML extends Application implements Initializable {
      * Build table view data for gf to nan from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildTableGFtoNan(String sqlQuery){
         try{
@@ -1539,7 +1755,7 @@ public class NanFXML extends Application implements Initializable {
      * Build table view data for tsmc to nan from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildTableTSMCtoNan(String sqlQuery){
         try{
@@ -1566,7 +1782,8 @@ public class NanFXML extends Application implements Initializable {
                 TSMCtoNanItem.setETA(rs.getString("ETA"));
                 TSMCtoNanData.add(TSMCtoNanItem);
             }
-            System.out.println("Table build done for tsmc to nan"); 
+            System.out.println("Table build done for tsmc to nan");
+            logger.info("Table build done for tsmc to nan.");
             // enable multi-selection
             TSMCtoNanTable.getSelectionModel().setCellSelectionEnabled(true);
             TSMCtoNanTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -1574,6 +1791,7 @@ public class NanFXML extends Application implements Initializable {
             TableUtils.installCopyPasteHandler(TSMCtoNanTable);
         }catch(Exception e){
             e.printStackTrace();
+            logger.error("Error on Building Data for tsmc to nan.");
             System.out.println("Error on Building Data for tsmc to nan");             
         }
     }
@@ -1582,7 +1800,7 @@ public class NanFXML extends Application implements Initializable {
      * Build table view data for umci to nan from sql query
      * we connect to the database, run the sql query and get the result set
      * we fill the data into the table view observable list
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void buildTableUMCItoNan(String sqlQuery){
         try{
@@ -1620,7 +1838,8 @@ public class NanFXML extends Application implements Initializable {
                 UMCItoNanItem.setReportFileName(rs.getString("ReportFileName"));
                 UMCItoNanData.add(UMCItoNanItem);
             }
-            System.out.println("Table build done for umci to nan"); 
+            System.out.println("Table build done for umci to nan");
+            logger.info("Table build done for umci to nan.");
             // enable multi-selection
             UMCItoNanTable.getSelectionModel().setCellSelectionEnabled(true);
             UMCItoNanTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -1628,60 +1847,131 @@ public class NanFXML extends Application implements Initializable {
             TableUtils.installCopyPasteHandler(UMCItoNanTable);
         }catch(Exception e){
             e.printStackTrace();
+            logger.error("Error on Building Data for umci to nan.");
             System.out.println("Error on Building Data for umci to nan");             
         }
     }
     
     /**
+     * Build table view data for AMKOR to ASE from sql query
+     * we connect to the database, run the sql query and get the result set
+     * we fill the data into the table view observable list
+     * @param sqlQuery SQL-Query to be run
+     */
+    public void buildTableAMKORtoASE(String sqlQuery){
+        try{
+            // connect to database
+            DataBaseSQLite db = new DataBaseSQLite();
+            // get ResultSet as ArrayList of ArrayList of Strings
+            ResultSet rs = db.selectTableResultSet(sqlQuery);
+            AMKORtoASEData.clear();
+            // loop through the result set
+            while(rs.next()){
+                //add data from result set into WipNan data
+                AMKORtoASE AMKORtoASEItem = new AMKORtoASE();
+                AMKORtoASEItem.setShippingDate(rs.getString("ShippingDate"));
+                AMKORtoASEItem.setPackingNo(rs.getString("PackingNo"));
+                AMKORtoASEItem.setInvoiceNo(rs.getString("InvoiceNo"));
+                AMKORtoASEItem.setShipTo(rs.getString("ShipTo"));
+                AMKORtoASEItem.setMAWB(rs.getString("MAWB"));
+                AMKORtoASEItem.setCustomerPO(rs.getString("CustomerPO"));
+                AMKORtoASEItem.setDescriptionOfGoods(rs.getString("DescriptionOfGoods"));
+                AMKORtoASEItem.setPdfFileName(rs.getString("PdfFileName"));
+                AMKORtoASEItem.setDelivery(rs.getString("Delivery"));
+                AMKORtoASEItem.setBox(rs.getString("Box"));
+                AMKORtoASEItem.setMaterial(rs.getString("Material"));
+                AMKORtoASEItem.setDeviceName(rs.getString("DeviceName"));
+                AMKORtoASEItem.setPONo(rs.getString("PONo"));
+                AMKORtoASEItem.setDateCode(rs.getString("DateCode"));
+                AMKORtoASEItem.setFABno(rs.getString("FABno"));
+                AMKORtoASEItem.setControlCode(rs.getString("ControlCode"));
+                AMKORtoASEItem.setATPOno(rs.getString("ATPOno"));
+                AMKORtoASEItem.setFPO(rs.getString("FPO"));
+                AMKORtoASEItem.setMCitem(rs.getString("MCitem"));
+                AMKORtoASEItem.setQuantity(rs.getString("Quantity"));
+                AMKORtoASEItem.setReportFileName(rs.getString("ReportFileName"));
+                AMKORtoASEData.add(AMKORtoASEItem);
+            }
+            System.out.println("Table build done for AMKOR to ASE");
+            logger.info("Table build done for amkor to ase.");
+            // enable multi-selection
+            AMKORtoASETable.getSelectionModel().setCellSelectionEnabled(true);
+            AMKORtoASETable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            // enable copy/paste
+            TableUtils.installCopyPasteHandler(AMKORtoASETable);
+        }catch(Exception e){
+            e.printStackTrace();
+            logger.error("Error on Building Data for amkor to ase.");
+            System.out.println("Error on Building Data for AMKOR to ASE");             
+        }
+    }
+    
+    /**
      * Filter data based on combobox and field values
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void filterLotData(String sqlQuery) {
         System.out.println("Start filter query for lot data");
+        logger.info("Start filter query for lot data");
         buildTableLotData(sqlQuery);
     }
     
     /**
      * Filter data based on combobox and field values
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void filterWipNanData(String sqlQuery) {
         System.out.println("Start filter query for wip nan");
+        logger.info("Start filter query for wip nan");
         buildTableWipNan(sqlQuery);
     }
     
     /**
      * Filter data based on combobox and field values
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void filterGFtoNanData(String sqlQuery) {
         System.out.println("Start filter query for gf to nan");
+        logger.info("Start filter query for gf to nan");
         buildTableGFtoNan(sqlQuery);
     }
     
     /**
      * Filter data based on combobox and field values
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void filterTSMCtoNanData(String sqlQuery) {
         System.out.println("Start filter query for tsmc to nan");
+        logger.info("Start filter query for tsmc to nan");
         buildTableTSMCtoNan(sqlQuery);
     }
     
     /**
      * Filter data based on combobox and field values
-     * @param sqlQuery 
+     * @param sqlQuery SQL-Query to be run
      */
     public void filterUMCItoNanData(String sqlQuery) {
         System.out.println("Start filter query for umci to nan");
+        logger.info("Start filter query for umci to nan");
         buildTableUMCItoNan(sqlQuery);
+    }
+    
+    /**
+     * Filter data based on combobox and field values
+     * @param sqlQuery SQL-Query to be run
+     */
+    public void filterAMKORtoASE(String sqlQuery) {
+        System.out.println("Start filter query for AMKOR to ASE");
+        logger.info("Start filter query for amkor to ase");
+        buildTableAMKORtoASE(sqlQuery);
     }
     
     /**
      * Constructor for a new runnable to run task in background
      */
     public void backroundUpdateTask() {
-        System.out.println("Start Background Update Task"); 
+        System.out.println("Start Background Update Task");
+        logger.info("Start Background Update Task");
         // Create a Runnable
         Runnable task = new Runnable()
         {
@@ -1694,10 +1984,12 @@ public class NanFXML extends Application implements Initializable {
 
         // Run the task in a background thread
         Thread backgroundThread = new Thread(task);
+        logger.info("Create Background thread");
         // Terminate the running thread if the application exits
         backgroundThread.setDaemon(true);
         // Start the thread
         backgroundThread.start();
+        logger.info("Start Background thread");
     }
     
     /**
@@ -1707,7 +1999,8 @@ public class NanFXML extends Application implements Initializable {
      */
     public void runUpdateTask() {
         try {
-            System.out.println("Run Background Task for data update"); 
+            System.out.println("Run Background Task for data update");
+            logger.info("Run Background Task for data update");
             // disable the button
             MenuBar.setDisable(true);
 
@@ -1721,10 +2014,13 @@ public class NanFXML extends Application implements Initializable {
             
             // run the report import
             ReportImport repimp = new ReportImport();
+            logger.info("Run ReportImport");
             repimp.runReportImport();
             // run the lot data update
             LotDataUpdate lotup = new LotDataUpdate();
+            logger.info("Run LotDataCheck");
             lotup.lotDataUpdate();
+            //lotup.fullDataCheck();
 
             // Update the Label on the JavaFx Application Thread		
             Platform.runLater(new Runnable() {
@@ -1736,14 +2032,18 @@ public class NanFXML extends Application implements Initializable {
             // enable the button again
             MenuBar.setDisable(false);
             System.out.println("Finished Background Task for data update"); 
+            logger.info("Finished Background Task for data update");
         } catch (Exception e){
-            //
+            e.printStackTrace();
+            logger.error("Error on running Background Task for data update");
+            System.out.println("Error on running Background Task for data update");  
         }
     }
     
     /**
      * Convert date to string
      * we get the actual date and convert it to the used date as string
+     * @param dateAdd date to be formated
      * @return actual date as formated string
      */
     public String dateToString(int dateAdd) {
@@ -1755,6 +2055,7 @@ public class NanFXML extends Application implements Initializable {
         Calendar cal = Calendar.getInstance();
         // get the date today and add the calculation
         cal.add(Calendar.DATE, dateAdd);
+        logger.info("Get date today for date calculation");
 
         // put the calculated date into a date object 
         Date calcDate = cal.getTime();

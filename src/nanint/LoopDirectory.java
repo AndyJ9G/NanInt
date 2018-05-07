@@ -7,12 +7,17 @@ package nanint;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This is the method for looping of file from given directory
  * @author Grdan Andreas
  */
 public class LoopDirectory {
+    
+    //private static final Logger logger = ApplicationLogger.getInstance();
+    private static Logger logger = LogManager.getLogger(LoopDirectory.class.getName());
 
     /**
      * Loop through specified directory
@@ -23,6 +28,7 @@ public class LoopDirectory {
      * @return Array of Files
      */
     public File[] loopDirectorySpecific (String directory, String fileEnding, String fileRegex) {
+        logger.info("Loop through all files in directory: " + directory + ", with Regex: " + fileRegex + ", with file-ending: " + fileEnding);
         // initilize the directory
         File dir = new File(directory);
         // list files and use FilenameFilter

@@ -24,7 +24,7 @@ public class ExcelExport {
     
     /**
      * Export the Wip NAN data to excel file
-     * @param wipNanData
+     * @param lotData
      * @param file 
      */
     public void reportLotDataExcelExport(ObservableList<LotData> lotData, File file){  
@@ -446,6 +446,102 @@ public class ExcelExport {
             }
             // loop through columns
             for(int i=0;i<23;i++){
+                // auto size the columns
+                sheet.autoSizeColumn(i);
+            }
+            try {  
+                //For performing write to Excel file  
+                fileOut = new FileOutputStream(filename);
+                System.out.println("File Output Stream opened.");
+                hwb.write(fileOut);
+                System.out.println("Write to file finished.");
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            }
+        } finally {
+            try {
+                //Close all the parameters once writing to excel is compelte.  
+                fileOut.close();
+                System.out.println("File closed.");
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            } 
+        }
+    }
+    
+    /**
+     * Export the AMKOR to ASE data to excel file
+     * @param ObservableList<AMKORtoASE>
+     * @param file 
+     */
+    public void reportAMKORtoASEExcelExport(ObservableList<AMKORtoASE> amkASE, File file){  
+        FileOutputStream fileOut = null;
+        try {           
+            //Variable counter for keeping track of number of rows inserted.  
+            int counter = 1;
+            
+            //sql - query to be executed; filename - Name of the excel file 
+            String filename = file.toString();
+            System.out.println("Excel Export into file: " + filename);
+            
+            //Creation of New Work Book in Excel and sheet.  
+            HSSFWorkbook hwb = new HSSFWorkbook();  
+            HSSFSheet sheet = hwb.createSheet("AMKORshipment");
+            
+            //Creating Headings in Excel sheet.  
+            HSSFRow rowhead=  sheet.createRow((short)0);  
+            rowhead.createCell((short) 0).setCellValue("ShippingDate");//Row Name1 
+            rowhead.createCell((short) 1).setCellValue("PackingNo");//Row Name1 
+            rowhead.createCell((short) 2).setCellValue("InvoiceNo");//Row Name1
+            rowhead.createCell((short) 3).setCellValue("ShipTo");//Row Name1
+            rowhead.createCell((short) 4).setCellValue("MAWB");//Row Name1
+            rowhead.createCell((short) 5).setCellValue("CustomerPO");//Row Name1
+            rowhead.createCell((short) 6).setCellValue("DescriptionOfGoods");//Row Name1
+            rowhead.createCell((short) 7).setCellValue("PdfFileName");//Row Name1
+            rowhead.createCell((short) 8).setCellValue("Delivery");//Row Name1
+            rowhead.createCell((short) 9).setCellValue("Box");//Row Name1
+            rowhead.createCell((short) 10).setCellValue("Material");//Row Name1
+            rowhead.createCell((short) 11).setCellValue("DeviceName");//Row Name1
+            rowhead.createCell((short) 12).setCellValue("PONo");//Row Name1
+            rowhead.createCell((short) 13).setCellValue("DateCode");//Row Name1
+            rowhead.createCell((short) 14).setCellValue("FABno");//Row Name1
+            rowhead.createCell((short) 15).setCellValue("ControlCode");//Row Name1
+            rowhead.createCell((short) 16).setCellValue("ATPOno");//Row Name1
+            rowhead.createCell((short) 17).setCellValue("FPO");//Row Name1
+            rowhead.createCell((short) 18).setCellValue("MCitem");//Row Name1
+            rowhead.createCell((short) 19).setCellValue("Quantity");//Row Name1
+            rowhead.createCell((short) 20).setCellValue("ReportFileName");//Row Name1
+
+            // loop through the observable list
+            for(AMKORtoASE am : amkASE){
+                //Insertion in corresponding row  
+                HSSFRow row=  sheet.createRow((int)counter); 
+                row.createCell((short) 0).setCellValue(am.getShippingDate());
+                row.createCell((short) 1).setCellValue(am.getPackingNo()); 
+                row.createCell((short) 2).setCellValue(am.getInvoiceNo());
+                row.createCell((short) 3).setCellValue(am.getShipTo());
+                row.createCell((short) 4).setCellValue(am.getMAWB());
+                row.createCell((short) 5).setCellValue(am.getCustomerPO());
+                row.createCell((short) 6).setCellValue(am.getDescriptionOfGoods());
+                row.createCell((short) 7).setCellValue(am.getPdfFileName());
+                row.createCell((short) 8).setCellValue(am.getDelivery());
+                row.createCell((short) 9).setCellValue(am.getBox());
+                row.createCell((short) 10).setCellValue(am.getMaterial());
+                row.createCell((short) 11).setCellValue(am.getDeviceName());
+                row.createCell((short) 12).setCellValue(am.getPONo());
+                row.createCell((short) 13).setCellValue(am.getDateCode());
+                row.createCell((short) 14).setCellValue(am.getFABno());
+                row.createCell((short) 15).setCellValue(am.getControlCode());
+                row.createCell((short) 16).setCellValue(am.getATPOno());
+                row.createCell((short) 17).setCellValue(am.getFPO());
+                row.createCell((short) 18).setCellValue(am.getMCitem());
+                row.createCell((short) 19).setCellValue(am.getQuantity());
+                row.createCell((short) 20).setCellValue(am.getReportFileName());
+                // increase the counter
+                counter ++;
+            }
+            // loop through columns
+            for(int i=0;i<16;i++){
                 // auto size the columns
                 sheet.autoSizeColumn(i);
             }

@@ -1,432 +1,249 @@
-2018-02-22 13:46:34,833 INFO - Hello World!
-2018-02-22 13:54:36,904 INFO - Initialize!
-2018-02-22 13:54:37,438 INFO - Got latest date from wip nan.
-2018-02-22 13:54:39,129 INFO - Table build done for wip nan.
-2018-02-22 13:54:39,144 INFO - Table build done for gf to nan.
-2018-02-22 13:54:39,171 INFO - Data build for line chart done for wip nan.
-2018-02-22 13:54:39,195 INFO - Data build for bar chart done for wip nan.
-2018-02-26 13:28:46,846 INFO - Initialize!
-2018-02-26 13:28:47,467 INFO - Got latest date from wip nan.
-2018-02-26 13:28:49,238 INFO - Table build done for wip nan.
-2018-02-26 13:28:49,250 INFO - Table build done for gf to nan.
-2018-02-26 13:28:49,281 INFO - Data build for line chart done for wip nan.
-2018-02-26 13:28:49,308 INFO - Data build for bar chart done for wip nan.
-2018-02-26 13:30:21,980 INFO - Initialize!
-2018-02-26 13:30:22,390 INFO - Got latest date from wip nan.
-2018-02-26 13:30:23,894 INFO - Table build done for wip nan.
-2018-02-26 13:30:23,905 INFO - Table build done for gf to nan.
-2018-02-26 13:30:23,935 INFO - Data build for line chart done for wip nan.
-2018-02-26 13:30:23,963 INFO - Data build for bar chart done for wip nan.
-2018-02-26 13:34:12,381 INFO - Initialize!
-2018-02-26 13:34:12,996 INFO - Got latest date from wip nan.
-2018-02-26 13:34:14,787 INFO - Table build done for wip nan.
-2018-02-26 13:34:14,813 INFO - Table build done for gf to nan.
-2018-02-26 13:34:14,853 INFO - Data build for line chart done for wip nan.
-2018-02-26 13:34:14,882 INFO - Data build for bar chart done for wip nan.
-2018-02-26 13:59:13,245 INFO - Initialize!
-2018-02-26 13:59:13,943 INFO - Got latest date from wip nan.
-2018-02-26 13:59:15,722 INFO - Table build done for wip nan.
-2018-02-26 13:59:15,747 INFO - Table build done for gf to nan.
-2018-02-26 13:59:15,777 INFO - Data build for line chart done for wip nan.
-2018-02-26 13:59:15,810 INFO - Data build for bar chart done for wip nan.
-2018-02-27 09:32:39,621 INFO - Initialize!
-2018-02-27 09:32:40,333 INFO - Got latest date from wip nan.
-2018-02-27 09:32:42,384 INFO - Table build done for wip nan.
-2018-02-27 09:32:42,410 INFO - Table build done for gf to nan.
-2018-02-27 09:32:42,441 INFO - Data build for line chart done for wip nan.
-2018-02-27 09:32:42,462 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:20:39,964 INFO - Initialize!
-2018-02-27 10:20:40,805 INFO - Got latest date from wip nan.
-2018-02-27 10:20:42,595 INFO - Table build done for wip nan.
-2018-02-27 10:20:42,658 INFO - Table build done for gf to nan.
-2018-02-27 10:20:42,683 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:20:42,705 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:22:34,840 INFO - Initialize!
-2018-02-27 10:22:35,273 INFO - Got latest date from wip nan.
-2018-02-27 10:22:36,785 INFO - Table build done for wip nan.
-2018-02-27 10:22:36,805 INFO - Table build done for gf to nan.
-2018-02-27 10:22:36,826 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:22:36,844 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:24:08,880 INFO - Initialize!
-2018-02-27 10:24:09,315 INFO - Got latest date from wip nan.
-2018-02-27 10:24:10,984 INFO - Table build done for wip nan.
-2018-02-27 10:24:11,003 INFO - Table build done for gf to nan.
-2018-02-27 10:24:11,027 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:24:11,048 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:26:42,298 INFO - Initialize!
-2018-02-27 10:26:42,706 INFO - Got latest date from wip nan.
-2018-02-27 10:26:44,748 INFO - Table build done for wip nan.
-2018-02-27 10:26:44,759 INFO - Table build done for gf to nan.
-2018-02-27 10:26:44,780 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:26:44,797 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:28:52,311 INFO - Initialize!
-2018-02-27 10:28:52,688 INFO - Got latest date from wip nan.
-2018-02-27 10:28:54,283 INFO - Table build done for wip nan.
-2018-02-27 10:28:54,296 INFO - Table build done for gf to nan.
-2018-02-27 10:28:54,322 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:28:54,340 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:29:29,117 INFO - Initialize!
-2018-02-27 10:29:29,496 INFO - Got latest date from wip nan.
-2018-02-27 10:29:31,318 INFO - Table build done for wip nan.
-2018-02-27 10:29:31,332 INFO - Table build done for gf to nan.
-2018-02-27 10:29:31,358 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:29:31,376 INFO - Data build for bar chart done for wip nan.
-2018-02-27 10:29:54,912 INFO - Initialize!
-2018-02-27 10:29:55,285 INFO - Got latest date from wip nan.
-2018-02-27 10:29:57,841 INFO - Table build done for wip nan.
-2018-02-27 10:29:57,853 INFO - Table build done for gf to nan.
-2018-02-27 10:29:57,882 INFO - Data build for line chart done for wip nan.
-2018-02-27 10:29:57,901 INFO - Data build for bar chart done for wip nan.
-2018-02-27 11:06:02,884 INFO - Initialize!
-2018-02-27 11:06:03,409 INFO - Got latest date from wip nan.
-2018-02-27 11:06:06,500 INFO - Table build done for wip nan.
-2018-02-27 11:06:06,523 INFO - Table build done for gf to nan.
-2018-02-27 11:06:06,593 INFO - Data build for line chart done for wip nan.
-2018-02-27 11:06:06,626 INFO - Data build for bar chart done for wip nan.
-2018-02-27 11:18:32,449 INFO - Initialize!
-2018-02-27 11:18:34,775 INFO - Got latest date from wip nan.
-2018-02-27 11:18:37,592 INFO - Table build done for wip nan.
-2018-02-27 11:18:37,641 INFO - Table build done for gf to nan.
-2018-02-27 11:18:37,683 INFO - Data build for line chart done for wip nan.
-2018-02-27 11:18:37,715 INFO - Data build for bar chart done for wip nan.
-2018-02-27 13:07:34,384 INFO - Initialize!
-2018-02-27 13:07:35,254 INFO - Got latest date from wip nan.
-2018-02-27 13:07:37,616 INFO - Table build done for wip nan.
-2018-02-27 13:07:37,641 INFO - Table build done for gf to nan.
-2018-02-27 13:07:37,678 INFO - Data build for line chart done for wip nan.
-2018-02-27 13:07:37,712 INFO - Data build for bar chart done for wip nan.
-2018-02-27 13:08:23,646 INFO - Initialize!
-2018-02-27 13:08:24,150 INFO - Got latest date from wip nan.
-2018-02-27 13:08:27,516 INFO - Table build done for wip nan.
-2018-02-27 13:08:27,530 INFO - Table build done for gf to nan.
-2018-02-27 13:08:27,555 INFO - Data build for line chart done for wip nan.
-2018-02-27 13:08:27,576 INFO - Data build for bar chart done for wip nan.
-2018-02-27 13:20:40,715 INFO - Initialize!
-2018-02-27 13:20:41,192 INFO - Got latest date from wip nan.
-2018-02-27 13:20:43,178 INFO - Table build done for wip nan.
-2018-02-27 13:20:43,200 INFO - Table build done for gf to nan.
-2018-02-27 13:20:43,238 INFO - Data build for line chart done for wip nan.
-2018-02-27 13:20:43,273 INFO - Data build for bar chart done for wip nan.
-2018-02-27 13:31:37,467 INFO - Initialize!
-2018-02-27 13:31:37,938 INFO - Got latest date from wip nan.
-2018-02-27 13:31:40,223 INFO - Table build done for wip nan.
-2018-02-27 13:31:40,238 INFO - Table build done for gf to nan.
-2018-02-27 13:31:40,268 INFO - Data build for line chart done for wip nan.
-2018-02-27 13:31:40,290 INFO - Data build for bar chart done for wip nan.
-2018-02-27 13:33:29,004 INFO - Initialize!
-2018-02-27 13:33:29,593 INFO - Got latest date from wip nan.
-2018-02-27 13:33:31,514 INFO - Table build done for wip nan.
-2018-02-27 13:33:31,528 INFO - Table build done for gf to nan.
-2018-02-27 13:33:31,678 INFO - Data build for line chart done for wip nan.
-2018-02-27 13:33:31,705 INFO - Data build for bar chart done for wip nan.
-2018-02-27 13:42:37,074 INFO - Initialize!
-2018-02-27 13:42:37,539 INFO - Got latest date from wip nan.
-2018-02-27 13:42:39,540 INFO - Table build done for wip nan.
-2018-02-27 13:42:39,648 INFO - Table build done for gf to nan.
-2018-02-27 13:42:39,677 INFO - Data build for line chart done for wip nan.
-2018-02-27 13:42:39,707 INFO - Data build for bar chart done for wip nan.
-2018-02-27 17:03:33,047 INFO - Initialize!
-2018-02-27 17:03:33,492 INFO - Got latest date from wip nan.
-2018-02-27 17:03:35,511 INFO - Table build done for wip nan.
-2018-02-27 17:03:35,526 INFO - Table build done for gf to nan.
-2018-02-27 17:03:35,554 INFO - Data build for line chart done for wip nan.
-2018-02-27 17:03:35,572 INFO - Data build for bar chart done for wip nan.
-2018-02-27 17:17:21,600 INFO - Initialize!
-2018-02-27 17:17:21,933 INFO - Got latest date from wip nan.
-2018-02-27 17:17:23,651 INFO - Table build done for wip nan.
-2018-02-27 17:17:23,662 INFO - Table build done for gf to nan.
-2018-02-27 17:17:23,691 INFO - Data build for line chart done for wip nan.
-2018-02-27 17:17:23,708 INFO - Data build for bar chart done for wip nan.
-2018-02-27 17:18:28,830 INFO - Initialize!
-2018-02-27 17:18:29,183 INFO - Got latest date from wip nan.
-2018-02-27 17:18:30,658 INFO - Table build done for wip nan.
-2018-02-27 17:18:30,675 INFO - Table build done for gf to nan.
-2018-02-27 17:18:30,704 INFO - Data build for line chart done for wip nan.
-2018-02-27 17:18:30,727 INFO - Data build for bar chart done for wip nan.
-2018-02-27 17:20:29,210 INFO - Initialize!
-2018-02-27 17:20:29,636 INFO - Got latest date from wip nan.
-2018-02-27 17:20:31,617 INFO - Table build done for wip nan.
-2018-02-27 17:20:31,629 INFO - Table build done for gf to nan.
-2018-02-27 17:20:31,657 INFO - Data build for line chart done for wip nan.
-2018-02-27 17:20:31,679 INFO - Data build for bar chart done for wip nan.
-2018-02-27 17:52:33,186 INFO - Initialize!
-2018-02-27 17:52:33,599 INFO - Got latest date from wip nan.
-2018-02-27 17:52:33,663 INFO - Table build done for lot data.
-2018-02-27 17:52:35,099 INFO - Table build done for wip nan.
-2018-02-27 17:52:35,101 INFO - Table build done for gf to nan.
-2018-02-27 17:52:35,125 INFO - Data build for line chart done for wip nan.
-2018-02-27 17:52:35,146 INFO - Data build for bar chart done for wip nan.
-2018-02-27 17:52:54,804 INFO - Build filtered sql query for lot data.
-2018-02-27 17:52:54,812 INFO - Table build done for lot data.
-2018-02-27 17:52:59,660 INFO - Build filtered sql query for lot data.
-2018-02-27 17:52:59,742 INFO - Table build done for lot data.
-2018-02-27 17:53:07,547 INFO - Build filtered sql query for lot data.
-2018-02-27 17:53:07,550 INFO - Table build done for lot data.
-2018-02-27 17:53:14,512 INFO - Build filtered sql query for lot data.
-2018-02-27 17:53:14,546 INFO - Table build done for lot data.
-2018-02-27 17:53:25,736 INFO - Build filtered sql query for lot data.
-2018-02-27 17:53:25,740 INFO - Table build done for lot data.
-2018-02-27 17:53:39,768 INFO - Build filtered sql query for lot data.
-2018-02-27 17:53:39,772 INFO - Table build done for lot data.
-2018-02-27 17:53:47,160 INFO - Build filtered sql query for lot data.
-2018-02-27 17:53:47,181 INFO - Table build done for lot data.
-2018-02-27 18:02:16,635 INFO - Initialize!
-2018-02-27 18:02:16,982 INFO - Got latest date from wip nan.
-2018-02-27 18:02:17,047 INFO - Table build done for lot data.
-2018-02-27 18:02:19,206 INFO - Table build done for wip nan.
-2018-02-27 18:02:19,208 INFO - Table build done for gf to nan.
-2018-02-27 18:02:19,236 INFO - Data build for line chart done for wip nan.
-2018-02-27 18:02:19,257 INFO - Data build for bar chart done for wip nan.
-2018-02-27 18:02:31,114 INFO - Build filtered sql query for lot data.
-2018-02-27 18:02:31,133 INFO - Table build done for lot data.
-2018-02-27 18:02:37,612 INFO - Build filtered sql query for lot data.
-2018-02-27 18:02:37,624 INFO - Table build done for lot data.
-2018-02-27 18:02:42,779 INFO - Build filtered sql query for lot data.
-2018-02-27 18:02:42,781 INFO - Table build done for lot data.
-2018-02-27 18:02:47,466 INFO - Build filtered sql query for lot data.
-2018-02-27 18:02:47,537 INFO - Table build done for lot data.
-2018-02-27 18:02:57,218 INFO - Build filtered sql query for lot data.
-2018-02-27 18:02:57,223 INFO - Table build done for lot data.
-2018-02-27 18:03:08,782 INFO - Build filtered sql query for lot data.
-2018-02-27 18:03:08,785 INFO - Table build done for lot data.
-2018-02-27 18:03:12,020 INFO - Build filtered sql query for lot data.
-2018-02-27 18:03:12,023 INFO - Table build done for lot data.
-2018-03-01 10:52:18,886 INFO - Initialize!
-2018-03-01 10:52:19,532 INFO - Got latest date from wip nan.
-2018-03-01 10:52:19,618 INFO - Table build done for lot data.
-2018-03-01 10:52:21,607 INFO - Table build done for wip nan.
-2018-03-01 10:52:21,610 INFO - Table build done for gf to nan.
-2018-03-01 10:52:21,648 INFO - Data build for line chart done for wip nan.
-2018-03-01 10:52:21,666 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:03:24,692 INFO - Initialize!
-2018-03-01 11:03:25,431 INFO - Got latest date from wip nan.
-2018-03-01 11:03:25,536 INFO - Table build done for lot data.
-2018-03-01 11:03:27,401 INFO - Table build done for wip nan.
-2018-03-01 11:03:27,403 INFO - Table build done for gf to nan.
-2018-03-01 11:03:27,434 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:03:27,458 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:21:19,364 INFO - Initialize!
-2018-03-01 11:21:19,943 INFO - Got latest date from wip nan.
-2018-03-01 11:21:20,034 INFO - Table build done for lot data.
-2018-03-01 11:21:21,940 INFO - Table build done for wip nan.
-2018-03-01 11:21:21,945 INFO - Table build done for gf to nan.
-2018-03-01 11:21:21,974 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:21:21,998 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:23:01,586 INFO - Initialize!
-2018-03-01 11:23:02,050 INFO - Got latest date from wip nan.
-2018-03-01 11:23:02,152 INFO - Table build done for lot data.
-2018-03-01 11:23:04,387 INFO - Table build done for wip nan.
-2018-03-01 11:23:04,391 INFO - Table build done for gf to nan.
-2018-03-01 11:23:04,420 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:23:04,447 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:23:37,829 INFO - Initialize!
-2018-03-01 11:23:38,269 INFO - Got latest date from wip nan.
-2018-03-01 11:23:38,361 INFO - Table build done for lot data.
-2018-03-01 11:23:40,244 INFO - Table build done for wip nan.
-2018-03-01 11:23:40,246 INFO - Table build done for gf to nan.
-2018-03-01 11:23:40,274 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:23:40,301 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:35:43,895 INFO - Initialize!
-2018-03-01 11:35:44,347 INFO - Got latest date from wip nan.
-2018-03-01 11:35:44,427 INFO - Table build done for lot data.
-2018-03-01 11:35:46,597 INFO - Table build done for wip nan.
-2018-03-01 11:35:46,600 INFO - Table build done for gf to nan.
-2018-03-01 11:35:46,626 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:35:46,653 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:36:17,881 INFO - Initialize!
-2018-03-01 11:36:18,325 INFO - Got latest date from wip nan.
-2018-03-01 11:36:18,405 INFO - Table build done for lot data.
-2018-03-01 11:36:20,201 INFO - Table build done for wip nan.
-2018-03-01 11:36:20,204 INFO - Table build done for gf to nan.
-2018-03-01 11:36:20,232 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:36:20,250 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:41:08,507 INFO - Initialize!
-2018-03-01 11:41:08,893 INFO - Got latest date from wip nan.
-2018-03-01 11:41:08,970 INFO - Table build done for lot data.
-2018-03-01 11:41:11,225 INFO - Table build done for wip nan.
-2018-03-01 11:41:11,228 INFO - Table build done for gf to nan.
-2018-03-01 11:41:11,247 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:41:11,264 INFO - Data build for bar chart done for wip nan.
-2018-03-01 11:48:04,634 INFO - Initialize!
-2018-03-01 11:48:05,067 INFO - Got latest date from wip nan.
-2018-03-01 11:48:05,132 INFO - Table build done for lot data.
-2018-03-01 11:48:06,683 INFO - Table build done for wip nan.
-2018-03-01 11:48:06,685 INFO - Table build done for gf to nan.
-2018-03-01 11:48:06,722 INFO - Data build for line chart done for wip nan.
-2018-03-01 11:48:06,756 INFO - Data build for bar chart done for wip nan.
-2018-03-02 09:33:57,833 INFO - Initialize!
-2018-03-02 09:33:59,046 INFO - Got latest date from wip nan.
-2018-03-02 09:33:59,323 INFO - Table build done for lot data.
-2018-03-02 09:34:01,855 INFO - Table build done for wip nan.
-2018-03-02 09:34:01,857 INFO - Table build done for gf to nan.
-2018-03-02 09:34:01,897 INFO - Data build for line chart done for wip nan.
-2018-03-02 09:34:01,934 INFO - Data build for bar chart done for wip nan.
-2018-03-02 09:39:24,262 INFO - Initialize!
-2018-03-02 09:39:24,889 INFO - Got latest date from wip nan.
-2018-03-02 09:39:25,030 INFO - Table build done for lot data.
-2018-03-02 09:39:27,981 INFO - Table build done for wip nan.
-2018-03-02 09:39:27,985 INFO - Table build done for gf to nan.
-2018-03-02 09:39:28,018 INFO - Data build for line chart done for wip nan.
-2018-03-02 09:39:28,060 INFO - Data build for bar chart done for wip nan.
-2018-03-02 09:43:06,959 INFO - Initialize!
-2018-03-02 09:43:07,452 INFO - Got latest date from wip nan.
-2018-03-02 09:43:07,544 INFO - Table build done for lot data.
-2018-03-02 09:43:10,203 INFO - Table build done for wip nan.
-2018-03-02 09:43:10,207 INFO - Table build done for gf to nan.
-2018-03-02 09:43:10,237 INFO - Data build for line chart done for wip nan.
-2018-03-02 09:43:10,275 INFO - Data build for bar chart done for wip nan.
-2018-03-02 09:55:18,160 INFO - Initialize!
-2018-03-02 09:55:19,003 INFO - Got latest date from wip nan.
-2018-03-02 09:55:19,139 INFO - Table build done for lot data.
-2018-03-02 09:55:22,014 INFO - Table build done for wip nan.
-2018-03-02 09:55:22,017 INFO - Table build done for gf to nan.
-2018-03-02 09:55:22,056 INFO - Data build for line chart done for wip nan.
-2018-03-02 09:55:22,096 INFO - Data build for bar chart done for wip nan.
-2018-03-02 10:06:47,716 INFO - Initialize!
-2018-03-02 10:06:48,589 INFO - Got latest date from wip nan.
-2018-03-02 10:06:48,848 INFO - Table build done for lot data.
-2018-03-02 10:06:51,953 INFO - Table build done for wip nan.
-2018-03-02 10:06:51,957 INFO - Table build done for gf to nan.
-2018-03-02 10:06:52,006 INFO - Data build for line chart done for wip nan.
-2018-03-02 10:06:52,045 INFO - Data build for bar chart done for wip nan.
-2018-03-02 10:10:07,931 INFO - Initialize!
-2018-03-02 10:10:09,057 INFO - Got latest date from wip nan.
-2018-03-02 10:10:09,197 INFO - Table build done for lot data.
-2018-03-02 10:10:11,812 INFO - Table build done for wip nan.
-2018-03-02 10:10:11,815 INFO - Table build done for gf to nan.
-2018-03-02 10:10:11,864 INFO - Data build for line chart done for wip nan.
-2018-03-02 10:10:11,904 INFO - Data build for bar chart done for wip nan.
-2018-03-02 10:13:13,808 INFO - Initialize!
-2018-03-02 10:13:14,336 INFO - Got latest date from wip nan.
-2018-03-02 10:13:14,416 INFO - Table build done for lot data.
-2018-03-02 10:13:17,248 INFO - Table build done for wip nan.
-2018-03-02 10:13:17,250 INFO - Table build done for gf to nan.
-2018-03-02 10:13:17,273 INFO - Data build for line chart done for wip nan.
-2018-03-02 10:13:17,300 INFO - Data build for bar chart done for wip nan.
-2018-03-02 10:14:19,168 INFO - Initialize!
-2018-03-02 10:14:19,507 INFO - Got latest date from wip nan.
-2018-03-02 10:14:19,578 INFO - Table build done for lot data.
-2018-03-02 10:14:21,025 INFO - Table build done for wip nan.
-2018-03-02 10:14:21,027 INFO - Table build done for gf to nan.
-2018-03-02 10:14:21,047 INFO - Data build for line chart done for wip nan.
-2018-03-02 10:14:21,071 INFO - Data build for bar chart done for wip nan.
-2018-03-02 10:26:08,603 INFO - Initialize!
-2018-03-02 10:26:09,093 INFO - Got latest date from wip nan.
-2018-03-02 10:26:09,205 INFO - Table build done for lot data.
-2018-03-02 10:26:10,849 INFO - Table build done for wip nan.
-2018-03-02 10:26:10,852 INFO - Table build done for gf to nan.
-2018-03-02 10:26:10,884 INFO - Data build for line chart done for wip nan.
-2018-03-02 10:26:10,912 INFO - Data build for bar chart done for wip nan.
-2018-03-02 10:33:30,564 INFO - Initialize!
-2018-03-02 10:33:30,995 INFO - Got latest date from wip nan.
-2018-03-02 10:33:31,097 INFO - Table build done for lot data.
-2018-03-02 10:33:32,799 INFO - Table build done for wip nan.
-2018-03-02 10:33:32,801 INFO - Table build done for gf to nan.
-2018-03-02 10:33:32,846 INFO - Data build for line chart done for wip nan.
-2018-03-02 10:33:32,875 INFO - Data build for bar chart done for wip nan.
-2018-03-02 11:09:22,337 INFO - Initialize!
-2018-03-02 11:09:23,272 INFO - Got latest date from wip nan.
-2018-03-02 11:09:23,391 INFO - Table build done for lot data.
-2018-03-02 11:09:25,712 INFO - Table build done for wip nan.
-2018-03-02 11:09:25,714 INFO - Table build done for gf to nan.
-2018-03-02 11:09:25,746 INFO - Data build for line chart done for wip nan.
-2018-03-02 11:09:25,775 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:12:49,252 INFO - Initialize!
-2018-03-02 13:12:50,236 INFO - Got latest date from wip nan.
-2018-03-02 13:12:50,314 INFO - Table build done for lot data.
-2018-03-02 13:12:51,940 INFO - Table build done for wip nan.
-2018-03-02 13:12:51,942 INFO - Table build done for gf to nan.
-2018-03-02 13:12:51,967 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:12:51,992 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:17:08,131 INFO - Initialize!
-2018-03-02 13:17:08,649 INFO - Got latest date from wip nan.
-2018-03-02 13:17:08,742 INFO - Table build done for lot data.
-2018-03-02 13:17:10,276 INFO - Table build done for wip nan.
-2018-03-02 13:17:10,279 INFO - Table build done for gf to nan.
-2018-03-02 13:17:10,307 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:17:10,335 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:19:16,363 INFO - Initialize!
-2018-03-02 13:19:16,728 INFO - Got latest date from wip nan.
-2018-03-02 13:19:16,797 INFO - Table build done for lot data.
-2018-03-02 13:19:18,609 INFO - Table build done for wip nan.
-2018-03-02 13:19:18,611 INFO - Table build done for gf to nan.
-2018-03-02 13:19:18,643 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:19:18,665 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:19:48,934 INFO - Initialize!
-2018-03-02 13:19:49,319 INFO - Got latest date from wip nan.
-2018-03-02 13:19:49,393 INFO - Table build done for lot data.
-2018-03-02 13:19:50,837 INFO - Table build done for wip nan.
-2018-03-02 13:19:50,839 INFO - Table build done for gf to nan.
-2018-03-02 13:19:50,868 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:19:50,891 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:25:30,179 INFO - Initialize!
-2018-03-02 13:25:30,561 INFO - Got latest date from wip nan.
-2018-03-02 13:25:30,659 INFO - Table build done for lot data.
-2018-03-02 13:25:32,301 INFO - Table build done for wip nan.
-2018-03-02 13:25:32,303 INFO - Table build done for gf to nan.
-2018-03-02 13:25:32,329 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:25:32,352 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:38:28,814 INFO - Initialize!
-2018-03-02 13:38:29,311 INFO - Got latest date from wip nan.
-2018-03-02 13:38:29,385 INFO - Table build done for lot data.
-2018-03-02 13:38:31,091 INFO - Table build done for wip nan.
-2018-03-02 13:38:31,093 INFO - Table build done for gf to nan.
-2018-03-02 13:38:31,119 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:38:31,145 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:38:53,112 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 13:54:07,283 INFO - Initialize!
-2018-03-02 13:54:07,932 INFO - Got latest date from wip nan.
-2018-03-02 13:54:08,020 INFO - Table build done for lot data.
-2018-03-02 13:54:09,812 INFO - Table build done for wip nan.
-2018-03-02 13:54:09,813 INFO - Table build done for gf to nan.
-2018-03-02 13:54:09,944 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:54:09,966 INFO - Data build for bar chart done for wip nan.
-2018-03-02 13:54:44,125 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 13:59:40,144 INFO - Initialize!
-2018-03-02 13:59:40,551 INFO - Got latest date from wip nan.
-2018-03-02 13:59:40,616 INFO - Table build done for lot data.
-2018-03-02 13:59:42,150 INFO - Table build done for wip nan.
-2018-03-02 13:59:42,152 INFO - Table build done for gf to nan.
-2018-03-02 13:59:42,176 INFO - Data build for line chart done for wip nan.
-2018-03-02 13:59:42,196 INFO - Data build for bar chart done for wip nan.
-2018-03-02 14:01:12,761 INFO - Initialize!
-2018-03-02 14:01:13,147 INFO - Got latest date from wip nan.
-2018-03-02 14:01:13,219 INFO - Table build done for lot data.
-2018-03-02 14:01:14,844 INFO - Table build done for wip nan.
-2018-03-02 14:01:14,846 INFO - Table build done for gf to nan.
-2018-03-02 14:01:14,873 INFO - Data build for line chart done for wip nan.
-2018-03-02 14:01:14,898 INFO - Data build for bar chart done for wip nan.
-2018-03-02 14:01:40,530 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 14:02:30,032 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 14:08:21,825 INFO - Initialize!
-2018-03-02 14:08:22,235 INFO - Got latest date from wip nan.
-2018-03-02 14:08:22,316 INFO - Table build done for lot data.
-2018-03-02 14:08:23,902 INFO - Table build done for wip nan.
-2018-03-02 14:08:23,904 INFO - Table build done for gf to nan.
-2018-03-02 14:08:23,936 INFO - Data build for line chart done for wip nan.
-2018-03-02 14:08:23,960 INFO - Data build for bar chart done for wip nan.
-2018-03-02 14:08:46,584 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 14:10:24,087 INFO - Initialize!
-2018-03-02 14:10:24,477 INFO - Got latest date from wip nan.
-2018-03-02 14:10:24,542 INFO - Table build done for lot data.
-2018-03-02 14:10:26,122 INFO - Table build done for wip nan.
-2018-03-02 14:10:26,124 INFO - Table build done for gf to nan.
-2018-03-02 14:10:26,287 INFO - Data build for line chart done for wip nan.
-2018-03-02 14:10:26,309 INFO - Data build for bar chart done for wip nan.
-2018-03-02 14:10:35,926 INFO - Table build done for lot data.
-2018-03-02 14:10:35,934 INFO - Table build done for wip nan.
-2018-03-02 14:10:35,936 INFO - Table build done for gf to nan.
-2018-03-02 14:10:53,403 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 14:10:57,726 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 14:10:59,013 INFO - Build filtered sql query for tsmc to nan.
-2018-03-02 14:12:55,083 INFO - Initialize!
-2018-03-02 14:12:55,459 INFO - Got latest date from wip nan.
-2018-03-02 14:12:55,461 INFO - Table build done for lot data.
-2018-03-02 14:12:55,472 INFO - Table build done for wip nan.
-2018-03-02 14:12:55,474 INFO - Table build done for gf to nan.
-2018-03-02 14:12:55,479 INFO - Data build for line chart done for wip nan.
-2018-03-02 14:12:55,480 INFO - Data build for bar chart done for wip nan.
-2018-03-02 14:13:05,083 INFO - Table build done for lot data.
-2018-03-02 14:13:05,084 INFO - Table build done for wip nan.
-2018-03-02 14:13:05,086 INFO - Table build done for gf to nan.
-2018-03-02 14:13:23,164 INFO - Build filtered sql query for tsmc to nan.
+2018-05-07 12:54:10,231 [JavaFX Application Thread] INFO nanint.NanFXML - Get date today for date calculation
+2018-05-07 12:54:10,233 [JavaFX Application Thread] INFO nanint.NanFXML - Get date today for date calculation
+2018-05-07 12:54:10,248 [JavaFX Application Thread] INFO nanint.NanFXML - Start Primary Stage
+2018-05-07 12:54:10,266 [JavaFX Application Thread] INFO nanint.NanFXML - Get date today for date calculation
+2018-05-07 12:54:10,266 [JavaFX Application Thread] INFO nanint.NanFXML - Get date today for date calculation
+2018-05-07 12:54:10,543 [JavaFX Application Thread] INFO nanint.NanFXML - Initialize!
+2018-05-07 12:54:10,544 [JavaFX Application Thread] INFO nanint.NanFXML - Set Programm Version Label to Version 1.13 with Logging
+2018-05-07 12:54:10,551 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for LotData
+2018-05-07 12:54:10,551 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for WipNan
+2018-05-07 12:54:10,554 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT MAX(ReportDate) AS ReportDate FROM wip_nan;
+2018-05-07 12:54:10,554 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:10,755 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:10,773 [JavaFX Application Thread] INFO nanint.NanFXML - Got latest date from wip nan.
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.NanFXML - Set Report Date WipNan to newest found date
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for GFtoNan
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for TSMCtoNan
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for UMCItoNan
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for LotData
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.NanFXML - Define ComboBox for AMKORtoASE
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT * FROM lot_data;
+2018-05-07 12:54:10,774 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:10,775 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:10,815 [JavaFX Application Thread] INFO nanint.NanFXML - Table build done for lot data.
+2018-05-07 12:54:10,827 [JavaFX Application Thread] INFO nanint.NanFXML - Setup the LotData table
+2018-05-07 12:54:10,827 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT * FROM wip_nan;
+2018-05-07 12:54:10,827 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:10,828 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,224 [JavaFX Application Thread] INFO nanint.NanFXML - Table build done for wip nan.
+2018-05-07 12:54:12,224 [JavaFX Application Thread] INFO nanint.NanFXML - Setup the WipNan table
+2018-05-07 12:54:12,224 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT gf_to_nan.* FROM gf_to_nan LEFT JOIN wip_nan ON gf_to_nan.CustomerLotId = wip_nan.Lot WHERE wip_nan.Lot ISNULL;
+2018-05-07 12:54:12,224 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:12,225 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,226 [JavaFX Application Thread] INFO nanint.NanFXML - Table build done for gf to nan.
+2018-05-07 12:54:12,226 [JavaFX Application Thread] INFO nanint.NanFXML - Setup the GFtoNan table
+2018-05-07 12:54:12,226 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT tsmc_to_nan.* FROM tsmc_to_nan LEFT JOIN wip_nan ON tsmc_to_nan.Lot = wip_nan.Lot WHERE wip_nan.Lot ISNULL;
+2018-05-07 12:54:12,226 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:12,227 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,337 [JavaFX Application Thread] INFO nanint.NanFXML - Table build done for tsmc to nan.
+2018-05-07 12:54:12,337 [JavaFX Application Thread] INFO nanint.NanFXML - Setup the TSMCtoNan table
+2018-05-07 12:54:12,337 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT umci_to_nan.* FROM umci_to_nan LEFT JOIN wip_nan ON umci_to_nan.CUSTOMER_LOT = wip_nan.Lot WHERE wip_nan.Lot ISNULL;
+2018-05-07 12:54:12,337 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:12,338 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,339 [JavaFX Application Thread] INFO nanint.NanFXML - Table build done for umci to nan.
+2018-05-07 12:54:12,339 [JavaFX Application Thread] INFO nanint.NanFXML - Setup the UMCItoNan table
+2018-05-07 12:54:12,340 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT * FROM amkor_to_ase;
+2018-05-07 12:54:12,340 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:12,340 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,344 [JavaFX Application Thread] INFO nanint.NanFXML - Table build done for amkor to ase.
+2018-05-07 12:54:12,344 [JavaFX Application Thread] INFO nanint.NanFXML - Setup the AMKORtoASE table
+2018-05-07 12:54:12,344 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT * FROM wip_nan WHERE Lot LIKE '';
+2018-05-07 12:54:12,344 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:12,345 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,366 [JavaFX Application Thread] INFO nanint.NanFXML - Data build for line chart done for wip nan.
+2018-05-07 12:54:12,366 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Database query :SELECT * FROM wip_nan WHERE ReportDate LIKE '20180507';
+2018-05-07 12:54:12,366 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:12,367 [JavaFX Application Thread] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:12,385 [JavaFX Application Thread] INFO nanint.NanFXML - Data build for bar chart done for wip nan.
+2018-05-07 12:54:12,427 [JavaFX Application Thread] INFO nanint.NanFXML - Create barChart data
+2018-05-07 12:54:12,495 [JavaFX Application Thread] INFO nanint.NanFXML - Set the scene
+2018-05-07 12:54:14,423 [JavaFX Application Thread] INFO nanint.NanFXML - Show the scene
+2018-05-07 12:54:17,421 [JavaFX Application Thread] INFO nanint.NanFXML - Menu Button for data import pressed
+2018-05-07 12:54:17,421 [JavaFX Application Thread] INFO nanint.NanFXML - Start Background Update Task
+2018-05-07 12:54:17,422 [JavaFX Application Thread] INFO nanint.NanFXML - Create Background thread
+2018-05-07 12:54:17,422 [JavaFX Application Thread] INFO nanint.NanFXML - Start Background thread
+2018-05-07 12:54:17,422 [Thread-5] INFO nanint.NanFXML - Run Background Task for data update
+2018-05-07 12:54:17,431 [Thread-5] INFO nanint.NanFXML - Run ReportImport
+2018-05-07 12:54:17,432 [Thread-5] INFO nanint.ReportImport - Run Report Import Class
+2018-05-07 12:54:17,434 [Thread-5] INFO nanint.ReportImport - Extract the attachments from Outlook msg into the folder
+2018-05-07 12:54:17,435 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: wip-nan, with Regex: , with file-ending: .msg
+2018-05-07 12:54:17,444 [Thread-5] INFO nanint.ReportImport - Loop folder and get attachments extracted for wip nan
+2018-05-07 12:54:17,446 [Thread-5] INFO nanint.ReportImport - From folder wip-nan, found number of msg. files: 0, extracted number of attachments: 0
+2018-05-07 12:54:17,447 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: tsmc-to-nan, with Regex: , with file-ending: .msg
+2018-05-07 12:54:17,447 [Thread-5] INFO nanint.ReportImport - Loop folder and get attachments extracted for tsmc-to-nan
+2018-05-07 12:54:17,447 [Thread-5] INFO nanint.ReportImport - From folder tsmc-to-nan, found number of msg. files: 0, extracted number of attachments: 0
+2018-05-07 12:54:17,447 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: gf-to-nan, with Regex: , with file-ending: .msg
+2018-05-07 12:54:17,448 [Thread-5] INFO nanint.ReportImport - Loop folder and get attachments extracted for gf-to-nan
+2018-05-07 12:54:17,448 [Thread-5] INFO nanint.ReportImport - From folder gf-to-nan, found number of msg. files: 0, extracted number of attachments: 0
+2018-05-07 12:54:17,448 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: umci-to-nan, with Regex: , with file-ending: .msg
+2018-05-07 12:54:17,448 [Thread-5] INFO nanint.ReportImport - Loop folder and get attachments extracted for umci-to-nan
+2018-05-07 12:54:17,448 [Thread-5] INFO nanint.ReportImport - From folder umci-to-nan, found number of msg. files: 0, extracted number of attachments: 0
+2018-05-07 12:54:17,448 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: amkor-to-ase, with Regex: , with file-ending: .msg
+2018-05-07 12:54:17,555 [Thread-5] INFO nanint.DeleteFile - Delete File :amkor-to-ase\INTEL KYEC Shipment 6120080718 - 6120080719.msg
+2018-05-07 12:54:17,556 [Thread-5] INFO nanint.ReportImport - Loop folder and get attachments extracted for amkor-to-ase
+2018-05-07 12:54:17,556 [Thread-5] INFO nanint.ReportImport - From folder amkor-to-ase, found number of msg. files: 1, extracted number of attachments: 7
+2018-05-07 12:54:17,556 [Thread-5] INFO nanint.ReportImport - Loop through TXT files of specified directory
+2018-05-07 12:54:17,556 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: tsmc-to-nan, with Regex: , with file-ending: .txt
+2018-05-07 12:54:17,556 [Thread-5] INFO nanint.DataBaseSQLite - Database query to get all file names from file table
+2018-05-07 12:54:17,556 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,557 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,559 [Thread-5] INFO nanint.ReportImport - Get the TXT data as an ArrayLists of ArrayLists of Strings tsmc-to-nan
+2018-05-07 12:54:17,559 [Thread-5] INFO nanint.ReportImport - Number of data points from tsmc to nan extracted and inserted into database: 0
+2018-05-07 12:54:17,560 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ArrayList for the TSMC to Nan Table
+2018-05-07 12:54:17,560 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,561 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,565 [Thread-5] INFO nanint.ReportImport - Loop through CSV files of specified directory
+2018-05-07 12:54:17,565 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: wip-nan, with Regex: , with file-ending: .csv
+2018-05-07 12:54:17,565 [Thread-5] INFO nanint.DataBaseSQLite - Database query to get all file names from file table
+2018-05-07 12:54:17,565 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,566 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,567 [Thread-5] INFO nanint.ReportImport - Get the CSV data from WIP as an ArrayLists of ArrayLists of Strings for wip-nan
+2018-05-07 12:54:17,567 [Thread-5] INFO nanint.ReportImport - Number of data points from wip nan extracted and inserted into database: 0
+2018-05-07 12:54:17,567 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ArrayList for the Wip Nan Table
+2018-05-07 12:54:17,567 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,568 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,568 [Thread-5] INFO nanint.ReportImport - Loop through CSV files of specified directory
+2018-05-07 12:54:17,569 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: gf-to-nan, with Regex: , with file-ending: .csv
+2018-05-07 12:54:17,569 [Thread-5] INFO nanint.DataBaseSQLite - Database query to get all file names from file table
+2018-05-07 12:54:17,569 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,569 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,571 [Thread-5] INFO nanint.ReportImport - Get the CSV data from WIP as an ArrayLists of ArrayLists of Strings for gf-to-nan
+2018-05-07 12:54:17,571 [Thread-5] INFO nanint.ReportImport - Number of data points from gf to nan extracted and inserted into database: 0
+2018-05-07 12:54:17,571 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ArrayListto Table :gf-to-nan
+2018-05-07 12:54:17,571 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,572 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,573 [Thread-5] INFO nanint.ReportImport - Loop through CSV files of specified directory
+2018-05-07 12:54:17,573 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: umci-to-nan, with Regex: , with file-ending: .csv
+2018-05-07 12:54:17,573 [Thread-5] INFO nanint.DataBaseSQLite - Database query to get all file names from file table
+2018-05-07 12:54:17,573 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,574 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,575 [Thread-5] INFO nanint.ReportImport - Get the CSV data from WIP as an ArrayLists of ArrayLists of Strings for umci-to-nan
+2018-05-07 12:54:17,576 [Thread-5] INFO nanint.ReportImport - Number of data points from umci to nan extracted and inserted into database: 0
+2018-05-07 12:54:17,576 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ArrayList for the UMCI to Nan Table
+2018-05-07 12:54:17,576 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,576 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,577 [Thread-5] INFO nanint.ReportImport - Loop through XLS files of specified directory
+2018-05-07 12:54:17,577 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: amkor-to-ase, with Regex: , with file-ending: .xls
+2018-05-07 12:54:17,577 [Thread-5] INFO nanint.DataBaseSQLite - Database query to get all file names from file table
+2018-05-07 12:54:17,578 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,578 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,580 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\BOX 1   Kyec 6120080718.xls, file name: BOX 1   Kyec 6120080718.xls
+2018-05-07 12:54:17,580 [Thread-5] INFO nanint.ReportImport - Read XLS File :amkor-to-ase\BOX 1   Kyec 6120080718.xls
+2018-05-07 12:54:17,687 [Thread-5] INFO nanint.AmkorExcelImport - Import data from excel workbook AMKOR to ASE
+2018-05-07 12:54:17,687 [Thread-5] INFO nanint.AmkorExcelImport - Open Sheet
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - XLS, Header Row :0, last row :1
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Delivery  
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Box                 
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Material                      
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Device Name                   
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :PO No                         
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Material                      
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Date Code                     
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :FAB no                        
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Control Code                  
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :ATPO no                       
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :MC Item                       
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :Quantity
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - XLS, First Data Row :1, last row :1
+2018-05-07 12:54:17,688 [Thread-5] DEBUG nanint.AmkorExcelImport - XLS, Get Row :1, last row :1
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :6120080718
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :43437
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :PTI00204                      
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :B8111BVDB                     
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :5501064367
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :PTI00204                      
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :1816
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :C807Y970                      
+2018-05-07 12:54:17,694 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :250102
+2018-05-07 12:54:17,695 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :C807Y970                      
+2018-05-07 12:54:17,695 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :2000'120'016                  
+2018-05-07 12:54:17,695 [Thread-5] DEBUG nanint.AmkorExcelImport - Check cell value and return string :25
+2018-05-07 12:54:17,695 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\BOX 1   Kyec 6120080718.xls, file name: BOX 1   Kyec 6120080718.xls
+2018-05-07 12:54:17,695 [Thread-5] INFO nanint.AmkorExcelImport - Add new object to AMKOR to ASE observable list
+2018-05-07 12:54:17,695 [Thread-5] DEBUG nanint.AmkorExcelImport - nanint.AMKORtoASE@5b4ac2b0
+2018-05-07 12:54:17,695 [Thread-5] INFO nanint.ReportImport - Insert specific file into table file_list
+2018-05-07 12:54:17,695 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\BOX 1   Kyec 6120080718.xls, file name: BOX 1   Kyec 6120080718.xls
+2018-05-07 12:54:17,695 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert simple Data into table :file_list
+2018-05-07 12:54:17,695 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,696 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,722 [Thread-5] INFO nanint.DeleteFile - Delete File :amkor-to-ase\BOX 1   Kyec 6120080718.xls
+2018-05-07 12:54:17,723 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\BOX 1 - 6  Kyec 6120080719.xls, file name: BOX 1 - 6  Kyec 6120080719.xls
+2018-05-07 12:54:17,723 [Thread-5] INFO nanint.ReportImport - File already imported, skipping: amkor-to-ase\BOX 1 - 6  Kyec 6120080719.xls
+2018-05-07 12:54:17,723 [Thread-5] INFO nanint.DeleteFile - Delete File :amkor-to-ase\BOX 1 - 6  Kyec 6120080719.xls
+2018-05-07 12:54:17,724 [Thread-5] INFO nanint.ReportImport - Get the Excel data from AMKOR as an Observable List
+2018-05-07 12:54:17,724 [Thread-5] INFO nanint.ReportImport - Number of data points from AMKOR to ASE extracted and inserted into database: 1
+2018-05-07 12:54:17,724 [Thread-5] INFO nanint.ReportImport - Loop through PDF files of specified directory
+2018-05-07 12:54:17,724 [Thread-5] INFO nanint.LoopDirectory - Loop through all files in directory: amkor-to-ase, with Regex: PL , with file-ending: .pdf
+2018-05-07 12:54:17,725 [Thread-5] INFO nanint.DataBaseSQLite - Database query to get all file names from file table
+2018-05-07 12:54:17,725 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:17,726 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:17,727 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\PL 6120080718.pdf, file name: PL 6120080718.pdf
+2018-05-07 12:54:17,727 [Thread-5] INFO nanint.ReportImport - Read PDF file :amkor-to-ase\PL 6120080718.pdf
+2018-05-07 12:54:17,728 [Thread-5] INFO nanint.AMKORpdfBox - Class Amkor PDF import
+2018-05-07 12:54:17,805 [Thread-5] INFO nanint.AMKORpdfBox - Get Amkor PDF file
+2018-05-07 12:54:19,366 [Thread-5] INFO nanint.AMKORpdfBox - Read Text from Amkor PDF import
+2018-05-07 12:54:19,366 [Thread-5] INFO nanint.AMKORpdfBox - Split Text in lines from Amkor PDF import
+2018-05-07 12:54:19,366 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\PL 6120080718.pdf, file name: PL 6120080718.pdf
+2018-05-07 12:54:19,366 [Thread-5] INFO nanint.AMKORpdfBox - Loop through lines from Amkor PDF import
+2018-05-07 12:54:19,372 [Thread-5] INFO nanint.AMKORpdfBox - Check data from lines from Amkor PDF import
+2018-05-07 12:54:19,373 [Thread-5] INFO nanint.AMKORpdfBox - Add values from Amkor PDF import
+2018-05-07 12:54:19,373 [Thread-5] INFO nanint.ReportImport - Insert specific file into table file_list
+2018-05-07 12:54:19,373 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\PL 6120080718.pdf, file name: PL 6120080718.pdf
+2018-05-07 12:54:19,373 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert simple Data into table :file_list
+2018-05-07 12:54:19,373 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,374 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,423 [Thread-5] INFO nanint.DeleteFile - Delete File :amkor-to-ase\PL 6120080718.pdf
+2018-05-07 12:54:19,424 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\PL 6120080719.pdf, file name: PL 6120080719.pdf
+2018-05-07 12:54:19,424 [Thread-5] INFO nanint.ReportImport - File already imported, no need for skipping, PDF file only appending data: amkor-to-ase\PL 6120080719.pdf
+2018-05-07 12:54:19,424 [Thread-5] INFO nanint.ReportImport - Read PDF file :amkor-to-ase\PL 6120080719.pdf
+2018-05-07 12:54:19,424 [Thread-5] INFO nanint.AMKORpdfBox - Class Amkor PDF import
+2018-05-07 12:54:19,429 [Thread-5] INFO nanint.AMKORpdfBox - Get Amkor PDF file
+2018-05-07 12:54:19,478 [Thread-5] INFO nanint.AMKORpdfBox - Read Text from Amkor PDF import
+2018-05-07 12:54:19,478 [Thread-5] INFO nanint.AMKORpdfBox - Split Text in lines from Amkor PDF import
+2018-05-07 12:54:19,478 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\PL 6120080719.pdf, file name: PL 6120080719.pdf
+2018-05-07 12:54:19,478 [Thread-5] INFO nanint.AMKORpdfBox - Loop through lines from Amkor PDF import
+2018-05-07 12:54:19,480 [Thread-5] INFO nanint.AMKORpdfBox - Check data from lines from Amkor PDF import
+2018-05-07 12:54:19,480 [Thread-5] INFO nanint.AMKORpdfBox - Add values from Amkor PDF import
+2018-05-07 12:54:19,480 [Thread-5] INFO nanint.ReportImport - Insert specific file into table file_list
+2018-05-07 12:54:19,480 [Thread-5] INFO nanint.ReportImport - Get file name from file path: amkor-to-ase\PL 6120080719.pdf, file name: PL 6120080719.pdf
+2018-05-07 12:54:19,480 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert simple Data into table :file_list
+2018-05-07 12:54:19,480 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,481 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,501 [Thread-5] INFO nanint.DeleteFile - Delete File :amkor-to-ase\PL 6120080719.pdf
+2018-05-07 12:54:19,502 [Thread-5] INFO nanint.ReportImport - Get the PDF data from AMKOR pdf import as an Observable List
+2018-05-07 12:54:19,502 [Thread-5] INFO nanint.ReportImport - Number of data points from AMKOR pdf extracted and inserted into database: 2
+2018-05-07 12:54:19,502 [Thread-5] INFO nanint.ReportImport - Combine List of AMKOR shipment with List of AMKOR PDF shipment details
+2018-05-07 12:54:19,502 [Thread-5] INFO nanint.ReportImport - loop through AMKOR pdf List
+2018-05-07 12:54:19,509 [Thread-5] INFO nanint.ReportImport - loop through matching list
+2018-05-07 12:54:19,510 [Thread-5] DEBUG nanint.ReportImport - nanint.AMKORtoASE@5b4ac2b0
+2018-05-07 12:54:19,510 [Thread-5] INFO nanint.ReportImport - loop through matching list
+2018-05-07 12:54:19,510 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ObservableList for the amkor-to-ase
+2018-05-07 12:54:19,510 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,511 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,530 [Thread-5] INFO nanint.NanFXML - Run LotDataCheck
+2018-05-07 12:54:19,530 [Thread-5] INFO nanint.LotDataUpdate - Class for lot Data Update
+2018-05-07 12:54:19,530 [Thread-5] INFO nanint.DataBaseSQLite - Database query returning ArrayList of Strings :SELECT * FROM lot_data;
+2018-05-07 12:54:19,530 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,531 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,562 [Thread-5] INFO nanint.DataBaseSQLite - Database query returning ArrayList of Strings :SELECT Lot, Product, BasicType FROM wip_nan GROUP BY Lot ORDER BY Lot ASC;
+2018-05-07 12:54:19,563 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,563 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,645 [Thread-5] INFO nanint.DataBaseSQLite - Database query returning ArrayList of Strings :SELECT Lot, MIN(ReportDate) AS CreationDate FROM wip_nan GROUP BY Lot ORDER BY Lot ASC;
+2018-05-07 12:54:19,645 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,646 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,723 [Thread-5] INFO nanint.DataBaseSQLite - Database query returning ArrayList of Strings :SELECT Lot, MAX(ReportDate) AS FirstStepDate FROM wip_nan WHERE Step = 'DieBank' GROUP BY Lot ORDER BY Lot ASC;
+2018-05-07 12:54:19,723 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,723 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,760 [Thread-5] INFO nanint.DataBaseSQLite - Database query returning ArrayList of Strings :SELECT Lot, MIN(ReportDate) AS LastStepDate FROM wip_nan WHERE Step LIKE '%Shipping' GROUP BY Lot ORDER BY Lot ASC;
+2018-05-07 12:54:19,760 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,761 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,794 [Thread-5] INFO nanint.DataBaseSQLite - Database query returning ArrayList of Strings :SELECT Lot, MAX(ReportDate) AS LastDate FROM wip_nan GROUP BY Lot ORDER BY Lot ASC;
+2018-05-07 12:54:19,795 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,795 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:19,884 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ArrayList for the lot_data Table
+2018-05-07 12:54:19,884 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:19,884 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:23,233 [Thread-5] INFO nanint.DataBaseSQLite - Database Insert Multiple Data Rows from ArrayList for the lot_data Table
+2018-05-07 12:54:23,233 [Thread-5] INFO nanint.DataBaseSQLite - Connect to database
+2018-05-07 12:54:23,233 [Thread-5] INFO nanint.DataBaseSQLite - Connection to database, dp path: nanint.db, db driver: jdbc:sqlite:
+2018-05-07 12:54:23,234 [Thread-5] INFO nanint.NanFXML - Finished Background Task for data update

@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 
 import org.apache.poi.hsmf.MAPIMessage;
 import org.apache.poi.hsmf.datatypes.AttachmentChunks;
+import org.apache.poi.hsmf.datatypes.StringChunk;
 import org.apache.poi.hsmf.exceptions.ChunkNotFoundException;
 
 /**
